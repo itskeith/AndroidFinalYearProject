@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/textViewEnter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#636366"
+        android:text="Number to be converted:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <EditText
+        android:id="@+id/editTextHexadecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
+
+    <TextView
+        android:id="@+id/Decimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:text="Decimal:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textViewDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#989898"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
+
+    <TextView
+        android:id="@+id/Binary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:text="Binary:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textViewBinary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#989898"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
+</LinearLayout>

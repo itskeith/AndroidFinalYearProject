@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ConverterActivity">
+
+    <item
+        android:id="@+id/action_references"
+        android:orderInCategory="100"
+        android:title="References"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_calculator"
+        android:orderInCategory="200"
+        android:title="Calculator"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_designer"
+        android:orderInCategory="300"
+        android:title="Circuit Designer"
+        app:showAsAction="never" />
+</menu>

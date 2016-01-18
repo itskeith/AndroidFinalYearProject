@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">FinalYearProject</string>
+    <string name="ref_s">References</string>
+    <string name="unit_s">Unit Converter</string>
+    <string name="calc_s">Calculator</string>
+    <string name="logic_s">Logic Designer</string>
+    <string name="action_settings">Settings</string>
+    <string name="convertfrom">Select a format to convert from:</string>
+    <string-array name="logic_gates">
+        <item>AND</item>
+        <item>OR</item>
+        <item>NOT</item>
+        <item>NAND</item>
+        <item>NOR</item>
+        <item>XOR</item>
+        <item>XNOR</item>
+    </string-array>
+
+    <string name="binary_converter_keyboard">BinaryKeyboard</string>
+    <string name="binary_ime">Simple IME</string>
+    <string name="subtype_en_US">English (US)</string>
+    <string name="title_activity_calculator_hexadecimal_fragment">CalculatorHexadecimalFragment
+    </string>
+
+    <string name="hello_world">Hello world!</string>
+
+
+</resources>

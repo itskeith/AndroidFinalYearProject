@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/textViewEnter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#636366"
+        android:text="Number to be converted:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:background="@color/white" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
+
+    <TextView
+        android:id="@+id/Binary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:text="Binary:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#989898"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
+    <TextView
+        android:id="@+id/Hexadecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:text="Hexadecimal:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#989898"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
+    <TextView
+        android:id="@+id/Test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#989898"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        />
+
+</LinearLayout>
