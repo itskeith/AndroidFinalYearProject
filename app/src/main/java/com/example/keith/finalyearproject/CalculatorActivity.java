@@ -48,7 +48,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
     //Displays the hexadecimal mode of operation of the calculator activity when user selects the
     //radio hexadecimal button
-    public void hexadecimalCalculator() {
+    public void hexadecimalCalculator(View view) {
         Fragment hexadecimalFragment = new CalculatorHexadecimalFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
@@ -76,7 +76,7 @@ public class CalculatorActivity extends AppCompatActivity {
                 startActivity(launchReferencesIntent);
                 return true;
 
-            case R.id.action_calculator:
+            case R.id.action_converter:
                 Intent launchCalculatorIntent = new Intent(CalculatorActivity.this, ConverterActivity.class);
                 startActivity(launchCalculatorIntent);
                 return true;
