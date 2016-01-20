@@ -40,7 +40,9 @@ public class ReferenceActivity extends AppCompatActivity {
         //adds toolbar to top of activity
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        // For Setting Logo in toolbar myToolbar.setLogo();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -53,13 +55,18 @@ public class ReferenceActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_calculator:
-                Intent launchReferencesIntent = new Intent(ReferenceActivity.this,CalculatorActivity.class);
+                Intent launchReferencesIntent = new Intent(ReferenceActivity.this, CalculatorActivity.class);
                 startActivity(launchReferencesIntent);
                 return true;
 
             case R.id.action_converter:
-                Intent launchCalculatorIntent = new Intent(ReferenceActivity.this,ConverterActivity.class);
+                Intent launchCalculatorIntent = new Intent(ReferenceActivity.this, ConverterActivity.class);
                 startActivity(launchCalculatorIntent);
+                return true;
+
+            case R.id.home_button:
+                Intent launchMainActivityIntent = new Intent(ReferenceActivity.this, MainActivity.class);
+                startActivity(launchMainActivityIntent);
                 return true;
 
             default:

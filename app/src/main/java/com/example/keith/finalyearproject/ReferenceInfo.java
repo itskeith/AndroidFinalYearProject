@@ -16,12 +16,16 @@ public class ReferenceInfo {
                     "NAND",
                     "NOR",
                     "XOR",
-                    "XNOR"
+                    "XNOR",
+                    "Decimal",
+                    "Binary",
+                    "Octal",
+                    "Hexadecimal"
             };
 
-        /*
-        Array containing logic gate images
-         */
+    /*
+    Array containing logic gate images
+     */
     public static final int[] GATESPIC =
             {
                     R.drawable.and,
@@ -30,7 +34,8 @@ public class ReferenceInfo {
                     R.drawable.nandgate,
                     R.drawable.norgate,
                     R.drawable.xorgate,
-                    R.drawable.xorgate
+                    R.drawable.xorgate,//need to add correct image here
+
             };
 
     public static final int[] GATESTT =
@@ -42,5 +47,16 @@ public class ReferenceInfo {
                     R.drawable.andtable,
                     R.drawable.andtable,
                     R.drawable.andtable
+            };
+
+    public static final String[] TEXTINFO =
+            {
+                    "The AND gate typically takes in 2 inputs",
+                    "kkjhgf",
+                    "asda",
+                    "asdadaa",
+                    "wqeqe",
+                    "aasdjad",
+                    "asdadalsd"
             };
 }

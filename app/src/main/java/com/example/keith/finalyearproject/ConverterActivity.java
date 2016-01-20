@@ -38,6 +38,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        // For Setting Logo in toolbar myToolbar.setLogo();
 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroupConverter);
         radioButtonDecimal = (RadioButton) findViewById(R.id.radioButtonDecimal);
@@ -136,6 +137,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher 
     public void afterTextChanged(Editable editable) {
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -148,15 +150,19 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_references:
-                Intent launchReferencesIntent = new Intent(ConverterActivity.this,ReferenceActivity.class);
+                Intent launchReferencesIntent = new Intent(ConverterActivity.this, ReferenceActivity.class);
                 startActivity(launchReferencesIntent);
                 return true;
 
             case R.id.action_calculator:
-                Intent launchCalculatorIntent = new Intent(ConverterActivity.this,CalculatorActivity.class);
+                Intent launchCalculatorIntent = new Intent(ConverterActivity.this, CalculatorActivity.class);
                 startActivity(launchCalculatorIntent);
                 return true;
 
+            case R.id.home_button:
+                Intent launchMainActivityIntent = new Intent(ConverterActivity.this, MainActivity.class);
+                startActivity(launchMainActivityIntent);
+                return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.

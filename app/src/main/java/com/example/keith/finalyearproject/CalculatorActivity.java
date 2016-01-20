@@ -29,6 +29,8 @@ public class CalculatorActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        // For Setting Logo in toolbar myToolbar.setLogo();
+
         radioBinaryButton = (RadioButton) findViewById(R.id.binarybuttoncalculator);
         radioHexadecimalButton = (RadioButton) findViewById(R.id.hexadecimalbuttoncalculator);
     }
@@ -77,10 +79,14 @@ public class CalculatorActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_converter:
-                Intent launchCalculatorIntent = new Intent(CalculatorActivity.this, ConverterActivity.class);
-                startActivity(launchCalculatorIntent);
+                Intent launchConverterIntent = new Intent(CalculatorActivity.this, ConverterActivity.class);
+                startActivity(launchConverterIntent);
                 return true;
 
+            case R.id.home_button:
+                Intent launchMainActivityIntent = new Intent(CalculatorActivity.this, MainActivity.class);
+                startActivity(launchMainActivityIntent);
+                return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.

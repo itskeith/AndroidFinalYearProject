@@ -6,15 +6,6 @@
     android:fillViewport="true"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main_menu_rel"
         android:layout_width="match_parent"
@@ -25,6 +16,15 @@
         android:paddingRight="0dp"
         android:paddingTop="0dp"
         tools:context=".MainActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <LinearLayout
             android:id="@+id/linearLayout1"
@@ -83,7 +83,7 @@
                 android:minHeight="100dp"
                 android:onClick="showReference"
                 android:text="@string/ref_s"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/button2"
@@ -96,7 +96,7 @@
                 android:background="@drawable/buttons_main"
                 android:minHeight="100dp"
                 android:text="@string/calc_s"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
@@ -124,7 +124,7 @@
                 android:minHeight="100dp"
                 android:onClick="showConverter"
                 android:text="@string/unit_s"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/button4"
@@ -137,7 +137,7 @@
                 android:background="@drawable/buttons_main"
                 android:minHeight="100dp"
                 android:text="@string/logic_s"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/black" />
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>

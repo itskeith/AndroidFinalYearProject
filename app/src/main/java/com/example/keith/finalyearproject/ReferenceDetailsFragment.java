@@ -3,12 +3,14 @@ package com.example.keith.finalyearproject;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 /**
  * Created by Keith on 17/11/2015.
@@ -58,7 +60,7 @@ public class ReferenceDetailsFragment extends Fragment{
         ImageView.ScaleType CENTER;
         dataLinearLayout.addView(image);
 
-        image.setImageResource(ReferenceInfo.GATESPIC[getShownIndex()]);
+        image.setImageResource(ReferenceInfo.GATESPIC[getShownIndex() - 1]);
         //End of imageView image
 
         //Creates imageview imageView image2 for displaying details
@@ -68,9 +70,15 @@ public class ReferenceDetailsFragment extends Fragment{
         //dataLinearLayout.addView(image);
         dataLinearLayout.addView(image2);
 
-        image2.setImageResource(ReferenceInfo.GATESTT[getShownIndex()]);
+        image2.setImageResource(ReferenceInfo.GATESTT[getShownIndex() - 1]);
         //End of imageView image2
 
+        TextView textView = new TextView(getActivity());
+
+        textView.setPadding(padding,padding,padding,padding);
+        textView.setGravity(Gravity.CENTER);
+        dataLinearLayout.addView(textView);
+        textView.setText(ReferenceInfo.TEXTINFO[getShownIndex() - 1]);
         scroller.addView(dataLinearLayout);
 
         return scroller;
