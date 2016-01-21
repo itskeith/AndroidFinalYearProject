@@ -4,37 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.15"
-        android:text="BINARY CALCULATOR"
-        android:background="@color/grey"
-        android:textColor="@color/white"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
-
-
-    <TextView
-        android:id="@+id/textViewResult"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.4"
-        android:gravity="right|bottom"
-        android:background="@color/grey"
-        android:textColor="@color/white"
-        android:scrollbars="vertical"
-        android:text=""
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-    <TextView
-        android:id="@+id/textViewInput"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_below="@id/textViewResult"
-        android:layout_weight="0.1"
-        android:gravity="right"
-        android:text=""
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <LinearLayout
         android:layout_width="match_parent"

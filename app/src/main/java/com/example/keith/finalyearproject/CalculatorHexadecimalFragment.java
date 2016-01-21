@@ -34,8 +34,8 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
         View view = inflater.inflate(R.layout.fragment_calculator_hexadecimal, container, false);
 
         //Text views for displaying users input and results
-        txtInput = (TextView) view.findViewById(R.id.textViewInput);
-        txtResult = (TextView) view.findViewById(R.id.textViewResult);
+        txtInput = (TextView) getActivity().findViewById(R.id.textViewInput);
+        txtResult = (TextView) getActivity().findViewById(R.id.textViewResult);
         txtInput.addTextChangedListener(this);
 
         //Make results view scrollable
@@ -118,6 +118,12 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
                 break;
             case R.id.buttonSeven:
                 txtInput.append("7");
+                break;
+            case R.id.buttonEight:
+                txtInput.append("8");
+                break;
+            case R.id.buttonNine:
+                txtInput.append("9");
                 break;
             case R.id.buttonA:
                 txtInput.append("A");
