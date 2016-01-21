@@ -23,14 +23,14 @@ import android.widget.TextView;
 public class CalculatorBinaryFragment extends Fragment implements View.OnClickListener, TextWatcher {
 
     int firstInput, secondInput, calculateResult;
-    String lastOperation, input, operation;
+    String lastOperation, input, operation, calculateResultString;
     TextView txtInput, txtResult;
     Button oneButton, zeroButton, plusButton, minusButton, multiplyButton, divideButton,
             deleteButton, clearButton, equalsButton;
     String userInput;
     Activity activity;
 
-    Boolean isTherePreviousInput = false;
+    Boolean isTherePreviousInput = false, isTherePreviousOperation = false;
     String firstInputString = "", secondInputString = "";
 
     @Override
@@ -95,48 +95,44 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.buttonOne:
-                txtInput.append("1");
+                txtResult.append("1");
                 input = "1";
                 getInput(input);
                 break;
             case R.id.buttonZero:
-                txtInput.append("0");
+                txtResult.append("0");
                 input = "0";
                 getInput(input);
                 break;
             case R.id.buttonMinus:
-                txtResult.append(txtInput.getText().toString() + " - ");
-                firstInputString = txtInput.getText().toString();
+                txtResult.append(" - ");
                 input = "Minus";
-                txtInput.setText("");
                 getInput(input);
                 break;
             case R.id.buttonPlus:
-                txtResult.append(txtInput.getText().toString() + " + ");
-                txtInput.setText("");
+                txtResult.append(" + ");
                 input = "Plus";
                 getInput(input);
                 break;
             case R.id.buttonEquals:
-                txtResult.append(txtInput.getText().toString() + "\n=\n");
-                txtInput.setText("");
+                txtResult.append("\n=\n");
                 input = "Equals";
                 getInput(input);
                 break;
             case R.id.buttonDivide:
-                txtResult.append(txtInput.getText().toString() + " / ");
+                txtResult.append(" / ");
                 txtInput.setText("");
                 input = "Divide";
                 getInput(input);
                 break;
             case R.id.buttonMultiply:
-                txtResult.append(txtInput.getText().toString() + " * ");
+                txtResult.append(" * ");
                 txtInput.setText("");
                 input = "Multiply";
                 getInput(input);
                 break;
             case R.id.buttonDelete:
-                int txtInputLength = txtInput.getText().toString().length();
+                int txtInputLength = txtResult.getText().toString().length();
                 if (txtInputLength > 0) {
                     userInput = txtInput.getText().toString();
                     txtInput.setText(userInput.substring(0, userInput.length() - 1));
@@ -149,6 +145,8 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
                 txtInput.setText("");
                 txtResult.setText("");
                 input = "Clear";
+                isTherePreviousInput = false;
+                isTherePreviousOperation = false;
         }
     }
 
@@ -182,25 +180,48 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
                 break;
             case "Plus":
                 lastOperation = "Plus";
+                if(isTherePreviousInput){
+                    firstInputString = calculateResultString;
+                    secondInputString = "";
+                }
                 isTherePreviousInput = true;
                 break;
             case "Minus":
                 lastOperation = "Minus";
+
+                if(isTherePreviousInput){
+                    firstInputString = calculateResultString;
+                    secondInputString = "";
+                }
                 isTherePreviousInput = true;
                 break;
             case "Multiply":
                 lastOperation = "Multiply";
+
+                if(isTherePreviousInput){
+                    firstInputString = calculateResultString;
+                    secondInputString = "";
+                }
                 isTherePreviousInput = true;
                 break;
             case "Divide":
                 lastOperation = "Divide";
+                if(isTherePreviousInput){
+                    firstInputString = calculateResultString;
+                    secondInputString = "";
+                }
                 isTherePreviousInput = true;
                 break;
             case "Equals":
                 lastOperation = "Equals";
+                if(isTherePreviousInput){
+                    firstInputString = calculateResultString;
+                    secondInputString = "";
+                }
                 isTherePreviousInput = true;
                 break;
             case "Delete":
+                //need delete logic still
                 lastOperation = "Delete";
                 break;
             case "Clear":
@@ -242,7 +263,7 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
 //        }
     }
 
-    public void calculate(String firstInputString, String secondInputString, String mode) {
+    public String calculate(String firstInputString, String secondInputString, String mode) {
         firstInput = Integer.parseInt(firstInputString, 2);
         secondInput = Integer.parseInt(secondInputString, 2);
 
@@ -261,6 +282,9 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
                 break;
         }
 
-        Integer.toBinaryString(calculateResult);
+        calculateResultString = Integer.toBinaryString(calculateResult);
+        txtInput.setText(calculateResultString);
+
+        return calculateResultString;
     }
 }

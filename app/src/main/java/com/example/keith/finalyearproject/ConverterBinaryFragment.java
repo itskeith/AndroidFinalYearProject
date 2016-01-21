@@ -80,6 +80,7 @@ public class ConverterBinaryFragment extends Fragment implements TextWatcher {
 
         if (txtBinary.getText().toString().trim().length() == 0) {
             txtDecimal.setText("");
+            txtHexadecimal.setText("");
             return;
         } else {
             calculate(2, txtDecimal);
