@@ -28,7 +28,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher 
     EditText txtDecimal;
     TextView txtBinary, txtHexadecimal;
     RadioGroup radioGroup;
-    RadioButton radioButtonDecimal, radioButtonBinary, radioButtonHexadecimal;
+    RadioButton radioButtonDecimal, radioButtonBinary, radioButtonOctal, radioButtonHexadecimal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroupConverter);
         radioButtonDecimal = (RadioButton) findViewById(R.id.radioButtonDecimal);
         radioButtonBinary = (RadioButton) findViewById(R.id.radioButtonBinary);
+        radioButtonOctal = (RadioButton) findViewById(R.id.radioButtonOctal);
         radioButtonHexadecimal = (RadioButton) findViewById(R.id.radioButtonHexadecimal);
         //radioGroup.setOnClickListener(this);
 //        radioButtonDecimal.setChecked(true);
@@ -101,6 +102,20 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher 
 
     }
 
+    //Called on radio button click for octal, inflates ConverterOctalFragment
+    public void selectOctal(View view){
+        String choice = radioButtonOctal.getText().toString();
+        Toast.makeText(ConverterActivity.this, "You chose: " + choice, Toast.LENGTH_SHORT).show();
+
+        Fragment newFragment = new ConverterOctalFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.converter_frame, newFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    //Called on radio button click for hexadecimal, inflates ConverterHexadecimalFragment
     public void selectHexadecimal(View view) {
         String choice = radioButtonHexadecimal.getText().toString();
         Toast.makeText(ConverterActivity.this, "You chose: " + choice, Toast.LENGTH_SHORT).show();

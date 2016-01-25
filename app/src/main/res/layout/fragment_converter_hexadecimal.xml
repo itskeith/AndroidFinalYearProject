@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/orange">
+
     <TextView
         android:id="@+id/textViewEnter"
         android:layout_width="match_parent"
@@ -53,6 +56,27 @@
 
     <TextView
         android:id="@+id/textViewBinary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#989898"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
+
+    <TextView
+        android:id="@+id/Octal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:text="Octal:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textViewOctal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#989898"

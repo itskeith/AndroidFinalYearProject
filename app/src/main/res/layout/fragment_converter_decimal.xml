@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/orange">
+
     <TextView
         android:id="@+id/textViewEnter"
         android:layout_width="match_parent"
@@ -12,11 +15,11 @@
         android:textColor="@color/white" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTextDecimal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:background="@color/white" />
+        android:background="@color/white"
+        android:inputType="numberDecimal" />
 
     <Space
         android:layout_width="20px"
@@ -32,15 +35,38 @@
         android:textColor="@color/white" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewBinary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#989898"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <Space
         android:layout_width="20px"
         android:layout_height="20px" />
+
+    <TextView
+        android:id="@+id/Octal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:text="Octal:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textViewOctal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#989898"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
+
     <TextView
         android:id="@+id/Hexadecimal"
         android:layout_width="match_parent"
@@ -51,31 +77,15 @@
         android:textColor="@color/white" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewHexadecimal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#989898"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <Space
         android:layout_width="20px"
         android:layout_height="20px" />
-    <TextView
-        android:id="@+id/Test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/grey"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#989898"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        />
 
 </LinearLayout>

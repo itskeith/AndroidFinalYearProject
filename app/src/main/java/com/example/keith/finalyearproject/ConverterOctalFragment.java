@@ -20,25 +20,26 @@ import java.util.Stack;
 
 /**
  * Created by Keith on 30/11/2015.
+ * ConverterOctalFragment Fragment for the Octal converter portion of the converter activity
  */
-public class ConverterHexadecimalFragment extends Fragment implements TextWatcher {
+public class ConverterOctalFragment extends Fragment implements TextWatcher {
 
-    EditText txtHexadecimal;
-    TextView txtBinary, txtDecimal, txtOctal;
-    String hexVal;
+    EditText txtOctal;
+    TextView txtBinary, txtHexadecimal, txtDecimal;
+    String octalVal;
     int binaryVal, decimalVal;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_converter_hexadecimal, container, false);
+        View view = inflater.inflate(R.layout.fragment_converter_octal, container, false);
         //radioGroup.setOnClickListener(this);
         //radioButtonDecimal.setChecked(true);
-        txtHexadecimal = (EditText) view.findViewById(R.id.editTextHexadecimal);
+        txtOctal = (EditText) view.findViewById(R.id.editTextOctal);
         txtBinary = (TextView) view.findViewById(R.id.textViewBinary);
-        txtOctal = (TextView) view.findViewById(R.id.textViewOctal);
+        txtHexadecimal = (TextView) view.findViewById(R.id.textViewHexadecimal);
         txtDecimal = (TextView) view.findViewById(R.id.textViewDecimal);
-        txtHexadecimal.addTextChangedListener(this);
-        txtHexadecimal.setFilters(new InputFilter[]{filter});
+        txtOctal.addTextChangedListener(this);
+        txtOctal.setFilters(new InputFilter[]{filter});
         return view;
     }
 
@@ -52,8 +53,8 @@ public class ConverterHexadecimalFragment extends Fragment implements TextWatche
                 if (isCharAllowed(c)) // put your condition here
                     sb.append(c);
                 else
-                    Toast.makeText(getActivity(), "You can only enter a number or letter from A to F for hexadecimal ", Toast.LENGTH_LONG).show();
-                    keepOriginal = false;
+                    Toast.makeText(getActivity(), "You can only enter a number from 0 to 7 for octal", Toast.LENGTH_LONG).show();
+                keepOriginal = false;
             }
             if (keepOriginal)
                 return null;
@@ -69,19 +70,14 @@ public class ConverterHexadecimalFragment extends Fragment implements TextWatche
         }
 
         private boolean isCharAllowed(char c) {
-            return Character.isDigit(c)
-                    || c == 'a'
-                    || c == 'A'
-                    || c == 'b'
-                    || c == 'B'
-                    || c == 'c'
-                    || c == 'C'
-                    || c == 'd'
-                    || c == 'D'
-                    || c == 'e'
-                    || c == 'E'
-                    || c == 'f'
-                    || c == 'F';
+            return c == '0'
+                    || c == '1'
+                    || c == '2'
+                    || c == '3'
+                    || c == '4'
+                    || c == '5'
+                    || c == '6'
+                    || c == '7';
         }
     };
     //    @Override
@@ -101,23 +97,22 @@ public class ConverterHexadecimalFragment extends Fragment implements TextWatche
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        hexVal = txtHexadecimal.getText().toString();
+        octalVal = txtOctal.getText().toString();
         //Check if input is empty
-        if (hexVal.trim().length() == 0) {
+        if (octalVal.trim().length() == 0) {
             txtDecimal.setText("");
             txtBinary.setText("");
-            txtOctal.setText("");
+            txtHexadecimal.setText("");
             return;
-        }
-        else{
+        } else {
             //Convert inputted hexadecimal value to decimal
-            decimalVal = Integer.parseInt(hexVal,16);
+            decimalVal = Integer.parseInt(octalVal, 8);
             //Set decimal value in textview
             txtDecimal.setText(Integer.toString(decimalVal));
             //Set binary value in textview
             txtBinary.setText(Integer.toBinaryString(decimalVal));
-            //Set octal value in textView
-            txtOctal.setText(Integer.toOctalString(decimalVal));
+            //Set hexadecimal value in textview
+            txtHexadecimal.setText(Integer.toHexString(decimalVal));
         }
 
 
@@ -126,7 +121,6 @@ public class ConverterHexadecimalFragment extends Fragment implements TextWatche
     public void afterTextChanged(Editable editable) {
 
     }
-
 
 
 }

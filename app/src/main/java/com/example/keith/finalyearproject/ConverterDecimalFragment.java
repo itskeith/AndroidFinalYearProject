@@ -26,7 +26,7 @@ import java.util.Stack;
 public class ConverterDecimalFragment extends Fragment implements TextWatcher {
 
     EditText txtDecimal;
-    TextView txtBinary, txtHexadecimal;
+    TextView txtBinary, txtHexadecimal, txtOctal;
     int decimalVal;
 
     @Override
@@ -34,9 +34,10 @@ public class ConverterDecimalFragment extends Fragment implements TextWatcher {
         View view = inflater.inflate(R.layout.fragment_converter_decimal, container, false);
         //radioGroup.setOnClickListener(this);
         //radioButtonDecimal.setChecked(true);
-        txtDecimal = (EditText) view.findViewById(R.id.editText);
-        txtBinary = (TextView) view.findViewById(R.id.textView2);
-        txtHexadecimal = (TextView) view.findViewById(R.id.textView3);
+        txtDecimal = (EditText) view.findViewById(R.id.editTextDecimal);
+        txtBinary = (TextView) view.findViewById(R.id.textViewBinary);
+        txtOctal = (TextView) view.findViewById(R.id.textViewOctal);
+        txtHexadecimal = (TextView) view.findViewById(R.id.textViewHexadecimal);
         txtDecimal.addTextChangedListener(this);
         txtDecimal.setFilters(new InputFilter[]{filter});
         return view;
@@ -82,6 +83,7 @@ public class ConverterDecimalFragment extends Fragment implements TextWatcher {
 
         if (txtDecimal.getText().toString().trim().length() == 0) {
             txtBinary.setText("");
+            txtOctal.setText("");
             txtHexadecimal.setText("");
             return;
         }
@@ -89,6 +91,7 @@ public class ConverterDecimalFragment extends Fragment implements TextWatcher {
 
             decimalVal = Integer.parseInt(txtDecimal.getText().toString());
             txtBinary.setText(Integer.toBinaryString(decimalVal));
+            txtOctal.setText(Integer.toOctalString(decimalVal));
             txtHexadecimal.setText(Integer.toHexString(decimalVal));
         }
     }

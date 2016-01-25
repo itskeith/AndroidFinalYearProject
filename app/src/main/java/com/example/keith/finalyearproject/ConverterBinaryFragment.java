@@ -23,7 +23,7 @@ import java.util.Stack;
 public class ConverterBinaryFragment extends Fragment implements TextWatcher {
 
     EditText txtBinary;
-    TextView txtDecimal, txtHexadecimal;
+    TextView txtDecimal, txtHexadecimal, txtOctal;
     int decimalVal;
 
     @Override
@@ -34,6 +34,7 @@ public class ConverterBinaryFragment extends Fragment implements TextWatcher {
         txtBinary = (EditText) view.findViewById(R.id.editTextBinary);
         txtDecimal = (TextView) view.findViewById(R.id.textViewDecimal);
         txtHexadecimal = (TextView) view.findViewById(R.id.textViewHexadecimal);
+        txtOctal = (TextView) view.findViewById(R.id.textViewOctal);
         txtBinary.addTextChangedListener(this);
         txtBinary.setFilters(new InputFilter[]{filter});
         return view;
@@ -77,16 +78,18 @@ public class ConverterBinaryFragment extends Fragment implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+        //If no values are input representing a binary value then all textviews display nothing
         if (txtBinary.getText().toString().trim().length() == 0) {
             txtDecimal.setText("");
             txtHexadecimal.setText("");
+            txtOctal.setText("");
             return;
         } else {
-            calculate(2, txtDecimal);
+            //calculate(2, txtDecimal);
             decimalVal = Integer.parseInt(txtBinary.getText().toString(), 2);
             txtDecimal.setText(Integer.toString(decimalVal));
             txtHexadecimal.setText(Integer.toHexString(decimalVal));
+            txtOctal.setText(Integer.toOctalString(decimalVal));
         }
 
     }
@@ -95,12 +98,14 @@ public class ConverterBinaryFragment extends Fragment implements TextWatcher {
 
     }
 
-    public void calculate(int base, TextView txtView) {
+   /* Believe this is redundant now
+   public void calculate(int base, TextView txtView) {
 
 
         decimalVal = Integer.parseInt(txtBinary.getText().toString(), base);
         txtDecimal.setText(Integer.toString(decimalVal));
         txtHexadecimal.setText(Integer.toHexString(decimalVal));
-    }
+        txtOctal.setText(Integer.toOctalString(decimalVal));
+    }*/
 
 }
