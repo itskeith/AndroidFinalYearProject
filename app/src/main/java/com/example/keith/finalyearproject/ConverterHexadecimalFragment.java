@@ -53,7 +53,7 @@ public class ConverterHexadecimalFragment extends Fragment implements TextWatche
                     sb.append(c);
                 else
                     Toast.makeText(getActivity(), "You can only enter a number or letter from A to F for hexadecimal ", Toast.LENGTH_LONG).show();
-                    keepOriginal = false;
+                keepOriginal = false;
             }
             if (keepOriginal)
                 return null;
@@ -108,16 +108,19 @@ public class ConverterHexadecimalFragment extends Fragment implements TextWatche
             txtBinary.setText("");
             txtOctal.setText("");
             return;
-        }
-        else{
-            //Convert inputted hexadecimal value to decimal
-            decimalVal = Integer.parseInt(hexVal,16);
-            //Set decimal value in textview
-            txtDecimal.setText(Integer.toString(decimalVal));
-            //Set binary value in textview
-            txtBinary.setText(Integer.toBinaryString(decimalVal));
-            //Set octal value in textView
-            txtOctal.setText(Integer.toOctalString(decimalVal));
+        } else {
+            try {
+                //Convert inputted hexadecimal value to decimal
+                decimalVal = Integer.parseInt(hexVal, 16);
+                //Set decimal value in textview
+                txtDecimal.setText(Integer.toString(decimalVal));
+                //Set binary value in textview
+                txtBinary.setText(Integer.toBinaryString(decimalVal));
+                //Set octal value in textView
+                txtOctal.setText(Integer.toOctalString(decimalVal));
+            } catch (Exception decimalTooLarge) {
+                Toast.makeText(getActivity(), "Decimal value too large", Toast.LENGTH_SHORT).show();
+            }
         }
 
 
@@ -126,7 +129,6 @@ public class ConverterHexadecimalFragment extends Fragment implements TextWatche
     public void afterTextChanged(Editable editable) {
 
     }
-
 
 
 }

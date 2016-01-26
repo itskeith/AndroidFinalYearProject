@@ -20,6 +20,9 @@ import android.widget.TextView;
  */
 public class CalculatorActivity extends AppCompatActivity {
     RadioButton radioBinaryButton, radioHexadecimalButton;
+    TextView txtInput, txtResult;
+    int decimalVal;
+    String lastMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +36,16 @@ public class CalculatorActivity extends AppCompatActivity {
 
         radioBinaryButton = (RadioButton) findViewById(R.id.binarybuttoncalculator);
         radioHexadecimalButton = (RadioButton) findViewById(R.id.hexadecimalbuttoncalculator);
+        txtInput = (TextView) findViewById(R.id.textViewInput);
     }
 
     //Displays the binary mode of operation of the calculator activity when user selects the
     //radio binary button
     public void binaryCalculator(View view) {
+        if(lastMode == "Hexadecimal"){
+            decimalVal = Integer.parseInt(txtInput.getText().toString(),16);
+            txtInput.setText(Integer.toBinaryString(decimalVal));
+        }
         Fragment binaryFragment = new CalculatorBinaryFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
@@ -46,11 +54,16 @@ public class CalculatorActivity extends AppCompatActivity {
         transaction.replace(R.id.calculator_frame, binaryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+        lastMode="Binary";
     }
 
     //Displays the hexadecimal mode of operation of the calculator activity when user selects the
     //radio hexadecimal button
     public void hexadecimalCalculator(View view) {
+        if(lastMode == "Binary"){
+            decimalVal = Integer.parseInt(txtInput.getText().toString(),2);
+            txtInput.setText(Integer.toHexString(decimalVal));
+        }
         Fragment hexadecimalFragment = new CalculatorHexadecimalFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
@@ -59,6 +72,7 @@ public class CalculatorActivity extends AppCompatActivity {
         transaction.replace(R.id.calculator_frame, hexadecimalFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+        lastMode="Hexadecimal";
     }
 
 

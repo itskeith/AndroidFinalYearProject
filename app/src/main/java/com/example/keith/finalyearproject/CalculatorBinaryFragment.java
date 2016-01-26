@@ -147,6 +147,8 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
                 input = "Clear";
                 isTherePreviousInput = false;
                 isTherePreviousOperation = false;
+                firstInputString = "";
+                secondInputString = "";
         }
     }
 

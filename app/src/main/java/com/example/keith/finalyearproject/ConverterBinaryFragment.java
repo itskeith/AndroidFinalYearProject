@@ -86,10 +86,15 @@ public class ConverterBinaryFragment extends Fragment implements TextWatcher {
             return;
         } else {
             //calculate(2, txtDecimal);
-            decimalVal = Integer.parseInt(txtBinary.getText().toString(), 2);
-            txtDecimal.setText(Integer.toString(decimalVal));
-            txtHexadecimal.setText(Integer.toHexString(decimalVal));
-            txtOctal.setText(Integer.toOctalString(decimalVal));
+            try {
+                decimalVal = Integer.parseInt(txtBinary.getText().toString(), 2);
+                txtDecimal.setText(Integer.toString(decimalVal));
+                txtHexadecimal.setText(Integer.toHexString(decimalVal));
+                txtOctal.setText(Integer.toOctalString(decimalVal));
+            }
+            catch (Exception decimalTooLarge){
+                Toast.makeText(getActivity(),"Decimal value too large", Toast.LENGTH_SHORT).show();
+            }
         }
 
     }
