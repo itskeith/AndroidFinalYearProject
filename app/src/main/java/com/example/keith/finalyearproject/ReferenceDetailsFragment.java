@@ -40,7 +40,7 @@ public class ReferenceDetailsFragment extends Fragment{
 
         //Declare scroller and set layout Parameters
         ScrollView scroller = new ScrollView(getActivity());
-        ScrollView.LayoutParams scrollerLayoutParams = new ScrollView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        ScrollView.LayoutParams scrollerLayoutParams = new ScrollView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         scroller.setLayoutParams(scrollerLayoutParams);
 
         LinearLayout dataLinearLayout = new LinearLayout(getActivity());
@@ -49,14 +49,15 @@ public class ReferenceDetailsFragment extends Fragment{
         //Set layout parameters for images added to scrollView
         LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
+        linearLayoutParams.gravity=Gravity.CENTER;
         //Set padding for images
         int padding = (int)
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,4,getActivity().getResources().getDisplayMetrics());
 
         //Creates imageView image for displaying details
         ImageView image = new ImageView(getActivity());
-        image.setPadding(padding, padding, padding, padding);
+        image.setLayoutParams(linearLayoutParams);
+        //image.setPadding(padding, padding, padding, padding);
         ImageView.ScaleType CENTER;
         dataLinearLayout.addView(image);
 
