@@ -14,14 +14,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * Created by Keith on 14/12/2015.
  */
-public class CalculatorActivity extends AppCompatActivity {
+public class CalculatorActivity extends AppCompatActivity implements CalculatorBinaryFragment.calculatorArrayListener {
+
+    ArrayList<String> calculatorArray = new ArrayList<>();
     RadioButton radioBinaryButton, radioHexadecimalButton;
     TextView txtInput, txtResult;
-    int decimalVal;
+    int decimalVal, currentIndex;
     String lastMode;
 
     @Override
@@ -33,18 +38,85 @@ public class CalculatorActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         // For Setting Logo in toolbar myToolbar.setLogo();
-
+        currentIndex = 0;
         radioBinaryButton = (RadioButton) findViewById(R.id.binarybuttoncalculator);
         radioHexadecimalButton = (RadioButton) findViewById(R.id.hexadecimalbuttoncalculator);
         txtInput = (TextView) findViewById(R.id.textViewInput);
     }
 
+    @Override
+    public void calculatorArrayActivity(String userInput) {
+        switch (userInput) {
+            case "0":
+            case "1":
+                if (calculatorArray.size() == 0) {
+                    calculatorArray.add(userInput);
+                } else {
+                    calculatorArray.set(currentIndex, calculatorArray.get(currentIndex) + userInput);
+                }
+                break;
+            case "+":
+            case "-":
+            case "*":
+            case "/":
+                if (calculatorArray.isEmpty()) {
+                    Toast.makeText(this, "Need to enter a number before an operation", Toast.LENGTH_SHORT).show();
+                }
+                calculatorArray.add(userInput);
+                currentIndex += 2;
+                calculatorArray.add("");
+                break;
+            case "Delete":
+                int arrayEntryLength;
+                if (calculatorArray.isEmpty()) {
+                    currentIndex = 0;
+                } else if (calculatorArray.get(currentIndex).length() == 0) {
+                    calculatorArray.remove(currentIndex);
+                    currentIndex--;
+                    arrayEntryLength = calculatorArray.get(currentIndex).length();
+                    if (arrayEntryLength > 0) {
+                        calculatorArray.set(currentIndex, calculatorArray.get(currentIndex).substring(0, arrayEntryLength - 1));
+                    }
+                } else {
+                    arrayEntryLength = calculatorArray.get(currentIndex).length();
+                    calculatorArray.set(currentIndex, calculatorArray.get(currentIndex).substring(0, arrayEntryLength - 1));
+                    if (calculatorArray.get(currentIndex).length() == 0) {
+                        calculatorArray.remove(currentIndex);
+                        if (currentIndex > 0) {
+                            currentIndex--;
+                        }
+                    }
+                }
+                break;
+            case "Clear":
+                currentIndex = 0;
+                calculatorArray.clear();
+                break;
+        }
+        setCalculatorInputDisplay();
+    }
+
+    public void setCalculatorInputDisplay() {
+        if (lastMode == "Binary") {
+            if(calculatorArray.size() == 0){
+                txtInput.setText("");
+            }
+            for (int i = 0; i < calculatorArray.size(); i++) {
+                if (i == 0) {
+                    txtInput.setText(calculatorArray.get(i));
+                } else {
+                    txtInput.append(" " + calculatorArray.get(i) + " ");
+                }
+            }
+        }
+    }
+
     //Displays the binary mode of operation of the calculator activity when user selects the
     //radio binary button
     public void binaryCalculator(View view) {
-        if(lastMode == "Hexadecimal"){
-            decimalVal = Integer.parseInt(txtInput.getText().toString(),16);
-            txtInput.setText(Integer.toBinaryString(decimalVal));
+        if (lastMode == "Hexadecimal") {
+            decimalVal = Integer.parseInt(txtResult.getText().toString(), 16);
+            txtResult.setText(Integer.toBinaryString(decimalVal));
         }
         Fragment binaryFragment = new CalculatorBinaryFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -54,15 +126,15 @@ public class CalculatorActivity extends AppCompatActivity {
         transaction.replace(R.id.calculator_frame, binaryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
-        lastMode="Binary";
+        lastMode = "Binary";
     }
 
     //Displays the hexadecimal mode of operation of the calculator activity when user selects the
     //radio hexadecimal button
     public void hexadecimalCalculator(View view) {
-        if(lastMode == "Binary"){
-            decimalVal = Integer.parseInt(txtInput.getText().toString(),2);
-            txtInput.setText(Integer.toHexString(decimalVal));
+        if (lastMode == "Binary") {
+            decimalVal = Integer.parseInt(txtResult.getText().toString(), 2);
+            txtResult.setText(Integer.toHexString(decimalVal));
         }
         Fragment hexadecimalFragment = new CalculatorHexadecimalFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -72,7 +144,7 @@ public class CalculatorActivity extends AppCompatActivity {
         transaction.replace(R.id.calculator_frame, hexadecimalFragment);
         transaction.addToBackStack(null);
         transaction.commit();
-        lastMode="Hexadecimal";
+        lastMode = "Hexadecimal";
     }
 
 

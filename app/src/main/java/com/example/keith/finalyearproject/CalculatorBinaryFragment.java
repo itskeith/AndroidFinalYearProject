@@ -16,13 +16,20 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * Created by Keith on 14/12/2015.
  */
 public class CalculatorBinaryFragment extends Fragment implements View.OnClickListener, TextWatcher {
 
-    int firstInput, secondInput, calculateResult;
+
+    ArrayList<String> numbers = new ArrayList<>();
+    ArrayList<String> operators = new ArrayList<>();
+
+    int firstInput, secondInput, calculateResult, currentIndex;
     String lastOperation, input, operation, calculateResultString;
     TextView txtInput, txtResult;
     Button oneButton, zeroButton, plusButton, minusButton, multiplyButton, divideButton,
@@ -30,6 +37,7 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
     String userInput;
     Activity activity;
 
+    Boolean isLastInputOperation;
     Boolean isTherePreviousInput = false, isTherePreviousOperation = false;
     String firstInputString = "", secondInputString = "";
 
@@ -43,7 +51,7 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calculator_binary, container, false);
-
+        currentIndex = 0;
         //Text views for displaying users input and results
         txtInput = (TextView) getActivity().findViewById(R.id.textViewInput);
         txtResult = (TextView) getActivity().findViewById(R.id.textViewResult);
@@ -90,67 +98,107 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
 
     }
 
-    // handles what happens on particular button clicks
+    /*
+    onClick handles any button clicks for the fragment, entering a 1 or 0 adds to textView and
+    sends value to array list in CalculatorActivity.
+    When entering an operation it first checks that there is a number before the operation before
+    sending its value to the array list in CalculatorActivity.
+     */
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.buttonOne:
-                txtResult.append("1");
                 input = "1";
+                isLastInputOperation = false;
                 getInput(input);
                 break;
             case R.id.buttonZero:
-                txtResult.append("0");
                 input = "0";
+                isLastInputOperation = false;
                 getInput(input);
                 break;
             case R.id.buttonMinus:
-                txtResult.append(" - ");
-                input = "Minus";
-                getInput(input);
+
+                    input = "-";
+                    isLastInputOperation = true;
+                    getInput(input);
                 break;
             case R.id.buttonPlus:
-                txtResult.append(" + ");
-                input = "Plus";
-                getInput(input);
-                break;
+                    isLastInputOperation = true;
+                    input = "+";
+                    getInput(input);
+                break;/*
             case R.id.buttonEquals:
-                txtResult.append("\n=\n");
-                input = "Equals";
+                isLastInputOperation = true;
+                input = "=";
                 getInput(input);
-                break;
+                break;*/
             case R.id.buttonDivide:
-                txtResult.append(" / ");
-                txtInput.setText("");
-                input = "Divide";
+                isLastInputOperation = true;
+                input = "/";
                 getInput(input);
                 break;
             case R.id.buttonMultiply:
-                txtResult.append(" * ");
-                txtInput.setText("");
-                input = "Multiply";
+                txtInput.append(" * ");
+                isLastInputOperation = true;
+                input = "*";
                 getInput(input);
                 break;
             case R.id.buttonDelete:
-                int txtInputLength = txtResult.getText().toString().length();
-                if (txtInputLength > 0) {
-                    userInput = txtInput.getText().toString();
-                    txtInput.setText(userInput.substring(0, userInput.length() - 1));
-                }
                 input = "Delete";
+                getInput(input);
                 //int start = txtInput.getText().toString().length();
                 //txtInput.setText(txtInput.getEditableText().delete(start - 1,start - 1));
                 break;
             case R.id.buttonClear:
-                txtInput.setText("");
-                txtResult.setText("");
                 input = "Clear";
-                isTherePreviousInput = false;
-                isTherePreviousOperation = false;
-                firstInputString = "";
-                secondInputString = "";
+                getInput(input);;
         }
     }
+
+    /*Interface for communicating from fragment to activity*/
+    public interface calculatorArrayListener {
+        public void calculatorArrayActivity(String userInput);
+    }
+
+    public void getInput(String input) {
+        //
+        switch (input) {
+            case "1":
+                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
+                break;
+            case "0":
+                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
+                break;
+            case "+":
+                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
+                break;
+            case "-":
+                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
+                break;
+            case "Multiply":
+                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
+                break;
+            case "Divide":
+                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
+                break;
+            /*case "Equals":
+                lastOperation = "Equals";
+                if (isTherePreviousInput) {
+                    firstInputString = calculateResultString;
+                    secondInputString = "";
+                }
+                isTherePreviousInput = true;
+                break;*/
+            case "Delete":
+                //need delete logic still
+                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
+                break;
+            case "Clear":
+                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
+                break;
+
+        }
 
     /*
         getInput gets the values for the firstInputString and secondInputString based on what a user
@@ -161,7 +209,7 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
            the operation between firstInputString and secondInputString and secondInputString is
            reassigned to be empty everytime this is done.
      */
-    public void getInput(String input) {
+    /*public void getInput(String input) {
         //
         switch (input) {
             case "1":
@@ -233,7 +281,7 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
                 secondInputString = "";
                 break;
 
-        }
+        }*/
 //        switch (operation) {
 //            case "Plus":
 //                if (firstInputString.isEmpty() || firstInputString != null) {
@@ -265,7 +313,7 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
 //        }
     }
 
-    public String calculate(String firstInputString, String secondInputString, String mode) {
+    /*public String calculate(String firstInputString, String secondInputString, String mode) {
         firstInput = Integer.parseInt(firstInputString, 2);
         secondInput = Integer.parseInt(secondInputString, 2);
 
@@ -285,8 +333,8 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
         }
 
         calculateResultString = Integer.toBinaryString(calculateResult);
-        txtInput.setText(calculateResultString);
+        txtResult.setText(calculateResultString);
 
         return calculateResultString;
-    }
+    }*/
 }
