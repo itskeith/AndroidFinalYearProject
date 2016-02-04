@@ -18,9 +18,12 @@ import android.widget.Toast;
 
 import java.util.Stack;
 
-/**
- * Created by Keith on 30/11/2015.
- */
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
 public class ConverterHexadecimalFragment extends Fragment implements TextWatcher {
 
     EditText txtHexadecimal;

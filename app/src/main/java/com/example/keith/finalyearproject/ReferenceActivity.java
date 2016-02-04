@@ -20,7 +20,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
 /**
  * Created by Keith on 12/11/2015.
  * Activity in charge of reference feature

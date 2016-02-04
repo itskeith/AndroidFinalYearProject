@@ -2,6 +2,12 @@ package com.example.keith.finalyearproject;
 
 import android.graphics.drawable.Drawable;
 
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
 /**
  * Created by Keith on 17/11/2015.
  * Activity called for information from other reference activities and fragments

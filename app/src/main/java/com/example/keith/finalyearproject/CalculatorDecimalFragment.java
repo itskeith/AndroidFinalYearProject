@@ -22,19 +22,18 @@ Electronic And Computer Engineering(LM118) 4th year
 Final Year Project
 */
 /*
-CalculatorHexadecimalFragment displays buttons for CalculatorActivity when Decimal radio button selected
+CalculatorDecimalFragment displays buttons for CalculatorActivity when Decimal radio button selected
 Only handles button clicks in fragment, all of calculations and displaying of information is carried
 out in CalculatorActivity
  */
-public class CalculatorHexadecimalFragment extends Fragment implements View.OnClickListener, TextWatcher {
+public class CalculatorDecimalFragment extends Fragment implements View.OnClickListener, TextWatcher {
 
     int firstInput, secondInput, calculateResult;
     String firstInputString, secondInputString, lastOperation;
     TextView txtInput, txtResult;
     Button oneButton, zeroButton, twoButton, threeButton, fourButton, fiveButton, sixButton,
-            sevenButton, eightButton, nineButton, aButton, bButton, cButton, dButton, eButton,
-            fButton, plusButton, minusButton, multiplyButton, divideButton, deleteButton,
-            clearButton, equalsButton;
+            sevenButton, eightButton, nineButton, plusButton, minusButton, multiplyButton,
+            divideButton, deleteButton, clearButton, equalsButton;
     String input;
     Boolean isLastInputOperation;
     Activity activity;
@@ -48,7 +47,7 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_calculator_hexadecimal, container, false);
+        View view = inflater.inflate(R.layout.fragment_calculator_decimal, container, false);
 
         //Text views for displaying users input and results
         txtInput = (TextView) getActivity().findViewById(R.id.textViewInput);
@@ -59,18 +58,6 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
         txtResult.setMovementMethod(new ScrollingMovementMethod());
 
         //Setting button listeners for calculators Buttons
-        fButton = (Button) view.findViewById(R.id.buttonF);
-        fButton.setOnClickListener(this);
-        eButton = (Button) view.findViewById(R.id.buttonE);
-        eButton.setOnClickListener(this);
-        dButton = (Button) view.findViewById(R.id.buttonD);
-        dButton.setOnClickListener(this);
-        cButton = (Button) view.findViewById(R.id.buttonC);
-        cButton.setOnClickListener(this);
-        bButton = (Button) view.findViewById(R.id.buttonB);
-        bButton.setOnClickListener(this);
-        aButton = (Button) view.findViewById(R.id.buttonA);
-        aButton.setOnClickListener(this);
         nineButton = (Button) view.findViewById(R.id.buttonNine);
         nineButton.setOnClickListener(this);
         eightButton = (Button) view.findViewById(R.id.buttonEight);
@@ -179,36 +166,6 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
                 break;
             case R.id.buttonNine:
                 input = "9";
-                isLastInputOperation = false;
-                getInput(input);
-                break;
-            case R.id.buttonA:
-                input = "A";
-                isLastInputOperation = false;
-                getInput(input);
-                break;
-            case R.id.buttonB:
-                input = "B";
-                isLastInputOperation = false;
-                getInput(input);
-                break;
-            case R.id.buttonC:
-                input = "C";
-                isLastInputOperation = false;
-                getInput(input);
-                break;
-            case R.id.buttonD:
-                input = "D";
-                isLastInputOperation = false;
-                getInput(input);
-                break;
-            case R.id.buttonE:
-                input = "E";
-                isLastInputOperation = false;
-                getInput(input);
-                break;
-            case R.id.buttonF:
-                input = "F";
                 isLastInputOperation = false;
                 getInput(input);
                 break;

@@ -18,8 +18,14 @@ import android.widget.Toast;
 
 import java.util.Stack;
 
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
 /**
- * Created by Keith on 30/11/2015.
+ *
  * ConverterOctalFragment Fragment for the Octal converter portion of the converter activity
  */
 public class ConverterOctalFragment extends Fragment implements TextWatcher {

@@ -18,10 +18,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-/**
- * Created by Keith on 14/12/2015.
- */
-public class CalculatorActivity extends AppCompatActivity implements CalculatorBinaryFragment.calculatorArrayListener {
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
+public class CalculatorActivity extends AppCompatActivity implements CalculatorBinaryFragment.calculatorArrayListener,
+        CalculatorHexadecimalFragment.calculatorArrayListener, CalculatorDecimalFragment.calculatorArrayListener {
 
     ArrayList<String> calculatorArray = new ArrayList<>();
     RadioButton radioBinaryButton, radioHexadecimalButton;
@@ -46,6 +50,53 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         txtResult = (TextView) findViewById(R.id.textViewResult);
     }
 
+    public void decimalCalculator(View view) {
+        Fragment decimalFragment = new CalculatorDecimalFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.calculator_frame, decimalFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+        currentMode = "Decimal";
+        convertInputAndResult(lastMode, currentMode);
+        lastMode = "Decimal";
+    }
+
+    public void binaryCalculator(View view) {
+        Fragment binaryFragment = new CalculatorBinaryFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack
+        transaction.replace(R.id.calculator_frame, binaryFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+        currentMode = "Binary";
+        convertInputAndResult(lastMode, currentMode);
+        lastMode = "Binary";
+    }
+
+    /*
+    Displays the hexadecimal mode of operation of the calculator activity when user selects the
+    radio hexadecimal button
+    */
+    public void hexadecimalCalculator(View view) {
+        Fragment hexadecimalFragment = new CalculatorHexadecimalFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack
+        transaction.replace(R.id.calculator_frame, hexadecimalFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+        currentMode = "Hexadecimal";
+        convertInputAndResult(lastMode, currentMode);
+        lastMode = "Hexadecimal";
+    }
+
     /*
     calculatorArrayActivity checks what to do with users input
     If it is a 1 or a 0 it will add
@@ -59,6 +110,20 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         switch (userInput) {
             case "0":
             case "1":
+            case "2":
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+            case "7":
+            case "8":
+            case "9":
+            case "A":
+            case "B":
+            case "C":
+            case "D":
+            case "E":
+            case "F":
                 if (calculatorArray.size() == 0) {
                     calculatorArray.add(userInput);
                 } else if (calculatorArray.get(currentIndex) == "+" ||
@@ -130,6 +195,18 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
     public void setCalculatorInputDisplay() {
         switch (currentMode) {
+            case "Decimal":
+                if (calculatorArray.size() == 0) {
+                    txtInput.setText("");
+                }
+                for (int i = 0; i < calculatorArray.size(); i++) {
+                    if (i == 0) {
+                        txtInput.setText(calculatorArray.get(i));
+                    } else {
+                        txtInput.append(" " + calculatorArray.get(i) + " ");
+                    }
+                }
+                break;
             case "Binary":
                 if (calculatorArray.size() == 0) {
                     txtInput.setText("");
@@ -161,6 +238,41 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
     public void setCalculatorResultDisplay() {
         switch (currentMode) {
+            case "Decimal":
+                if (calculatorArray.isEmpty() != true) {
+                    firstInputString = calculatorArray.get(0);
+                    firstInput = Integer.parseInt(firstInputString);
+                    if (calculatorArray.size() > 1) {
+                        for (int i = 1; i < calculatorArray.size(); i++) {
+
+                            if (calculatorArray.get(i - 1) == "+") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString);
+                                firstInput = firstInput + secondInput;
+                            } else if (calculatorArray.get(i - 1) == "-") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString);
+                                firstInput = firstInput - secondInput;
+                            } else if (calculatorArray.get(i - 1) == "*") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString);
+                                firstInput = firstInput * secondInput;
+                            } else if (calculatorArray.get(i - 1) == "/") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString);
+                                firstInput = firstInput / secondInput;
+                            }
+                            txtResult.setText(Integer.toString(firstInput));
+
+                        }
+                    } else {
+                        txtResult.setText(Integer.toString(firstInput));
+                    }
+                } else {
+                    firstInputString = "";
+                    txtResult.setText(firstInputString);
+                }
+                break;
             case "Binary":
                 if (calculatorArray.isEmpty() != true) {
                     firstInputString = calculatorArray.get(0);
@@ -196,6 +308,42 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                     txtResult.setText(firstInputString);
                 }
                 break;
+            case "Hexadecimal":
+                if (calculatorArray.isEmpty() != true) {
+                    firstInputString = calculatorArray.get(0);
+                    firstInput = Integer.parseInt(firstInputString, 16);
+                    if (calculatorArray.size() > 1) {
+                        for (int i = 1; i < calculatorArray.size(); i++) {
+
+                            if (calculatorArray.get(i - 1) == "+") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString, 16);
+                                firstInput = firstInput + secondInput;
+                            } else if (calculatorArray.get(i - 1) == "-") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString, 16);
+                                firstInput = firstInput - secondInput;
+                            } else if (calculatorArray.get(i - 1) == "*") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString, 16);
+                                firstInput = firstInput * secondInput;
+                            } else if (calculatorArray.get(i - 1) == "/") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString, 16);
+                                firstInput = firstInput / secondInput;
+                            }
+                            txtResult.setText(Integer.toHexString(firstInput));
+
+                        }
+                    } else {
+                        txtResult.setText(Integer.toHexString(firstInput));
+                    }
+                } else {
+                    firstInputString = "";
+                    txtResult.setText(firstInputString);
+                }
+                break;
+
         }
     }
 
@@ -204,41 +352,6 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         radio binary button
         */
 
-    public void binaryCalculator(View view) {
-        if (lastMode == "Hexadecimal") {
-            decimalVal = Integer.parseInt(txtResult.getText().toString(), 16);
-            txtResult.setText(Integer.toBinaryString(decimalVal));
-        }
-        Fragment binaryFragment = new CalculatorBinaryFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack
-        transaction.replace(R.id.calculator_frame, binaryFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-        currentMode = "Binary";
-        convertInputAndResult(lastMode, currentMode);
-        lastMode = "Binary";
-    }
-
-    /*
-    Displays the hexadecimal mode of operation of the calculator activity when user selects the
-    radio hexadecimal button
-    */
-    public void hexadecimalCalculator(View view) {
-        Fragment hexadecimalFragment = new CalculatorHexadecimalFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack
-        transaction.replace(R.id.calculator_frame, hexadecimalFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-        currentMode = "Hexadecimal";
-        convertInputAndResult(lastMode, currentMode);
-        lastMode = "Hexadecimal";
-    }
 
     /*
     convertInputAndResult is responsible for converting all previous inputs and the result to
@@ -346,7 +459,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                 break;
         }
         setCalculatorInputDisplay();
-
+        setCalculatorResultDisplay();
     }
 
     @Override

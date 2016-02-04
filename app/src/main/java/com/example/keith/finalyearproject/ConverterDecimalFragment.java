@@ -20,9 +20,12 @@ import android.widget.Toast;
 
 import java.util.Stack;
 
-/**
- * Created by Keith on 25/11/2015.
- */
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
 public class ConverterDecimalFragment extends Fragment implements TextWatcher {
 
     EditText txtDecimal;

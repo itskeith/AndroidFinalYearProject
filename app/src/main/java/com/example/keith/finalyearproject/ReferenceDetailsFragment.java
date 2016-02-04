@@ -12,8 +12,14 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
 /**
- * Created by Keith on 17/11/2015.
+ *
  * ReferenceDetailsFragment is responsible for displaying the details of the reference item chosen
  * by the user
  */

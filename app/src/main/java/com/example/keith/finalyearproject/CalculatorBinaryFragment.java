@@ -20,8 +20,16 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-/**
- * Created by Keith on 14/12/2015.
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
+/*
+CalculatorBinaryFragment displays buttons for CalculatorActivity when Decimal radio button selected
+Only handles button clicks in fragment, all of calculations and displaying of information is carried
+out in CalculatorActivity
  */
 public class CalculatorBinaryFragment extends Fragment implements View.OnClickListener, TextWatcher {
 
@@ -162,42 +170,9 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
 
     public void getInput(String input) {
         //
-        switch (input) {
-            case "1":
-                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
-                break;
-            case "0":
-                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
-                break;
-            case "+":
-                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
-                break;
-            case "-":
-                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
-                break;
-            case "*":
-                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
-                break;
-            case "/":
-                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
-                break;
-            /*case "Equals":
-                lastOperation = "Equals";
-                if (isTherePreviousInput) {
-                    firstInputString = calculateResultString;
-                    secondInputString = "";
-                }
-                isTherePreviousInput = true;
-                break;*/
-            case "Delete":
-                //need delete logic still
-                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
-                break;
-            case "Clear":
-                ((calculatorArrayListener) activity).calculatorArrayActivity(input);
-                break;
+        ((calculatorArrayListener) activity).calculatorArrayActivity(input);
 
-        }
+    }
 
     /*
         getInput gets the values for the firstInputString and secondInputString based on what a user
@@ -208,6 +183,5 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
            the operation between firstInputString and secondInputString and secondInputString is
            reassigned to be empty everytime this is done.
      */
-    }
-
 }
+

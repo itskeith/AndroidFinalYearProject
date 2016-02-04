@@ -7,7 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.SpinnerAdapter;
-
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
 /**
  * Decorator Adapter to allow a Spinner to show a 'Nothing Selected...' initially
  * displayed instead of the first choice in the Adapter.

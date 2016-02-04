@@ -31,6 +31,14 @@
         android:layout_below="@+id/textView">
 
         <RadioButton
+            android:id="@+id/decimalbuttoncalculator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="decimalCalculator"
+            android:text="Decimal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            />
+        <RadioButton
             android:id="@+id/binarybuttoncalculator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -3,7 +3,12 @@ package com.example.keith.finalyearproject;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
-
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
 /**
  * Created by Keith on 17/11/2015.
  * ReferenceDetailsActivity checks screen orientation and calls ReferenceDetailsFragment for
