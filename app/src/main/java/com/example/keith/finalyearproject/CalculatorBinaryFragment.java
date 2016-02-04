@@ -82,6 +82,10 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
         return view;
     }
 
+    /*Interface for communicating from fragment to activity*/
+    public interface calculatorArrayListener {
+        public void calculatorArrayActivity(String userInput);
+    }
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -118,15 +122,14 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
                 getInput(input);
                 break;
             case R.id.buttonMinus:
-
-                    input = "-";
-                    isLastInputOperation = true;
-                    getInput(input);
+                input = "-";
+                isLastInputOperation = true;
+                getInput(input);
                 break;
             case R.id.buttonPlus:
-                    isLastInputOperation = true;
-                    input = "+";
-                    getInput(input);
+                isLastInputOperation = true;
+                input = "+";
+                getInput(input);
                 break;/*
             case R.id.buttonEquals:
                 isLastInputOperation = true;
@@ -151,14 +154,11 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
                 break;
             case R.id.buttonClear:
                 input = "Clear";
-                getInput(input);;
+                getInput(input);
+                ;
         }
     }
 
-    /*Interface for communicating from fragment to activity*/
-    public interface calculatorArrayListener {
-        public void calculatorArrayActivity(String userInput);
-    }
 
     public void getInput(String input) {
         //
@@ -208,132 +208,6 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
            the operation between firstInputString and secondInputString and secondInputString is
            reassigned to be empty everytime this is done.
      */
-    /*public void getInput(String input) {
-        //
-        switch (input) {
-            case "1":
-                if (isTherePreviousInput == false) {
-                    firstInputString = firstInputString + "1";
-                } else {
-                    secondInputString = secondInputString + "1";
-                    calculate(firstInputString, secondInputString, lastOperation);
-                }
-                break;
-            case "0":
-                if (isTherePreviousInput == false) {
-                    firstInputString = firstInputString + "0";
-                } else {
-                    secondInputString = secondInputString + "0";
-                    calculate(firstInputString, secondInputString, lastOperation);
-                }
-                break;
-            case "Plus":
-                lastOperation = "Plus";
-                if(isTherePreviousInput){
-                    firstInputString = calculateResultString;
-                    secondInputString = "";
-                }
-                isTherePreviousInput = true;
-                break;
-            case "Minus":
-                lastOperation = "Minus";
-
-                if(isTherePreviousInput){
-                    firstInputString = calculateResultString;
-                    secondInputString = "";
-                }
-                isTherePreviousInput = true;
-                break;
-            case "Multiply":
-                lastOperation = "Multiply";
-
-                if(isTherePreviousInput){
-                    firstInputString = calculateResultString;
-                    secondInputString = "";
-                }
-                isTherePreviousInput = true;
-                break;
-            case "Divide":
-                lastOperation = "Divide";
-                if(isTherePreviousInput){
-                    firstInputString = calculateResultString;
-                    secondInputString = "";
-                }
-                isTherePreviousInput = true;
-                break;
-            case "Equals":
-                lastOperation = "Equals";
-                if(isTherePreviousInput){
-                    firstInputString = calculateResultString;
-                    secondInputString = "";
-                }
-                isTherePreviousInput = true;
-                break;
-            case "Delete":
-                //need delete logic still
-                lastOperation = "Delete";
-                break;
-            case "Clear":
-                lastOperation = "Clear";
-                isTherePreviousInput = false;
-                firstInputString = "";
-                secondInputString = "";
-                break;
-
-        }*/
-//        switch (operation) {
-//            case "Plus":
-//                if (firstInputString.isEmpty() || firstInputString != null) {
-//                    lastOperation = "Plus";
-//                    isTherePreviousInput = true;
-//                } else if (firstInputString.isEmpty() != true && secondInputString.isEmpty()) {
-//                    secondInputString = input;
-//                } else if (firstInputString.isEmpty() != true && secondInputString.isEmpty() != true) {
-//                    calculate(firstInputString, secondInputString, lastOperation);
-//                }
-//                lastOperation = "+";
-//                break;
-//            case "=":
-//                if(input.isEmpty() != true){
-//                    secondInputString = input;
-//                    calculate(firstInputString, secondInputString, lastOperation);
-//                }
-//                txtResult.setText("");
-//                break;
-//            default:
-//                /*  Checks if there is any value already for firstInput String
-//                    if not then the firstInputString is
-//                  */
-//                if (firstInputString == "") {
-//                    firstInputString = input;
-//                } else if (firstInputString.length() > 1) {
-//
-//                }
-//        }
     }
 
-    /*public String calculate(String firstInputString, String secondInputString, String mode) {
-        firstInput = Integer.parseInt(firstInputString, 2);
-        secondInput = Integer.parseInt(secondInputString, 2);
-
-        switch (mode) {
-            case "Plus":
-                calculateResult = firstInput + secondInput;
-                break;
-            case "Minus":
-                calculateResult = firstInput - secondInput;
-                break;
-            case "Divide":
-                calculateResult = firstInput / secondInput;
-                break;
-            case "Multiply":
-                calculateResult = firstInput * secondInput;
-                break;
-        }
-
-        calculateResultString = Integer.toBinaryString(calculateResult);
-        txtResult.setText(calculateResultString);
-
-        return calculateResultString;
-    }*/
 }

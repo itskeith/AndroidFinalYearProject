@@ -27,7 +27,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     RadioButton radioBinaryButton, radioHexadecimalButton;
     TextView txtInput, txtResult;
     int decimalVal, currentIndex;
-    String lastMode, firstInputString, secondInputString, Operator;
+    String lastMode, currentMode, firstInputString, secondInputString, Operator;
     int firstInput, secondInput;
 
     @Override
@@ -129,68 +129,80 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     }
 
     public void setCalculatorInputDisplay() {
-        if (lastMode == "Binary") {
-            if (calculatorArray.size() == 0) {
-                txtInput.setText("");
-            }
-            for (int i = 0; i < calculatorArray.size(); i++) {
-                if (i == 0) {
-                    txtInput.setText(calculatorArray.get(i));
-                } else {
-                    txtInput.append(" " + calculatorArray.get(i) + " ");
+        switch (currentMode) {
+            case "Binary":
+                if (calculatorArray.size() == 0) {
+                    txtInput.setText("");
                 }
-            }
-        } else if (lastMode == "Hexadecimal") {
-            if (calculatorArray.size() == 0) {
-                txtInput.setText("");
-            }
-
+                for (int i = 0; i < calculatorArray.size(); i++) {
+                    if (i == 0) {
+                        txtInput.setText(calculatorArray.get(i));
+                    } else {
+                        txtInput.append(" " + calculatorArray.get(i) + " ");
+                    }
+                }
+                break;
+            case "Hexadecimal":
+                if (calculatorArray.size() == 0) {
+                    txtInput.setText("");
+                }
+                for (int i = 0; i < calculatorArray.size(); i++) {
+                    if (i == 0) {
+                        txtInput.setText(calculatorArray.get(i));
+                    } else {
+                        txtInput.append(" " + calculatorArray.get(i) + " ");
+                    }
+                }
+                break;
         }
+
     }
+
 
     public void setCalculatorResultDisplay() {
+        switch (currentMode) {
+            case "Binary":
+                if (calculatorArray.isEmpty() != true) {
+                    firstInputString = calculatorArray.get(0);
+                    firstInput = Integer.parseInt(firstInputString, 2);
+                    if (calculatorArray.size() > 1) {
+                        for (int i = 1; i < calculatorArray.size(); i++) {
 
-        if (lastMode == "Binary") {
-            if (calculatorArray.isEmpty() != true) {
-                firstInputString = calculatorArray.get(0);
-                firstInput = Integer.parseInt(firstInputString, 2);
-                if (calculatorArray.size() > 1) {
-                    for (int i = 1; i < calculatorArray.size(); i++) {
+                            if (calculatorArray.get(i - 1) == "+") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString, 2);
+                                firstInput = firstInput + secondInput;
+                            } else if (calculatorArray.get(i - 1) == "-") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString, 2);
+                                firstInput = firstInput - secondInput;
+                            } else if (calculatorArray.get(i - 1) == "*") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString, 2);
+                                firstInput = firstInput * secondInput;
+                            } else if (calculatorArray.get(i - 1) == "/") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString, 2);
+                                firstInput = firstInput / secondInput;
+                            }
+                            txtResult.setText(Integer.toBinaryString(firstInput));
 
-                        if (calculatorArray.get(i - 1) == "+") {
-                            secondInputString = calculatorArray.get(i);
-                            secondInput = Integer.parseInt(secondInputString, 2);
-                            firstInput = firstInput + secondInput;
-                        } else if (calculatorArray.get(i - 1) == "-") {
-                            secondInputString = calculatorArray.get(i);
-                            secondInput = Integer.parseInt(secondInputString, 2);
-                            firstInput = firstInput - secondInput;
-                        } else if (calculatorArray.get(i - 1) == "*") {
-                            secondInputString = calculatorArray.get(i);
-                            secondInput = Integer.parseInt(secondInputString, 2);
-                            firstInput = firstInput * secondInput;
-                        } else if (calculatorArray.get(i - 1) == "/") {
-                            secondInputString = calculatorArray.get(i);
-                            secondInput = Integer.parseInt(secondInputString, 2);
-                            firstInput = firstInput / secondInput;
                         }
+                    } else {
                         txtResult.setText(Integer.toBinaryString(firstInput));
-
                     }
                 } else {
-                    txtResult.setText(Integer.toBinaryString(firstInput));
+                    firstInputString = "";
+                    txtResult.setText(firstInputString);
                 }
-            } else {
-                firstInputString = "";
-                txtResult.setText(firstInputString);
-            }
-
-
+                break;
         }
     }
 
-    //Displays the binary mode of operation of the calculator activity when user selects the
-    //radio binary button
+    /*
+        Displays the binary mode of operation of the calculator activity when user selects the
+        radio binary button
+        */
 
     public void binaryCalculator(View view) {
         if (lastMode == "Hexadecimal") {
@@ -205,16 +217,16 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         transaction.replace(R.id.calculator_frame, binaryFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+        currentMode = "Binary";
+        convertInputAndResult(lastMode, currentMode);
         lastMode = "Binary";
     }
 
-    //Displays the hexadecimal mode of operation of the calculator activity when user selects the
-    //radio hexadecimal button
+    /*
+    Displays the hexadecimal mode of operation of the calculator activity when user selects the
+    radio hexadecimal button
+    */
     public void hexadecimalCalculator(View view) {
-        if (lastMode == "Binary") {
-            decimalVal = Integer.parseInt(txtResult.getText().toString(), 2);
-            txtResult.setText(Integer.toHexString(decimalVal));
-        }
         Fragment hexadecimalFragment = new CalculatorHexadecimalFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
@@ -223,9 +235,119 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         transaction.replace(R.id.calculator_frame, hexadecimalFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+        currentMode = "Hexadecimal";
+        convertInputAndResult(lastMode, currentMode);
         lastMode = "Hexadecimal";
     }
 
+    /*
+    convertInputAndResult is responsible for converting all previous inputs and the result to
+    whatever user chosen format
+     */
+    public void convertInputAndResult(String lastMode, String currentMode) {
+        //Switch case statements first check the newly selected mode and then what the previous used
+        //mode was and behaves accordingly for conversion
+        if (lastMode == "" || lastMode == null) {
+            return;
+        }
+        switch (lastMode) {
+            //Convert from decimal to the currentMode
+            case "Decimal":
+                switch (currentMode) {
+                    case "Binary":
+                        for (int i = 0; i < calculatorArray.size(); i++) {
+                            if (calculatorArray.get(i).contains("+") ||
+                                    calculatorArray.get(i).contains("-") ||
+                                    calculatorArray.get(i).contains("*") ||
+                                    calculatorArray.get(i).contains("/")) {
+
+                            } else {
+                                decimalVal = Integer.parseInt(calculatorArray.get(i));
+                                calculatorArray.set(i, Integer.toBinaryString(decimalVal));
+                            }
+                        }
+                        break;
+                    case "Hexadecimal":
+                        for (int i = 0; i < calculatorArray.size(); i++) {
+                            if (calculatorArray.get(i).contains("+") ||
+                                    calculatorArray.get(i).contains("-") ||
+                                    calculatorArray.get(i).contains("*") ||
+                                    calculatorArray.get(i).contains("/")) {
+
+                            } else {
+                                decimalVal = Integer.parseInt(calculatorArray.get(i));
+                                calculatorArray.set(i, Integer.toHexString(decimalVal));
+                            }
+                        }
+                        break;
+                }
+                break;
+            //Convert from binary to the currentMode
+            case "Binary":
+                switch (currentMode) {
+                    case "Decimal":
+                        for (int i = 0; i < calculatorArray.size(); i++) {
+                            if (calculatorArray.get(i).contains("+") ||
+                                    calculatorArray.get(i).contains("-") ||
+                                    calculatorArray.get(i).contains("*") ||
+                                    calculatorArray.get(i).contains("/")) {
+
+                            } else {
+                                decimalVal = Integer.parseInt(calculatorArray.get(i), 2);
+                                calculatorArray.set(i, Integer.toString(decimalVal));
+                            }
+                        }
+                        break;
+                    case "Hexadecimal":
+                        for (int i = 0; i < calculatorArray.size(); i++) {
+                            if (calculatorArray.get(i).contains("+") ||
+                                    calculatorArray.get(i).contains("-") ||
+                                    calculatorArray.get(i).contains("*") ||
+                                    calculatorArray.get(i).contains("/")) {
+                                continue;
+                            } else {
+                                decimalVal = Integer.parseInt(calculatorArray.get(i), 2);
+                                calculatorArray.set(i, Integer.toHexString(decimalVal));
+                            }
+                        }
+                        break;
+                }
+                break;
+            //Convert from hexadecimal to the currentMode
+            case "Hexadecimal":
+                switch (currentMode) {
+                    case "Binary":
+                        for (int i = 0; i < calculatorArray.size(); i++) {
+                            if (calculatorArray.get(i).contains("+") ||
+                                    calculatorArray.get(i).contains("-") ||
+                                    calculatorArray.get(i).contains("*") ||
+                                    calculatorArray.get(i).contains("/")) {
+
+                            } else {
+                                decimalVal = Integer.parseInt(calculatorArray.get(i), 16);
+                                calculatorArray.set(i, Integer.toBinaryString(decimalVal));
+                            }
+                        }
+                        break;
+                    case "Decimal":
+                        for (int i = 0; i < calculatorArray.size(); i++) {
+                            if (calculatorArray.get(i).contains("+") ||
+                                    calculatorArray.get(i).contains("-") ||
+                                    calculatorArray.get(i).contains("*") ||
+                                    calculatorArray.get(i).contains("/")) {
+
+                            } else {
+                                decimalVal = Integer.parseInt(calculatorArray.get(i), 16);
+                                calculatorArray.set(i, Integer.toString(decimalVal));
+                            }
+                        }
+                        break;
+                }
+                break;
+        }
+        setCalculatorInputDisplay();
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

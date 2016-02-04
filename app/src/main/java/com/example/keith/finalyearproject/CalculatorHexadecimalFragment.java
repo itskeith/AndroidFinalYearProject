@@ -25,7 +25,8 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
             sevenButton, eightButton, nineButton, aButton, bButton, cButton, dButton, eButton,
             fButton, plusButton, minusButton, multiplyButton, divideButton, deleteButton,
             clearButton, equalsButton;
-    String userInput;
+    String input;
+    Boolean isLastInputOperation;
     Activity activity;
 
     @Nullable
@@ -92,91 +93,9 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
         return view;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.buttonZero:
-                txtInput.append("0");
-                break;
-            case R.id.buttonOne:
-                txtInput.append("1");
-                break;
-            case R.id.buttonTwo:
-                txtInput.append("2");
-                break;
-            case R.id.buttonThree:
-                txtInput.append("3");
-                break;
-            case R.id.buttonFour:
-                txtInput.append("4");
-                break;
-            case R.id.buttonFive:
-                txtInput.append("5");
-                break;
-            case R.id.buttonSix:
-                txtInput.append("6");
-                break;
-            case R.id.buttonSeven:
-                txtInput.append("7");
-                break;
-            case R.id.buttonEight:
-                txtInput.append("8");
-                break;
-            case R.id.buttonNine:
-                txtInput.append("9");
-                break;
-            case R.id.buttonA:
-                txtInput.append("A");
-                break;
-            case R.id.buttonB:
-                txtInput.append("B");
-                break;
-            case R.id.buttonC:
-                txtInput.append("C");
-                break;
-            case R.id.buttonD:
-                txtInput.append("D");
-                break;
-            case R.id.buttonE:
-                txtInput.append("E");
-                break;
-            case R.id.buttonF:
-                txtInput.append("F");
-                break;
-            case R.id.buttonMinus:
-                txtResult.append(txtInput.getText().toString() + " - ");
-                firstInputString = txtInput.getText().toString();
-                txtInput.setText("");
-                break;
-            case R.id.buttonPlus:
-                txtResult.append(txtInput.getText().toString() + " + ");
-                txtInput.setText("");
-                break;
-            case R.id.buttonEquals:
-                txtResult.append(txtInput.getText().toString() + "\n=\n");
-                txtInput.setText("");
-                break;
-            case R.id.buttonDivide:
-                txtResult.append(txtInput.getText().toString() + " / ");
-                txtInput.setText("");
-                break;
-            case R.id.buttonMultiply:
-                txtResult.append(txtInput.getText().toString() + " * ");
-                txtInput.setText("");
-                break;
-            case R.id.buttonDelete:
-                int txtInputLength = txtInput.getText().toString().length();
-                if (txtInputLength > 0) {
-                    userInput = txtInput.getText().toString();
-                    txtInput.setText(userInput.substring(0, userInput.length() - 1));
-                }
-                //int start = txtInput.getText().toString().length();
-                //txtInput.setText(txtInput.getEditableText().delete(start - 1,start - 1));
-                break;
-            case R.id.buttonClear:
-                txtInput.setText("");
-                txtResult.setText("");
-        }
+    /*Interface for communicating from fragment to activity*/
+    public interface calculatorArrayListener {
+        public void calculatorArrayActivity(String userInput);
     }
 
     @Override
@@ -194,26 +113,127 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
 
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.buttonZero:
+                input = "0";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonOne:
+                input = "1";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonTwo:
+                input = "2";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonThree:
+                input = "3";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonFour:
+                input = "4";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonFive:
+                input = "5";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonSix:
+                input = "6";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonSeven:
+                input = "7";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonEight:
+                input = "8";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonNine:
+                input = "0";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonA:
+                input = "A";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonB:
+                input = "B";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonC:
+                input = "C";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonD:
+                input = "D";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonE:
+                input = "E";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonF:
+                input = "F";
+                isLastInputOperation = false;
+                getInput(input);
+                break;
+            case R.id.buttonMinus:
+                input = "-";
+                isLastInputOperation = true;
+                getInput(input);
+                break;
+            case R.id.buttonPlus:
+                input = "+";
+                isLastInputOperation = true;
+                getInput(input);
+                break;
+            case R.id.buttonEquals:
+                input = "=";
+                isLastInputOperation = true;
+                getInput(input);
+                break;
+            case R.id.buttonDivide:
+                input = "/";
+                isLastInputOperation = true;
+                getInput(input);
+                break;
+            case R.id.buttonMultiply:
+                input = "*";
+                isLastInputOperation = true;
+                getInput(input);
+                break;
+            case R.id.buttonDelete:
+                input = "Delete";
+                getInput(input);
+                //int start = txtInput.getText().toString().length();
+                //txtInput.setText(txtInput.getEditableText().delete(start - 1,start - 1));
+                break;
+            case R.id.buttonClear:
+                input = "Clear";
+                getInput(input);
+        }
+    }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_calculator, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    public void getInput(String input){
+        ((calculatorArrayListener) activity).calculatorArrayActivity(input);
+    }
 }
