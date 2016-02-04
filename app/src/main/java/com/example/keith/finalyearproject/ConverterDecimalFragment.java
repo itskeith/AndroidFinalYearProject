@@ -12,6 +12,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,10 +27,11 @@ Student Number: 11125268
 Electronic And Computer Engineering(LM118) 4th year
 Final Year Project
 */
-public class ConverterDecimalFragment extends Fragment implements TextWatcher {
+public class ConverterDecimalFragment extends Fragment implements View.OnClickListener, TextWatcher {
 
-    EditText txtDecimal;
-    TextView txtBinary, txtHexadecimal, txtOctal;
+    TextView txtDecimal, txtBinary, txtHexadecimal, txtOctal;
+    Button oneButton, zeroButton, twoButton, threeButton, fourButton, fiveButton, sixButton, sevenButton,
+            eightButton, nineButton, deleteButton;
     int decimalVal;
 
     @Override
@@ -37,12 +39,37 @@ public class ConverterDecimalFragment extends Fragment implements TextWatcher {
         View view = inflater.inflate(R.layout.fragment_converter_decimal, container, false);
         //radioGroup.setOnClickListener(this);
         //radioButtonDecimal.setChecked(true);
-        txtDecimal = (EditText) view.findViewById(R.id.editTextDecimal);
+        txtDecimal = (TextView) view.findViewById(R.id.editTextDecimal);
         txtBinary = (TextView) view.findViewById(R.id.textViewBinary);
         txtOctal = (TextView) view.findViewById(R.id.textViewOctal);
         txtHexadecimal = (TextView) view.findViewById(R.id.textViewHexadecimal);
         txtDecimal.addTextChangedListener(this);
         txtDecimal.setFilters(new InputFilter[]{filter});
+
+        oneButton = (Button) view.findViewById(R.id.converterButtonOne);
+        oneButton.setOnClickListener(this);
+        zeroButton = (Button) view.findViewById(R.id.converterButtonZero);
+        zeroButton.setOnClickListener(this);
+        twoButton = (Button) view.findViewById(R.id.converterButtonTwo);
+        twoButton.setOnClickListener(this);
+        threeButton = (Button) view.findViewById(R.id.converterButtonThree);
+        threeButton.setOnClickListener(this);
+        fourButton = (Button) view.findViewById(R.id.converterButtonFour);
+        fourButton.setOnClickListener(this);
+        fiveButton = (Button) view.findViewById(R.id.converterButtonFive);
+        fiveButton.setOnClickListener(this);
+        sixButton = (Button) view.findViewById(R.id.converterButtonSix);
+        sixButton.setOnClickListener(this);
+        sevenButton = (Button) view.findViewById(R.id.converterButtonSeven);
+        sevenButton.setOnClickListener(this);
+        eightButton = (Button) view.findViewById(R.id.converterButtonEight);
+        eightButton.setOnClickListener(this);
+        nineButton = (Button) view.findViewById(R.id.converterButtonNine);
+        nineButton.setOnClickListener(this);
+
+        deleteButton = (Button) view.findViewById(R.id.converterButtonDelete);
+        deleteButton.setOnClickListener(this);
+
         return view;
     }
 
@@ -103,4 +130,47 @@ public class ConverterDecimalFragment extends Fragment implements TextWatcher {
 
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.converterButtonOne:
+                txtDecimal.setText(txtDecimal.getText() + "1");
+                break;
+            case R.id.converterButtonZero:
+                txtDecimal.setText(txtDecimal.getText() + "0");
+                break;
+            case R.id.converterButtonTwo:
+                txtDecimal.setText(txtDecimal.getText() + "2");
+                break;
+            case R.id.converterButtonThree:
+                txtDecimal.setText(txtDecimal.getText() + "3");
+                break;
+            case R.id.converterButtonFour:
+                txtDecimal.setText(txtDecimal.getText() + "4");
+                break;
+            case R.id.converterButtonFive:
+                txtDecimal.setText(txtDecimal.getText() + "5");
+                break;
+            case R.id.converterButtonSix:
+                txtDecimal.setText(txtDecimal.getText() + "6");
+                break;
+            case R.id.converterButtonSeven:
+                txtDecimal.setText(txtDecimal.getText() + "7");
+                break;
+            case R.id.converterButtonEight:
+                txtDecimal.setText(txtDecimal.getText() + "8");
+                break;
+            case R.id.converterButtonNine:
+                txtDecimal.setText(txtDecimal.getText() + "9");
+                break;
+            case R.id.converterButtonDelete:
+                int start = txtDecimal.getText().toString().length();
+                if(start>0) {
+                    txtDecimal.setText(txtDecimal.getEditableText().delete(start - 1, start));
+                }else{
+                    return;
+                }
+                break;
+        }
+    }
 }

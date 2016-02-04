@@ -14,8 +14,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/white" />
 
-    <EditText
-        android:id="@+id/editTextBinary"
+    <TextView
+        android:id="@+id/converterInputBinary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -90,5 +90,33 @@
     <Space
         android:layout_width="20px"
         android:layout_height="20px" />
-
+    <LinearLayout
+        android:id="@+id/converterLinearLayoutButtons"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/converterButtonZero"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            android:text = "0"/>
+        <Button
+            android:id="@+id/converterButtonOne"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            android:text = "1"/>
+        <Button
+            android:id="@+id/converterButtonDelete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            android:text="Delete"/>
+    </LinearLayout>
 </LinearLayout>

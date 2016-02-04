@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,10 +24,10 @@ Student Number: 11125268
 Electronic And Computer Engineering(LM118) 4th year
 Final Year Project
 */
-public class ConverterBinaryFragment extends Fragment implements TextWatcher {
+public class ConverterBinaryFragment extends Fragment implements View.OnClickListener, TextWatcher {
 
-    EditText txtBinary;
-    TextView txtDecimal, txtHexadecimal, txtOctal;
+    TextView txtDecimal, txtBinary, txtHexadecimal, txtOctal;
+    Button oneButton, zeroButton, deleteButton;
     int decimalVal;
 
     @Override
@@ -34,12 +35,19 @@ public class ConverterBinaryFragment extends Fragment implements TextWatcher {
         View view = inflater.inflate(R.layout.fragment_converter_binary, container, false);
         //radioGroup.setOnClickListener(this);
         //radioButtonDecimal.setChecked(true);
-        txtBinary = (EditText) view.findViewById(R.id.editTextBinary);
+        txtBinary = (TextView) view.findViewById(R.id.converterInputBinary);
         txtDecimal = (TextView) view.findViewById(R.id.textViewDecimal);
         txtHexadecimal = (TextView) view.findViewById(R.id.textViewHexadecimal);
         txtOctal = (TextView) view.findViewById(R.id.textViewOctal);
         txtBinary.addTextChangedListener(this);
         txtBinary.setFilters(new InputFilter[]{filter});
+        oneButton = (Button) view.findViewById(R.id.converterButtonOne);
+        oneButton.setOnClickListener(this);
+        zeroButton = (Button) view.findViewById(R.id.converterButtonZero);
+        zeroButton.setOnClickListener(this);
+        deleteButton = (Button) view.findViewById(R.id.converterButtonDelete);
+        deleteButton.setOnClickListener(this);
+
         return view;
     }
 
@@ -94,9 +102,8 @@ public class ConverterBinaryFragment extends Fragment implements TextWatcher {
                 txtDecimal.setText(Integer.toString(decimalVal));
                 txtHexadecimal.setText(Integer.toHexString(decimalVal));
                 txtOctal.setText(Integer.toOctalString(decimalVal));
-            }
-            catch (Exception decimalTooLarge){
-                Toast.makeText(getActivity(),"Decimal value too large", Toast.LENGTH_SHORT).show();
+            } catch (Exception decimalTooLarge) {
+                Toast.makeText(getActivity(), "Decimal value too large", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -104,6 +111,26 @@ public class ConverterBinaryFragment extends Fragment implements TextWatcher {
 
     public void afterTextChanged(Editable editable) {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.converterButtonOne:
+                txtBinary.setText(txtBinary.getText() + "1");
+                break;
+            case R.id.converterButtonZero:
+                txtBinary.setText(txtBinary.getText() + "0");
+                break;
+            case R.id.converterButtonDelete:
+                int start = txtBinary.getText().toString().length();
+                if(start>0) {
+                    txtBinary.setText(txtBinary.getEditableText().delete(start - 1, start));
+                }else{
+                    return;
+                }
+                break;
+        }
     }
 
    /* Believe this is redundant now
