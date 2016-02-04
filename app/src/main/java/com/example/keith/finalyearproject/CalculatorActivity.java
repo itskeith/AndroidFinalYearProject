@@ -158,16 +158,24 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                     for (int i = 1; i < calculatorArray.size(); i++) {
 
                         if (calculatorArray.get(i - 1) == "+") {
-                            secondInputString = calculatorArray.get(currentIndex);
+                            secondInputString = calculatorArray.get(i);
                             secondInput = Integer.parseInt(secondInputString, 2);
                             firstInput = firstInput + secondInput;
                         } else if (calculatorArray.get(i - 1) == "-") {
-                            secondInputString = calculatorArray.get(currentIndex);
+                            secondInputString = calculatorArray.get(i);
                             secondInput = Integer.parseInt(secondInputString, 2);
                             firstInput = firstInput - secondInput;
+                        } else if (calculatorArray.get(i - 1) == "*") {
+                            secondInputString = calculatorArray.get(i);
+                            secondInput = Integer.parseInt(secondInputString, 2);
+                            firstInput = firstInput * secondInput;
+                        } else if (calculatorArray.get(i - 1) == "/") {
+                            secondInputString = calculatorArray.get(i);
+                            secondInput = Integer.parseInt(secondInputString, 2);
+                            firstInput = firstInput / secondInput;
                         }
                         txtResult.setText(Integer.toBinaryString(firstInput));
-                        
+
                     }
                 } else {
                     txtResult.setText(Integer.toBinaryString(firstInput));
@@ -183,6 +191,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
     //Displays the binary mode of operation of the calculator activity when user selects the
     //radio binary button
+
     public void binaryCalculator(View view) {
         if (lastMode == "Hexadecimal") {
             decimalVal = Integer.parseInt(txtResult.getText().toString(), 16);
