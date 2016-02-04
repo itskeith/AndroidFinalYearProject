@@ -13,7 +13,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -24,11 +26,12 @@ import java.util.Stack;
 /**
  * Created by Keith on 18/11/2015.
  */
-public class ConverterActivity extends AppCompatActivity implements TextWatcher {
+public class ConverterActivity extends AppCompatActivity implements TextWatcher, View.OnClickListener {
     EditText txtDecimal;
     TextView txtBinary, txtHexadecimal;
     RadioGroup radioGroup;
     RadioButton radioButtonDecimal, radioButtonBinary, radioButtonOctal, radioButtonHexadecimal;
+    ImageButton referenceButtonDecimal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,8 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher 
 //                }
 //            }
 //        });
+        referenceButtonDecimal = (ImageButton) findViewById(R.id.decimalReferenceButton);
+        referenceButtonDecimal.setOnClickListener(this);
     }
 
 
@@ -183,6 +188,15 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher 
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
 
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.decimalReferenceButton:
+                //TODO
+                break;
         }
     }
 //    public void calculate(int base, TextView txtView) {

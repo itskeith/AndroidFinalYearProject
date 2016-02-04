@@ -27,7 +27,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     RadioButton radioBinaryButton, radioHexadecimalButton;
     TextView txtInput, txtResult;
     int decimalVal, currentIndex;
-    String lastMode;
+    String lastMode, firstInputString, secondInputString, Operator;
+    int firstInput, secondInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +43,17 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         radioBinaryButton = (RadioButton) findViewById(R.id.binarybuttoncalculator);
         radioHexadecimalButton = (RadioButton) findViewById(R.id.hexadecimalbuttoncalculator);
         txtInput = (TextView) findViewById(R.id.textViewInput);
+        txtResult = (TextView) findViewById(R.id.textViewResult);
     }
 
+    /*
+    calculatorArrayActivity checks what to do with users input
+    If it is a 1 or a 0 it will add
+    to its own array entry or append it to an existing array entry if the latest array entry is a
+    number.
+    If the input is an operation it checks to make sure that there is a number entered
+    before the operator otherwise it is not accepted.
+     */
     @Override
     public void calculatorArrayActivity(String userInput) {
         switch (userInput) {
@@ -51,9 +61,20 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
             case "1":
                 if (calculatorArray.size() == 0) {
                     calculatorArray.add(userInput);
+                } else if (calculatorArray.get(currentIndex) == "+" ||
+                        calculatorArray.get(currentIndex) == "-" ||
+                        calculatorArray.get(currentIndex) == "*" ||
+                        calculatorArray.get(currentIndex) == "/") {
+                    currentIndex++;
+                    calculatorArray.add(userInput);
                 } else {
+                    //if the array is not empty and the current index in the array is not an operator
+                    //then the array entry at the current index must be a number so then the current
+                    //user input is appended to the end
                     calculatorArray.set(currentIndex, calculatorArray.get(currentIndex) + userInput);
                 }
+
+                setCalculatorResultDisplay();
                 break;
             case "+":
             case "-":
@@ -61,10 +82,19 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
             case "/":
                 if (calculatorArray.isEmpty()) {
                     Toast.makeText(this, "Need to enter a number before an operation", Toast.LENGTH_SHORT).show();
+                } else if (calculatorArray.get(currentIndex) == "+" ||
+                        calculatorArray.get(currentIndex) == "-" ||
+                        calculatorArray.get(currentIndex) == "*" ||
+                        calculatorArray.get(currentIndex) == "/") {
+                    //if current array entry is an operation, replace it with the latest user input operation
+                    calculatorArray.set(currentIndex, userInput);
+                } else {
+                    currentIndex++;
+                    calculatorArray.add(userInput);
                 }
-                calculatorArray.add(userInput);
-                currentIndex += 2;
-                calculatorArray.add("");
+
+                //currentIndex += 2;
+                //calculatorArray.add("");
                 break;
             case "Delete":
                 int arrayEntryLength;
@@ -87,10 +117,12 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                         }
                     }
                 }
+                setCalculatorResultDisplay();
                 break;
             case "Clear":
                 currentIndex = 0;
                 calculatorArray.clear();
+                txtResult.setText("");
                 break;
         }
         setCalculatorInputDisplay();
@@ -98,7 +130,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
     public void setCalculatorInputDisplay() {
         if (lastMode == "Binary") {
-            if(calculatorArray.size() == 0){
+            if (calculatorArray.size() == 0) {
                 txtInput.setText("");
             }
             for (int i = 0; i < calculatorArray.size(); i++) {
@@ -108,6 +140,44 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                     txtInput.append(" " + calculatorArray.get(i) + " ");
                 }
             }
+        } else if (lastMode == "Hexadecimal") {
+            if (calculatorArray.size() == 0) {
+                txtInput.setText("");
+            }
+
+        }
+    }
+
+    public void setCalculatorResultDisplay() {
+
+        if (lastMode == "Binary") {
+            if (calculatorArray.isEmpty() != true) {
+                firstInputString = calculatorArray.get(0);
+                firstInput = Integer.parseInt(firstInputString, 2);
+                if (calculatorArray.size() > 1) {
+                    for (int i = 1; i < calculatorArray.size(); i++) {
+
+                        if (calculatorArray.get(i - 1) == "+") {
+                            secondInputString = calculatorArray.get(currentIndex);
+                            secondInput = Integer.parseInt(secondInputString, 2);
+                            firstInput = firstInput + secondInput;
+                        } else if (calculatorArray.get(i - 1) == "-") {
+                            secondInputString = calculatorArray.get(currentIndex);
+                            secondInput = Integer.parseInt(secondInputString, 2);
+                            firstInput = firstInput - secondInput;
+                        }
+                        txtResult.setText(Integer.toBinaryString(firstInput));
+                        
+                    }
+                } else {
+                    txtResult.setText(Integer.toBinaryString(firstInput));
+                }
+            } else {
+                firstInputString = "";
+                txtResult.setText(firstInputString);
+            }
+
+
         }
     }
 

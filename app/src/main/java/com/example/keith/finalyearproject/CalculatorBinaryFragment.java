@@ -139,7 +139,6 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
                 getInput(input);
                 break;
             case R.id.buttonMultiply:
-                txtInput.append(" * ");
                 isLastInputOperation = true;
                 input = "*";
                 getInput(input);
@@ -176,10 +175,10 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
             case "-":
                 ((calculatorArrayListener) activity).calculatorArrayActivity(input);
                 break;
-            case "Multiply":
+            case "*":
                 ((calculatorArrayListener) activity).calculatorArrayActivity(input);
                 break;
-            case "Divide":
+            case "/":
                 ((calculatorArrayListener) activity).calculatorArrayActivity(input);
                 break;
             /*case "Equals":
