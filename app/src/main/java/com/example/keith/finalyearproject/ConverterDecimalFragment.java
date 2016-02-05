@@ -118,11 +118,14 @@ public class ConverterDecimalFragment extends Fragment implements View.OnClickLi
             return;
         }
         else{
-
-            decimalVal = Integer.parseInt(txtDecimal.getText().toString());
-            txtBinary.setText(Integer.toBinaryString(decimalVal));
-            txtOctal.setText(Integer.toOctalString(decimalVal));
-            txtHexadecimal.setText(Integer.toHexString(decimalVal));
+            try {
+                decimalVal = Integer.parseInt(txtDecimal.getText().toString());
+                txtBinary.setText(Integer.toBinaryString(decimalVal));
+                txtOctal.setText(Integer.toOctalString(decimalVal));
+                txtHexadecimal.setText(Integer.toHexString(decimalVal));
+            } catch(Exception decimalValueTooLarge){
+                Toast.makeText(getActivity(), "Hexadecimal value too large", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

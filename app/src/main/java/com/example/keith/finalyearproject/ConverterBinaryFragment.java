@@ -103,7 +103,7 @@ public class ConverterBinaryFragment extends Fragment implements View.OnClickLis
                 txtHexadecimal.setText(Integer.toHexString(decimalVal));
                 txtOctal.setText(Integer.toOctalString(decimalVal));
             } catch (Exception decimalTooLarge) {
-                Toast.makeText(getActivity(), "Decimal value too large", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Binary value too large", Toast.LENGTH_SHORT).show();
             }
         }
 

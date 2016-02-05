@@ -14,8 +14,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/white" />
 
-    <EditText
-        android:id="@+id/editTextHexadecimal"
+    <TextView
+        android:id="@+id/textViewHexadecimal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white" />
@@ -86,4 +86,193 @@
     <Space
         android:layout_width="20px"
         android:layout_height="20px" />
+
+    <LinearLayout
+        android:id="@+id/converterLinearLayoutButtonFirstRow"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/converterButtonD"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="D" />
+        <Button
+            android:id="@+id/converterButtonE"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="E" />
+        <Button
+            android:id="@+id/converterButtonF"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="F" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/converterLinearLayoutButtonSecondRow"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/converterButtonA"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="A" />
+        <Button
+            android:id="@+id/converterButtonB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="B" />
+        <Button
+            android:id="@+id/converterButtonC"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="C" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/converterLinearLayoutButtonThirdRow"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/converterButtonSeven"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="7" />
+        <Button
+            android:id="@+id/converterButtonEight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="8" />
+        <Button
+            android:id="@+id/converterButtonNine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="9" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/converterLinearLayoutButtonFourthRow"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/converterLinearLayoutButtonFirstRow"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/converterButtonFour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="4" />
+        <Button
+            android:id="@+id/converterButtonFive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="5" />
+        <Button
+            android:id="@+id/converterButtonSix"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="6" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/converterLinearLayoutButtonFifthRow"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/converterLinearLayoutButtonSecondRow"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/converterButtonOne"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="1" />
+        <Button
+            android:id="@+id/converterButtonTwo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="2" />
+        <Button
+            android:id="@+id/converterButtonThree"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/converterLinearLayoutButtonSixthRow"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/converterLinearLayoutButtonThirdRow"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/converterButtonZero"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="0" />
+        <Button
+            android:id="@+id/converterButtonDelete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
+            android:text="Delete" />
+    </LinearLayout>
 </LinearLayout>

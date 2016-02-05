@@ -14,7 +14,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/white" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTextDecimal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -86,7 +86,8 @@
 
     <Space
         android:layout_width="20px"
-        android:layout_height="20px" />
+        android:layout_height="20px"
+        />
 
     <LinearLayout
         android:id="@+id/converterLinearLayoutButtonFirstRow"
@@ -101,6 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
             android:text="7" />
         <Button
             android:id="@+id/converterButtonEight"
@@ -108,6 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
             android:text="8" />
         <Button
             android:id="@+id/converterButtonNine"
@@ -115,6 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
             android:text="9" />
     </LinearLayout>
 
@@ -131,6 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
             android:text="4" />
         <Button
             android:id="@+id/converterButtonFive"
@@ -138,6 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
             android:text="5" />
         <Button
             android:id="@+id/converterButtonSix"
@@ -145,6 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
             android:text="6" />
     </LinearLayout>
 
@@ -161,6 +168,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
             android:text="1" />
         <Button
             android:id="@+id/converterButtonTwo"
@@ -168,6 +176,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
             android:text="2" />
         <Button
             android:id="@+id/converterButtonThree"
@@ -175,6 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
             android:text="3" />
     </LinearLayout>
 
@@ -191,6 +201,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
             android:text="0" />
         <Button
             android:id="@+id/converterButtonDelete"
@@ -198,6 +209,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
+            android:background="@drawable/buttons_calc"
             android:text="Delete" />
     </LinearLayout>
 

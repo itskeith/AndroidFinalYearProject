@@ -12,9 +12,12 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.Stack;
 
@@ -24,10 +27,11 @@ Student Number: 11125268
 Electronic And Computer Engineering(LM118) 4th year
 Final Year Project
 */
-public class ConverterHexadecimalFragment extends Fragment implements TextWatcher {
+public class ConverterHexadecimalFragment extends Fragment implements View.OnClickListener, TextWatcher {
 
-    EditText txtHexadecimal;
-    TextView txtBinary, txtDecimal, txtOctal;
+    TextView txtBinary, txtHexadecimal, txtDecimal, txtOctal;
+    Button oneButton, zeroButton, twoButton, threeButton, fourButton, fiveButton, sixButton, sevenButton,
+            eightButton, nineButton, aButton, bButton, cButton, dButton, eButton, fButton, deleteButton;
     String hexVal;
     int binaryVal, decimalVal;
 
@@ -36,12 +40,48 @@ public class ConverterHexadecimalFragment extends Fragment implements TextWatche
         View view = inflater.inflate(R.layout.fragment_converter_hexadecimal, container, false);
         //radioGroup.setOnClickListener(this);
         //radioButtonDecimal.setChecked(true);
-        txtHexadecimal = (EditText) view.findViewById(R.id.editTextHexadecimal);
+        txtHexadecimal = (TextView) view.findViewById(R.id.textViewHexadecimal);
         txtBinary = (TextView) view.findViewById(R.id.textViewBinary);
         txtOctal = (TextView) view.findViewById(R.id.textViewOctal);
         txtDecimal = (TextView) view.findViewById(R.id.textViewDecimal);
         txtHexadecimal.addTextChangedListener(this);
         txtHexadecimal.setFilters(new InputFilter[]{filter});
+
+        oneButton = (Button) view.findViewById(R.id.converterButtonOne);
+        oneButton.setOnClickListener(this);
+        zeroButton = (Button) view.findViewById(R.id.converterButtonZero);
+        zeroButton.setOnClickListener(this);
+        twoButton = (Button) view.findViewById(R.id.converterButtonTwo);
+        twoButton.setOnClickListener(this);
+        threeButton = (Button) view.findViewById(R.id.converterButtonThree);
+        threeButton.setOnClickListener(this);
+        fourButton = (Button) view.findViewById(R.id.converterButtonFour);
+        fourButton.setOnClickListener(this);
+        fiveButton = (Button) view.findViewById(R.id.converterButtonFive);
+        fiveButton.setOnClickListener(this);
+        sixButton = (Button) view.findViewById(R.id.converterButtonSix);
+        sixButton.setOnClickListener(this);
+        sevenButton = (Button) view.findViewById(R.id.converterButtonSeven);
+        sevenButton.setOnClickListener(this);
+        eightButton = (Button) view.findViewById(R.id.converterButtonEight);
+        eightButton.setOnClickListener(this);
+        nineButton = (Button) view.findViewById(R.id.converterButtonNine);
+        nineButton.setOnClickListener(this);
+        aButton = (Button) view.findViewById(R.id.converterButtonA);
+        aButton.setOnClickListener(this);
+        bButton = (Button) view.findViewById(R.id.converterButtonB);
+        bButton.setOnClickListener(this);
+        cButton = (Button) view.findViewById(R.id.converterButtonC);
+        cButton.setOnClickListener(this);
+        dButton = (Button) view.findViewById(R.id.converterButtonD);
+        dButton.setOnClickListener(this);
+        eButton = (Button) view.findViewById(R.id.converterButtonE);
+        eButton.setOnClickListener(this);
+        fButton = (Button) view.findViewById(R.id.converterButtonF);
+        fButton.setOnClickListener(this);
+
+        deleteButton = (Button) view.findViewById(R.id.converterButtonDelete);
+        deleteButton.setOnClickListener(this);
         return view;
     }
 
@@ -122,7 +162,7 @@ public class ConverterHexadecimalFragment extends Fragment implements TextWatche
                 //Set octal value in textView
                 txtOctal.setText(Integer.toOctalString(decimalVal));
             } catch (Exception decimalTooLarge) {
-                Toast.makeText(getActivity(), "Decimal value too large", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Hexadecimal value too large", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -134,4 +174,66 @@ public class ConverterHexadecimalFragment extends Fragment implements TextWatche
     }
 
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+
+            case R.id.converterButtonZero:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "0");
+                break;
+            case R.id.converterButtonOne:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "1");
+                break;
+            case R.id.converterButtonTwo:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "2");
+                break;
+            case R.id.converterButtonThree:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "3");
+                break;
+            case R.id.converterButtonFour:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "4");
+                break;
+            case R.id.converterButtonFive:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "5");
+                break;
+            case R.id.converterButtonSix:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "6");
+                break;
+            case R.id.converterButtonSeven:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "7");
+                break;
+            case R.id.converterButtonEight:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "8");
+                break;
+            case R.id.converterButtonNine:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "9");
+                break;
+            case R.id.converterButtonA:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "A");
+                break;
+            case R.id.converterButtonB:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "B");
+                break;
+            case R.id.converterButtonC:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "C");
+                break;
+            case R.id.converterButtonD:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "D");
+                break;
+            case R.id.converterButtonE:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "E");
+                break;
+            case R.id.converterButtonF:
+                txtHexadecimal.setText(txtHexadecimal.getText() + "F");
+                break;
+            case R.id.converterButtonDelete:
+                int start = txtHexadecimal.getText().toString().length();
+                if (start > 0) {
+                    txtHexadecimal.setText(txtHexadecimal.getEditableText().delete(start - 1, start));
+                } else {
+                    return;
+                }
+                break;
+        }
+    }
 }
