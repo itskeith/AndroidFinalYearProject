@@ -34,7 +34,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
     TextView txtBinary, txtHexadecimal;
     RadioGroup radioGroup;
     RadioButton radioButtonDecimal, radioButtonBinary, radioButtonOctal, radioButtonHexadecimal;
-    ImageButton referenceButtonDecimal;
+    ImageButton referenceButtonDecimal, referenceButtonBinary, referenceButtonOctal, referenceButtonHexadecimal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +77,12 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
 //        });
         referenceButtonDecimal = (ImageButton) findViewById(R.id.decimalReferenceButton);
         referenceButtonDecimal.setOnClickListener(this);
+        referenceButtonBinary = (ImageButton) findViewById(R.id.binaryReferenceButton);
+        referenceButtonBinary.setOnClickListener(this);
+        referenceButtonOctal = (ImageButton) findViewById(R.id.octalReferenceButton);
+        referenceButtonOctal.setOnClickListener(this);
+        referenceButtonHexadecimal = (ImageButton) findViewById(R.id.hexadecimalReferenceButton);
+        referenceButtonHexadecimal.setOnClickListener(this);
     }
 
 
@@ -198,7 +204,36 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.decimalReferenceButton:
-                //TODO
+                Intent decimalIntent = new Intent();
+                decimalIntent.setClass(ConverterActivity.this, ReferenceDetailsActivity.class);
+
+                decimalIntent.putExtra("index", 8);
+
+                startActivity(decimalIntent);
+                break;
+            case R.id.binaryReferenceButton:
+                Intent binaryIntent = new Intent();
+                binaryIntent.setClass(ConverterActivity.this, ReferenceDetailsActivity.class);
+
+                binaryIntent.putExtra("index", 9);
+
+                startActivity(binaryIntent);
+                break;
+            case R.id.octalReferenceButton:
+                Intent octalIntent = new Intent();
+                octalIntent.setClass(ConverterActivity.this, ReferenceDetailsActivity.class);
+
+                octalIntent.putExtra("index", 10);
+
+                startActivity(octalIntent);
+                break;
+            case R.id.hexadecimalReferenceButton:
+                Intent hexadecimalIntent = new Intent();
+                hexadecimalIntent.setClass(ConverterActivity.this, ReferenceDetailsActivity.class);
+
+                hexadecimalIntent.putExtra("index", 11);
+
+                startActivity(hexadecimalIntent);
                 break;
         }
     }

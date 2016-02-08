@@ -17,162 +17,104 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/linearLayoutA"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/my_toolbar"
-            android:layout_weight="3.5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textViewDescription"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#636366"
-                android:text="@string/convertfrom"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/white" />
+                android:orientation="horizontal">
 
-            <RadioGroup
-                android:id="@+id/radioGroupConverter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textViewDescription"
-                android:background="#989898">
+                <RadioGroup
+                    android:id="@+id/radioGroupConverter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textViewDescription"
+                    android:layout_weight="0.5"
+                    android:background="#989898"
+                    android:elevation="8dp">
 
-                <RadioButton
-                    android:id="@+id/radioButtonDecimal"
+                    <RadioButton
+                        android:id="@+id/radioButtonDecimal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="selectDecimal"
+                        android:text="Decimal" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonBinary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="selectBinary"
+                        android:text="Binary" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonOctal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="selectOctal"
+                        android:text="Octal" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonHexadecimal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="selectHexadecimal"
+                        android:text="Hexadecimal" />
+                </RadioGroup>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="selectDecimal"
-                    android:text="Decimal" />
+                    android:layout_height="match_parent"
+                    android:background="#989898"
+                    android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/radioButtonBinary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="selectBinary"
-                    android:text="Binary" />
+                    <ImageButton
+                        android:id="@+id/decimalReferenceButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.25"
+                        android:background="?android:selectableItemBackground"
+                        android:src="@android:drawable/ic_menu_help" />
 
-                <RadioButton
-                    android:id="@+id/radioButtonOctal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="selectOctal"
-                    android:text="Octal" />
+                    <ImageButton
+                        android:id="@+id/binaryReferenceButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.25"
+                        android:background="?android:selectableItemBackground"
+                        android:src="@android:drawable/ic_menu_help" />
 
-                <RadioButton
-                    android:id="@+id/radioButtonHexadecimal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="selectHexadecimal"
-                    android:text="Hexadecimal" />
-            </RadioGroup>
-        </LinearLayout>
+                    <ImageButton
+                        android:id="@+id/octalReferenceButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.25"
+                        android:background="?android:selectableItemBackground"
+                        android:src="@android:drawable/ic_menu_help" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"></LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayoutB"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/linearLayoutA"
-            android:layout_weight="6">
+                    <ImageButton
+                        android:id="@+id/hexadecimalReferenceButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.25"
+                        android:background="?android:selectableItemBackground"
+                        android:src="@android:drawable/ic_menu_help" />
+                </LinearLayout>
+            </LinearLayout>
 
             <FrameLayout
                 android:id="@+id/converter_frame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></FrameLayout>
         </LinearLayout>
-    </LinearLayout>
-
-
-    <!--<Space-->
-    <!--android:layout_width="20px"-->
-    <!--android:layout_height="20px" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textViewEnter"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="#636366"-->
-    <!--android:text="Number to be converted:"-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-    <!--android:textColor="@color/white" />-->
-
-    <!--<EditText-->
-    <!--android:id="@+id/editText"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@color/white" />-->
-
-    <!--<Space-->
-    <!--android:layout_width="20px"-->
-    <!--android:layout_height="20px" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/Binary"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@color/grey"-->
-    <!--android:text="Binary:"-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-    <!--android:textColor="@color/white" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView2"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="#989898"-->
-    <!--android:text=""-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
-    <!--<Space-->
-    <!--android:layout_width="20px"-->
-    <!--android:layout_height="20px" />-->
-    <!--<TextView-->
-    <!--android:id="@+id/Hexadecimal"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@color/grey"-->
-    <!--android:text="Hexadecimal:"-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-    <!--android:textColor="@color/white" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView3"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="#989898"-->
-    <!--android:text=""-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
-    <!--<Space-->
-    <!--android:layout_width="20px"-->
-    <!--android:layout_height="20px" />-->
-    <!--<TextView-->
-    <!--android:id="@+id/Test"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@color/grey"-->
-    <!--android:text="Large Text"-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-    <!--android:textColor="@color/white" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView4"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="#989898"-->
-    <!--android:text=""-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
+    </ScrollView>
 
 
 </LinearLayout>

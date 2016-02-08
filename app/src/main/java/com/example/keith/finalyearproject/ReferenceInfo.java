@@ -8,6 +8,7 @@ Student Number: 11125268
 Electronic And Computer Engineering(LM118) 4th year
 Final Year Project
 */
+
 /**
  * Created by Keith on 17/11/2015.
  * Activity called for information from other reference activities and fragments
@@ -42,6 +43,10 @@ public class ReferenceInfo {
                     R.drawable.norgate,
                     R.drawable.xorgate,
                     R.drawable.xorgate,//need to add correct image here
+                    R.drawable.decimal,
+                    R.drawable.binary,
+                    R.drawable.octal,
+                    R.drawable.hexadecimal,
 
             };
 
@@ -53,8 +58,11 @@ public class ReferenceInfo {
                     R.drawable.nandtable,
                     R.drawable.nortable,
                     R.drawable.xortable,
-                    R.drawable.andtable,
-                    R.drawable.andtable
+                    R.drawable.xortable,
+                    R.drawable.base10,
+                    R.drawable.base2,
+                    R.drawable.base8,
+                    R.drawable.base10,
             };
 
     public static final String[] TEXTINFO =
@@ -77,8 +85,29 @@ public class ReferenceInfo {
                             "Anywhere you would normally expect a 1 or 0 to be the output of an OR " +
                             "gate is instead the opposite, so a NOR gate only returns a 1 when there" +
                             "are only 0's on the inputs.",
-                    "wqeqe",
-                    "aasdjad",
-                    "asdadalsd"
+                    "The XOR gate typically takes in 2 inputs, usually reffered to as A and B. \n" +
+                            "The XOR gate behaves simlar to the OR gate except it only outputs a " +
+                            "one when the inputs have opposite values i.e. a 1 and a 0, hence the name " +
+                            "XOR(Exclusive OR).",
+                    "The XNOR gate typically takes in 2 inputs, usually reffered to as A and B. \n" +
+                            "The XNOR gate behaves simlar to the NOR gate except it outputs a 1 when" +
+                            "there are two 1's or two 0's as the inputs, hence the name XNOR (Exclusive Not OR)",
+                    "Decimal is a base 10 number system \n" +
+                            "The decimal system goes from 1 to 9, A decimal number is the sum of its " +
+                            "digits multiplied with 10 to the power of n (with n being the position of the digit)" +
+                            "",
+                    "Binary is a base 2 number system \n" +
+                            "The binary system goes from 0 to 1. A binary number is the sum of its " +
+                            "digits multiplied with 2 to the power of n",
+                    "Octal is a base 8 number system \n" +
+                            "The binary system goes from 0 to 7. An octal number is the sum of its " +
+                            "digits multiplied with 8 to the power of n",
+                    "Hexadecimal is a base 16 number system \n" +
+                            "The hexadeicmal system goes from 0 to F (With A as the first digit after 9)." +
+                            " A hexadecimal number is the sum" +
+                            "of its digits multiplied with 16 to the power of n\n" +
+                            "A in hexadecimal represents a 10 in decimal and F represents 15\n" +
+                            "a 10 in hexadecimal represents 16 in decimal and 100 represents 256"
+
             };
 }
