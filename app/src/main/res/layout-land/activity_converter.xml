@@ -25,50 +25,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <TextView
+                android:id="@+id/textViewDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#636366"
+                android:elevation="4dp"
+                android:text="@string/convertfrom"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <RadioGroup
-                    android:id="@+id/radioGroupConverter"
+                <Spinner
+                    android:id="@+id/spinnerSelectConverter"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/textViewDescription"
                     android:layout_weight="0.5"
-                    android:background="#989898"
-                    android:elevation="8dp">
-
-                    <RadioButton
-                        android:id="@+id/radioButtonDecimal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="selectDecimal"
-                        android:text="Decimal" />
-
-                    <RadioButton
-                        android:id="@+id/radioButtonBinary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="selectBinary"
-                        android:text="Binary" />
-
-                    <RadioButton
-                        android:id="@+id/radioButtonOctal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="selectOctal"
-                        android:text="Octal" />
-
-                    <RadioButton
-                        android:id="@+id/radioButtonHexadecimal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="selectHexadecimal"
-                        android:text="Hexadecimal" />
-                </RadioGroup>
-
+                    android:spinnerMode="dropdown"
+                    android:elevation="4dp"
+                    android:background="@color/lighter_grey"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -76,31 +54,7 @@
                     android:orientation="vertical">
 
                     <ImageButton
-                        android:id="@+id/decimalReferenceButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.25"
-                        android:background="?android:selectableItemBackground"
-                        android:src="@android:drawable/ic_menu_help" />
-
-                    <ImageButton
-                        android:id="@+id/binaryReferenceButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.25"
-                        android:background="?android:selectableItemBackground"
-                        android:src="@android:drawable/ic_menu_help" />
-
-                    <ImageButton
-                        android:id="@+id/octalReferenceButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.25"
-                        android:background="?android:selectableItemBackground"
-                        android:src="@android:drawable/ic_menu_help" />
-
-                    <ImageButton
-                        android:id="@+id/hexadecimalReferenceButton"
+                        android:id="@+id/referenceHelpButton"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="0.25"

@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_below="@id/buttonZero"
-                android:layout_weight="0.3"
+                android:layout_weight="0.5"
                 android:background="@drawable/buttons_calc"
                 android:text="2's compliment"
                 android:textColor="@color/magenta"

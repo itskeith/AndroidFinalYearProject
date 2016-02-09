@@ -37,7 +37,9 @@
             android:name=".CalculatorActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme" />
-
+        <activity android:name=".ConverterHowtoBinaryActivity"
+            android:parentActivityName=".ConverterActivity"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

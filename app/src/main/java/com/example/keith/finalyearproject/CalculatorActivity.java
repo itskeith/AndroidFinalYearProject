@@ -7,14 +7,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import java.util.ArrayList;
 
@@ -25,13 +30,15 @@ Electronic And Computer Engineering(LM118) 4th year
 Final Year Project
 */
 public class CalculatorActivity extends AppCompatActivity implements CalculatorBinaryFragment.calculatorArrayListener,
-        CalculatorHexadecimalFragment.calculatorArrayListener, CalculatorDecimalFragment.calculatorArrayListener {
+        CalculatorHexadecimalFragment.calculatorArrayListener, CalculatorDecimalFragment.calculatorArrayListener, OnItemSelectedListener {
 
     ArrayList<String> calculatorArray = new ArrayList<>();
-    RadioButton radioBinaryButton, radioHexadecimalButton;
+    /*RadioButton radioBinaryButton, radioHexadecimalButton;*/
     TextView txtInput, txtResult;
+    boolean isTwoComplimentEnabled;
     int decimalVal, currentIndex;
     String lastMode, currentMode, firstInputString, secondInputString, Operator;
+    Spinner calculatorMode;
     int firstInput, secondInput;
 
     @Override
@@ -42,10 +49,19 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        //Sets dropdown from resource string array
+        calculatorMode = (Spinner) findViewById(R.id.spinnerSelectCalculator);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.number_formats, android.R.layout.simple_spinner_dropdown_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        calculatorMode.setAdapter(spinnerAdapter);
+        calculatorMode.setOnItemSelectedListener(this);
+
         // For Setting Logo in toolbar myToolbar.setLogo();
         currentIndex = 0;
-        radioBinaryButton = (RadioButton) findViewById(R.id.binarybuttoncalculator);
-        radioHexadecimalButton = (RadioButton) findViewById(R.id.hexadecimalbuttoncalculator);
+        isTwoComplimentEnabled = false;
+        /*radioBinaryButton = (RadioButton) findViewById(R.id.binarybuttoncalculator);
+        radioHexadecimalButton = (RadioButton) findViewById(R.id.hexadecimalbuttoncalculator);*/
         txtInput = (TextView) findViewById(R.id.textViewInput);
         txtResult = (TextView) findViewById(R.id.textViewResult);
     }
@@ -99,10 +115,9 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
     /*
     calculatorArrayActivity checks what to do with users input
-    If it is a 1 or a 0 it will add
-    to its own array entry or append it to an existing array entry if the latest array entry is a
-    number.
-    If the input is an operation it checks to make sure that there is a number entered
+    If it is a digit it will add to its own array entry or append it to an existing array entry if
+    the latest array entry is a digit.
+    If the input is an operation it checks to make sure that there is a digit entered
     before the operator otherwise it is not accepted.
      */
     @Override
@@ -189,6 +204,9 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                 calculatorArray.clear();
                 txtResult.setText("");
                 break;
+            case "TwoCompliment":
+                if (isTwoComplimentEnabled == false) isTwoComplimentEnabled = true;
+                else isTwoComplimentEnabled = false;
         }
         setCalculatorInputDisplay();
     }
@@ -275,33 +293,37 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                 break;
             case "Binary":
                 if (calculatorArray.isEmpty() != true) {
-                    firstInputString = calculatorArray.get(0);
-                    firstInput = Integer.parseInt(firstInputString, 2);
-                    if (calculatorArray.size() > 1) {
-                        for (int i = 1; i < calculatorArray.size(); i++) {
+                    if (isTwoComplimentEnabled == false) {
+                        firstInputString = calculatorArray.get(0);
+                        firstInput = Integer.parseInt(firstInputString, 2);
+                        if (calculatorArray.size() > 1) {
+                            for (int i = 1; i < calculatorArray.size(); i++) {
 
-                            if (calculatorArray.get(i - 1) == "+") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString, 2);
-                                firstInput = firstInput + secondInput;
-                            } else if (calculatorArray.get(i - 1) == "-") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString, 2);
-                                firstInput = firstInput - secondInput;
-                            } else if (calculatorArray.get(i - 1) == "*") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString, 2);
-                                firstInput = firstInput * secondInput;
-                            } else if (calculatorArray.get(i - 1) == "/") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString, 2);
-                                firstInput = firstInput / secondInput;
+                                if (calculatorArray.get(i - 1) == "+") {
+                                    secondInputString = calculatorArray.get(i);
+                                    secondInput = Integer.parseInt(secondInputString, 2);
+                                    firstInput = firstInput + secondInput;
+                                } else if (calculatorArray.get(i - 1) == "-") {
+                                    secondInputString = calculatorArray.get(i);
+                                    secondInput = Integer.parseInt(secondInputString, 2);
+                                    firstInput = firstInput - secondInput;
+                                } else if (calculatorArray.get(i - 1) == "*") {
+                                    secondInputString = calculatorArray.get(i);
+                                    secondInput = Integer.parseInt(secondInputString, 2);
+                                    firstInput = firstInput * secondInput;
+                                } else if (calculatorArray.get(i - 1) == "/") {
+                                    secondInputString = calculatorArray.get(i);
+                                    secondInput = Integer.parseInt(secondInputString, 2);
+                                    firstInput = firstInput / secondInput;
+                                }
+                                txtResult.setText(Integer.toBinaryString(firstInput));
+
                             }
+                        } else {
                             txtResult.setText(Integer.toBinaryString(firstInput));
-
                         }
-                    } else {
-                        txtResult.setText(Integer.toBinaryString(firstInput));
+                    } else if(isTwoComplimentEnabled == true){
+                        
                     }
                 } else {
                     firstInputString = "";
@@ -355,7 +377,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
     /*
     convertInputAndResult is responsible for converting all previous inputs and the result to
-    whatever user chosen format
+    whatever user chosen format and displaying so that as user changes modes the displayed number format
+    also changes
      */
     public void convertInputAndResult(String lastMode, String currentMode) {
         //Switch case statements first check the newly selected mode and then what the previous used
@@ -460,6 +483,33 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         }
         setCalculatorInputDisplay();
         setCalculatorResultDisplay();
+    }
+
+    /*
+    onItemSelected and onNothingSelected are selection handlers for dropdown
+     */
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (position) {
+            case 0:
+                decimalCalculator(view);
+                //decimalCalculator();
+                break;
+            case 1:
+                binaryCalculator(view);
+                break;
+            case 2:
+                //octalCalculator(view);
+                break;
+            case 3:
+                hexadecimalCalculator(view);
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     @Override

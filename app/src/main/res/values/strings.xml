@@ -15,14 +15,17 @@
         <item>XOR</item>
         <item>XNOR</item>
     </string-array>
-
+    <string-array name="number_formats">
+        <item>Decimal</item>
+        <item>Binary</item>
+        <item>Octal</item>
+        <item>Hexadecimal</item>
+    </string-array>
     <string name="binary_converter_keyboard">BinaryKeyboard</string>
     <string name="binary_ime">Simple IME</string>
     <string name="subtype_en_US">English (US)</string>
     <string name="title_activity_calculator_hexadecimal_fragment">CalculatorHexadecimalFragment
     </string>
-
-    <string name="hello_world">Hello world!</string>
 
 
 </resources>

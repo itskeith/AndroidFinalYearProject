@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,11 +14,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,12 +33,14 @@ Student Number: 11125268
 Electronic And Computer Engineering(LM118) 4th year
 Final Year Project
 */
-public class ConverterActivity extends AppCompatActivity implements TextWatcher, View.OnClickListener {
+public class ConverterActivity extends AppCompatActivity implements TextWatcher, View.OnClickListener, AdapterView.OnItemSelectedListener {
     EditText txtDecimal;
+    String choice;
     TextView txtBinary, txtHexadecimal;
+    Spinner converterMode;
     RadioGroup radioGroup;
     RadioButton radioButtonDecimal, radioButtonBinary, radioButtonOctal, radioButtonHexadecimal;
-    ImageButton referenceButtonDecimal, referenceButtonBinary, referenceButtonOctal, referenceButtonHexadecimal;
+    ImageButton referenceButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,51 +50,23 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        converterMode = (Spinner) findViewById(R.id.spinnerSelectConverter);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.number_formats, android.R.layout.simple_spinner_dropdown_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        converterMode.setAdapter(spinnerAdapter);
+        converterMode.setOnItemSelectedListener(this);
+
         // For Setting Logo in toolbar myToolbar.setLogo();
+        referenceButton = (ImageButton) findViewById(R.id.referenceHelpButton);
+        referenceButton.setOnClickListener(this);
 
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroupConverter);
-        radioButtonDecimal = (RadioButton) findViewById(R.id.radioButtonDecimal);
-        radioButtonBinary = (RadioButton) findViewById(R.id.radioButtonBinary);
-        radioButtonOctal = (RadioButton) findViewById(R.id.radioButtonOctal);
-        radioButtonHexadecimal = (RadioButton) findViewById(R.id.radioButtonHexadecimal);
-        //radioGroup.setOnClickListener(this);
-//        radioButtonDecimal.setChecked(true);
-//        txtDecimal = (EditText) findViewById(R.id.editText);
-//        txtBinary = (TextView) findViewById(R.id.textView2);
-//        txtHexadecimal = (TextView) findViewById(R.id.textView3);
-//        txtDecimal.addTextChangedListener(this);
-
-//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group,int checkedId) {
-//                if (radioGroup.getCheckedRadioButtonId() == R.id.radioButtonDecimal) {
-//                    String choice = radioButtonDecimal.getText().toString();
-//                    Toast.makeText(ConverterActivity.this, "You chose: " + choice, Toast.LENGTH_SHORT).show();
-//                }
-//                if (radioGroup.getCheckedRadioButtonId() == R.id.radioButtonBinary) {
-//                    String choice = radioButtonBinary.getText().toString();
-//                    Toast.makeText(ConverterActivity.this, "You chose: " + choice, Toast.LENGTH_SHORT).show();
-//                }
-//                if (radioGroup.getCheckedRadioButtonId() == R.id.radioButtonHexadecimal) {
-//                    String choice = radioButtonHexadecimal.getText().toString();
-//                    Toast.makeText(ConverterActivity.this, "You chose: " + choice, Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-        referenceButtonDecimal = (ImageButton) findViewById(R.id.decimalReferenceButton);
-        referenceButtonDecimal.setOnClickListener(this);
-        referenceButtonBinary = (ImageButton) findViewById(R.id.binaryReferenceButton);
-        referenceButtonBinary.setOnClickListener(this);
-        referenceButtonOctal = (ImageButton) findViewById(R.id.octalReferenceButton);
-        referenceButtonOctal.setOnClickListener(this);
-        referenceButtonHexadecimal = (ImageButton) findViewById(R.id.hexadecimalReferenceButton);
-        referenceButtonHexadecimal.setOnClickListener(this);
     }
 
 
     public void selectDecimal(View view) {
-        String choice = radioButtonDecimal.getText().toString();
-        Toast.makeText(ConverterActivity.this, "You chose: " + choice, Toast.LENGTH_SHORT).show();
+        choice = "Decimal";
+        Toast.makeText(ConverterActivity.this, "You chose: Decimal", Toast.LENGTH_SHORT).show();
 
         Fragment newFragment = new ConverterDecimalFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -102,8 +80,8 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
     }
 
     public void selectBinary(View view) {
-        String choice = radioButtonBinary.getText().toString();
-        Toast.makeText(ConverterActivity.this, "You chose: " + choice, Toast.LENGTH_SHORT).show();
+        choice = "Binary";
+        Toast.makeText(ConverterActivity.this, "You chose: Binary", Toast.LENGTH_SHORT).show();
 
         Fragment newFragment = new ConverterBinaryFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -118,8 +96,8 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
 
     //Called on radio button click for octal, inflates ConverterOctalFragment
     public void selectOctal(View view){
-        String choice = radioButtonOctal.getText().toString();
-        Toast.makeText(ConverterActivity.this, "You chose: " + choice, Toast.LENGTH_SHORT).show();
+        choice = "Octal";
+        Toast.makeText(ConverterActivity.this, "You chose: Octal", Toast.LENGTH_SHORT).show();
 
         Fragment newFragment = new ConverterOctalFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -131,8 +109,8 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
 
     //Called on radio button click for hexadecimal, inflates ConverterHexadecimalFragment
     public void selectHexadecimal(View view) {
-        String choice = radioButtonHexadecimal.getText().toString();
-        Toast.makeText(ConverterActivity.this, "You chose: " + choice, Toast.LENGTH_SHORT).show();
+        choice = "Hexadecimal";
+        Toast.makeText(ConverterActivity.this, "You chose: Hexadecimal", Toast.LENGTH_SHORT).show();
 
         Fragment newFragment = new ConverterHexadecimalFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -174,6 +152,28 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
         return true;
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (position) {
+            case 0:
+                selectDecimal(view);
+                break;
+            case 1:
+                selectBinary(view);
+                break;
+            case 2:
+                selectOctal(view);
+                break;
+            case 3:
+                selectHexadecimal(view);
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
     //Menu item options in toolbar for launching other activities
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -202,8 +202,8 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.decimalReferenceButton:
+        switch (choice){
+            case "Decimal":
                 Intent decimalIntent = new Intent();
                 decimalIntent.setClass(ConverterActivity.this, ReferenceDetailsActivity.class);
 
@@ -211,7 +211,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
 
                 startActivity(decimalIntent);
                 break;
-            case R.id.binaryReferenceButton:
+            case "Binary":
                 Intent binaryIntent = new Intent();
                 binaryIntent.setClass(ConverterActivity.this, ReferenceDetailsActivity.class);
 
@@ -219,7 +219,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
 
                 startActivity(binaryIntent);
                 break;
-            case R.id.octalReferenceButton:
+            case "octal":
                 Intent octalIntent = new Intent();
                 octalIntent.setClass(ConverterActivity.this, ReferenceDetailsActivity.class);
 
@@ -227,7 +227,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
 
                 startActivity(octalIntent);
                 break;
-            case R.id.hexadecimalReferenceButton:
+            case "Hexadecimal":
                 Intent hexadecimalIntent = new Intent();
                 hexadecimalIntent.setClass(ConverterActivity.this, ReferenceDetailsActivity.class);
 
@@ -236,6 +236,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
                 startActivity(hexadecimalIntent);
                 break;
         }
+
     }
 //    public void calculate(int base, TextView txtView) {
 //        if (txtDecimal.getText().toString().trim().length() == 0) {

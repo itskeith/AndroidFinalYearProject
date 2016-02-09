@@ -1,6 +1,7 @@
 package com.example.keith.finalyearproject;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -27,7 +28,8 @@ Final Year Project
 public class ConverterBinaryFragment extends Fragment implements View.OnClickListener, TextWatcher {
 
     TextView txtDecimal, txtBinary, txtHexadecimal, txtOctal;
-    Button oneButton, zeroButton, deleteButton;
+    Button oneButton, zeroButton, deleteButton, howtoButton;
+    String valueToConvert;
     int decimalVal;
 
     @Override
@@ -47,6 +49,8 @@ public class ConverterBinaryFragment extends Fragment implements View.OnClickLis
         zeroButton.setOnClickListener(this);
         deleteButton = (Button) view.findViewById(R.id.converterButtonDelete);
         deleteButton.setOnClickListener(this);
+        howtoButton = (Button) view.findViewById(R.id.converterButtonHowto);
+        howtoButton.setOnClickListener(this);
 
         return view;
     }
@@ -83,6 +87,7 @@ public class ConverterBinaryFragment extends Fragment implements View.OnClickLis
         }
     };
 
+
     public void beforeTextChanged(CharSequence sequence, int start, int count, int after) {
 
     }
@@ -116,6 +121,14 @@ public class ConverterBinaryFragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.converterButtonHowto:
+                valueToConvert = txtDecimal.getText().toString();
+                Intent howtoIntent = new Intent();
+                howtoIntent.setClass(getActivity(), ConverterHowtoBinaryActivity.class);
+
+                howtoIntent.putExtra("value",valueToConvert);
+                startActivity(howtoIntent);
+                break;
             case R.id.converterButtonOne:
                 txtBinary.setText(txtBinary.getText() + "1");
                 break;
@@ -124,9 +137,9 @@ public class ConverterBinaryFragment extends Fragment implements View.OnClickLis
                 break;
             case R.id.converterButtonDelete:
                 int start = txtBinary.getText().toString().length();
-                if(start>0) {
+                if (start > 0) {
                     txtBinary.setText(txtBinary.getEditableText().delete(start - 1, start));
-                }else{
+                } else {
                     return;
                 }
                 break;

@@ -1,6 +1,7 @@
 package com.example.keith.finalyearproject;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
@@ -33,8 +34,8 @@ public class ConverterOctalFragment extends Fragment implements View.OnClickList
 
     TextView txtOctal, txtBinary, txtHexadecimal, txtDecimal;
     Button oneButton, zeroButton, twoButton, threeButton, fourButton, fiveButton, sixButton, sevenButton,
-            deleteButton;
-    String octalVal;
+            deleteButton, howtoButton;
+    String octalVal, valueToConvert;
     int binaryVal, decimalVal;
 
     @Override
@@ -42,7 +43,7 @@ public class ConverterOctalFragment extends Fragment implements View.OnClickList
         View view = inflater.inflate(R.layout.fragment_converter_octal, container, false);
         //radioGroup.setOnClickListener(this);
         //radioButtonDecimal.setChecked(true);
-        txtOctal = (TextView) view.findViewById(R.id.textViewOctal);
+        txtOctal = (TextView) view.findViewById(R.id.converterInputOctal);
         txtBinary = (TextView) view.findViewById(R.id.textViewBinary);
         txtHexadecimal = (TextView) view.findViewById(R.id.textViewHexadecimal);
         txtDecimal = (TextView) view.findViewById(R.id.textViewDecimal);
@@ -68,6 +69,9 @@ public class ConverterOctalFragment extends Fragment implements View.OnClickList
 
         deleteButton = (Button) view.findViewById(R.id.converterButtonDelete);
         deleteButton.setOnClickListener(this);
+
+        howtoButton = (Button) view.findViewById(R.id.converterButtonHowto);
+        howtoButton.setOnClickListener(this);
 
         return view;
     }
@@ -159,6 +163,14 @@ public class ConverterOctalFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.converterButtonHowto:
+                valueToConvert = txtOctal.getText().toString();
+                Intent howtoIntent = new Intent();
+                howtoIntent.setClass(getActivity(), ConverterHowtoBinaryActivity.class);
+
+                howtoIntent.putExtra("value",valueToConvert);
+                startActivity(howtoIntent);
+                break;
             case R.id.converterButtonZero:
                 txtOctal.setText(txtOctal.getText() + "0");
                 break;

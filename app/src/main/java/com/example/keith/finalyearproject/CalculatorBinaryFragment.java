@@ -41,7 +41,7 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
     String lastOperation, input, operation, calculateResultString;
     TextView txtInput, txtResult;
     Button oneButton, zeroButton, plusButton, minusButton, multiplyButton, divideButton,
-            deleteButton, clearButton, equalsButton;
+            deleteButton, clearButton, equalsButton, twosComplimentButton;
     String userInput;
     Activity activity;
 
@@ -87,6 +87,8 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
         deleteButton.setOnClickListener(this);
         clearButton = (Button) view.findViewById(R.id.buttonClear);
         clearButton.setOnClickListener(this);
+        twosComplimentButton = (Button) view.findViewById(R.id.buttonTwosComp);
+        twosComplimentButton.setOnClickListener(this);
         return view;
     }
 
@@ -163,7 +165,11 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
             case R.id.buttonClear:
                 input = "Clear";
                 getInput(input);
-                ;
+                break;
+            case R.id.buttonTwosComp:
+                input = "TwoCompliment";
+                getInput(input);
+                break;
         }
     }
 

@@ -1,6 +1,7 @@
 package com.example.keith.finalyearproject;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
@@ -31,8 +32,9 @@ public class ConverterHexadecimalFragment extends Fragment implements View.OnCli
 
     TextView txtBinary, txtHexadecimal, txtDecimal, txtOctal;
     Button oneButton, zeroButton, twoButton, threeButton, fourButton, fiveButton, sixButton, sevenButton,
-            eightButton, nineButton, aButton, bButton, cButton, dButton, eButton, fButton, deleteButton;
-    String hexVal;
+            eightButton, nineButton, aButton, bButton, cButton, dButton, eButton, fButton, deleteButton,
+            howtoButton;
+    String hexVal, valueToConvert;
     int binaryVal, decimalVal;
 
     @Override
@@ -40,7 +42,7 @@ public class ConverterHexadecimalFragment extends Fragment implements View.OnCli
         View view = inflater.inflate(R.layout.fragment_converter_hexadecimal, container, false);
         //radioGroup.setOnClickListener(this);
         //radioButtonDecimal.setChecked(true);
-        txtHexadecimal = (TextView) view.findViewById(R.id.textViewHexadecimal);
+        txtHexadecimal = (TextView) view.findViewById(R.id.converterInputHexadecimal);
         txtBinary = (TextView) view.findViewById(R.id.textViewBinary);
         txtOctal = (TextView) view.findViewById(R.id.textViewOctal);
         txtDecimal = (TextView) view.findViewById(R.id.textViewDecimal);
@@ -82,6 +84,10 @@ public class ConverterHexadecimalFragment extends Fragment implements View.OnCli
 
         deleteButton = (Button) view.findViewById(R.id.converterButtonDelete);
         deleteButton.setOnClickListener(this);
+
+        howtoButton = (Button) view.findViewById(R.id.converterButtonHowto);
+        howtoButton.setOnClickListener(this);
+
         return view;
     }
 
@@ -177,7 +183,14 @@ public class ConverterHexadecimalFragment extends Fragment implements View.OnCli
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.converterButtonHowto:
+                valueToConvert = txtHexadecimal.getText().toString();
+                Intent howtoIntent = new Intent();
+                howtoIntent.setClass(getActivity(), ConverterHowtoBinaryActivity.class);
 
+                howtoIntent.putExtra("value",valueToConvert);
+                startActivity(howtoIntent);
+                break;
             case R.id.converterButtonZero:
                 txtHexadecimal.setText(txtHexadecimal.getText() + "0");
                 break;

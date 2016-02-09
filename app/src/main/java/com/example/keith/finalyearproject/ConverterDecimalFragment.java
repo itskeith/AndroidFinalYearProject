@@ -1,6 +1,7 @@
 package com.example.keith.finalyearproject;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -31,7 +32,8 @@ public class ConverterDecimalFragment extends Fragment implements View.OnClickLi
 
     TextView txtDecimal, txtBinary, txtHexadecimal, txtOctal;
     Button oneButton, zeroButton, twoButton, threeButton, fourButton, fiveButton, sixButton, sevenButton,
-            eightButton, nineButton, deleteButton;
+            eightButton, nineButton, deleteButton, howtoButton;
+    String valueToConvert;
     int decimalVal;
 
     @Override
@@ -39,12 +41,11 @@ public class ConverterDecimalFragment extends Fragment implements View.OnClickLi
         View view = inflater.inflate(R.layout.fragment_converter_decimal, container, false);
         //radioGroup.setOnClickListener(this);
         //radioButtonDecimal.setChecked(true);
-        txtDecimal = (TextView) view.findViewById(R.id.editTextDecimal);
+        txtDecimal = (TextView) view.findViewById(R.id.converterInputDecimal);
         txtBinary = (TextView) view.findViewById(R.id.textViewBinary);
         txtOctal = (TextView) view.findViewById(R.id.textViewOctal);
         txtHexadecimal = (TextView) view.findViewById(R.id.textViewHexadecimal);
         txtDecimal.addTextChangedListener(this);
-        txtDecimal.setFilters(new InputFilter[]{filter});
 
         oneButton = (Button) view.findViewById(R.id.converterButtonOne);
         oneButton.setOnClickListener(this);
@@ -69,6 +70,9 @@ public class ConverterDecimalFragment extends Fragment implements View.OnClickLi
 
         deleteButton = (Button) view.findViewById(R.id.converterButtonDelete);
         deleteButton.setOnClickListener(this);
+
+        howtoButton = (Button) view.findViewById(R.id.converterButtonHowto);
+        howtoButton.setOnClickListener(this);
 
         return view;
     }
@@ -136,6 +140,14 @@ public class ConverterDecimalFragment extends Fragment implements View.OnClickLi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.converterButtonHowto:
+                valueToConvert = txtBinary.getText().toString();
+                Intent howtoIntent = new Intent();
+                howtoIntent.setClass(getActivity(), ConverterHowtoBinaryActivity.class);
+
+                howtoIntent.putExtra("value",valueToConvert);
+                startActivity(howtoIntent);
+                break;
             case R.id.converterButtonOne:
                 txtDecimal.setText(txtDecimal.getText() + "1");
                 break;

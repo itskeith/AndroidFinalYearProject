@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_grey"
+    android:background="@color/orange"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -31,43 +31,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <RadioGroup
-            android:id="@+id/radioGroupConverter"
+        <Spinner
+            android:id="@+id/spinnerSelectConverter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewDescription"
             android:layout_weight="0.5"
-            android:background="#989898"
-            android:elevation="8dp">
-
-            <RadioButton
-                android:id="@+id/radioButtonDecimal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="selectDecimal"
-                android:text="Decimal" />
-
-            <RadioButton
-                android:id="@+id/radioButtonBinary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="selectBinary"
-                android:text="Binary" />
-
-            <RadioButton
-                android:id="@+id/radioButtonOctal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="selectOctal"
-                android:text="Octal" />
-
-            <RadioButton
-                android:id="@+id/radioButtonHexadecimal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="selectHexadecimal"
-                android:text="Hexadecimal" />
-        </RadioGroup>
+            android:background="@color/lighter_grey"
+            android:elevation="4dp"
+            android:spinnerMode="dropdown" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -76,31 +47,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/decimalReferenceButton"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.25"
-                android:background="?android:selectableItemBackground"
-                android:src="@android:drawable/ic_menu_help" />
-
-            <ImageButton
-                android:id="@+id/binaryReferenceButton"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.25"
-                android:background="?android:selectableItemBackground"
-                android:src="@android:drawable/ic_menu_help" />
-
-            <ImageButton
-                android:id="@+id/octalReferenceButton"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.25"
-                android:background="?android:selectableItemBackground"
-                android:src="@android:drawable/ic_menu_help" />
-
-            <ImageButton
-                android:id="@+id/hexadecimalReferenceButton"
+                android:id="@+id/referenceHelpButton"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="0.25"
@@ -109,84 +56,10 @@
         </LinearLayout>
     </LinearLayout>
 
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
 
-    <!--<Space-->
-    <!--android:layout_width="20px"-->
-    <!--android:layout_height="20px" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textViewEnter"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="#636366"-->
-    <!--android:text="Number to be converted:"-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-    <!--android:textColor="@color/white" />-->
-
-    <!--<EditText-->
-    <!--android:id="@+id/editText"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@color/white" />-->
-
-    <!--<Space-->
-    <!--android:layout_width="20px"-->
-    <!--android:layout_height="20px" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/Binary"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@color/grey"-->
-    <!--android:text="Binary:"-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-    <!--android:textColor="@color/white" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView2"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="#989898"-->
-    <!--android:text=""-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
-    <!--<Space-->
-    <!--android:layout_width="20px"-->
-    <!--android:layout_height="20px" />-->
-    <!--<TextView-->
-    <!--android:id="@+id/Hexadecimal"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@color/grey"-->
-    <!--android:text="Hexadecimal:"-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-    <!--android:textColor="@color/white" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView3"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="#989898"-->
-    <!--android:text=""-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
-    <!--<Space-->
-    <!--android:layout_width="20px"-->
-    <!--android:layout_height="20px" />-->
-    <!--<TextView-->
-    <!--android:id="@+id/Test"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="@color/grey"-->
-    <!--android:text="Large Text"-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-    <!--android:textColor="@color/white" />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/textView4"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:background="#989898"-->
-    <!--android:text=""-->
-    <!--android:textAppearance="?android:attr/textAppearanceLarge" />-->
     <FrameLayout
         android:id="@+id/converter_frame"
         android:layout_width="match_parent"
