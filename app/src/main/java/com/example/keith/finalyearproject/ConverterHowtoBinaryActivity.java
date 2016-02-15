@@ -9,13 +9,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Keith on 09/02/2016.
  */
 public class ConverterHowtoBinaryActivity extends AppCompatActivity {
 
-    TextView textViewToConvert;
+    TextView textViewToConvert, textViewDecimalConvert;
     String originalValue;
+    double powerOf;
+    int test, test2,test3;
+    ArrayList<String> converterInputArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,20 +33,35 @@ public class ConverterHowtoBinaryActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        textViewToConvert =(TextView) findViewById(R.id.textViewValueToConvert);
+        textViewToConvert = (TextView) findViewById(R.id.textViewValueToConvert);
+        textViewDecimalConvert = (TextView) findViewById(R.id.textViewDecimalStep);
 
         Bundle extras = getIntent().getExtras();
-        if(extras == null){
-            originalValue="";
-        }
-        else{
+        if (extras == null) {
+            originalValue = "";
+        } else {
             originalValue = extras.getString("value");
             textViewToConvert.setText(originalValue);
         }
+        convertStep(originalValue);
     }
 
     public void convertStep(String value) {
+        //Break string into a digit per array index
+        String values[] = value.split("(?!^)"); // (?!^) = regex-expression negative lookahead
+        for (int i = 0; i < values.length; i++) {
+            if (values[i].equals("0")) {
+                test = 5;
+                textViewDecimalConvert.append("0");
+            } else if (values[i].equals("1")) {
 
+                powerOf = Math.pow(2, values.length - 1 - i);
+                textViewDecimalConvert.append(Integer.toString((int)powerOf));
+            }
+            if (values.length-1 != i) {
+                textViewDecimalConvert.append(" + ");
+            }
+        }
     }
 
     @Override

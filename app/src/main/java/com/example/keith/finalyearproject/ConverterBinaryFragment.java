@@ -122,7 +122,7 @@ public class ConverterBinaryFragment extends Fragment implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.converterButtonHowto:
-                valueToConvert = txtDecimal.getText().toString();
+                valueToConvert = txtBinary.getText().toString();
                 Intent howtoIntent = new Intent();
                 howtoIntent.setClass(getActivity(), ConverterHowtoBinaryActivity.class);
 

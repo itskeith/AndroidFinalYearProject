@@ -35,11 +35,11 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     ArrayList<String> calculatorArray = new ArrayList<>();
     /*RadioButton radioBinaryButton, radioHexadecimalButton;*/
     TextView txtInput, txtResult;
-    boolean isTwoComplimentEnabled;
-    int decimalVal, currentIndex;
+    double decimalVal;
+    int currentIndex;
     String lastMode, currentMode, firstInputString, secondInputString, Operator;
     Spinner calculatorMode;
-    int firstInput, secondInput;
+    double firstInput, secondInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,6 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
         // For Setting Logo in toolbar myToolbar.setLogo();
         currentIndex = 0;
-        isTwoComplimentEnabled = false;
         /*radioBinaryButton = (RadioButton) findViewById(R.id.binarybuttoncalculator);
         radioHexadecimalButton = (RadioButton) findViewById(R.id.hexadecimalbuttoncalculator);*/
         txtInput = (TextView) findViewById(R.id.textViewInput);
@@ -69,7 +68,6 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     public void decimalCalculator(View view) {
         Fragment decimalFragment = new CalculatorDecimalFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
         transaction.replace(R.id.calculator_frame, decimalFragment);
         transaction.addToBackStack(null);
         transaction.commit();
@@ -203,10 +201,10 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                 currentIndex = 0;
                 calculatorArray.clear();
                 txtResult.setText("");
-                break;
+                break;/*
             case "TwoCompliment":
                 if (isTwoComplimentEnabled == false) isTwoComplimentEnabled = true;
-                else isTwoComplimentEnabled = false;
+                else isTwoComplimentEnabled = false;*/
         }
         setCalculatorInputDisplay();
     }
@@ -259,32 +257,32 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
             case "Decimal":
                 if (calculatorArray.isEmpty() != true) {
                     firstInputString = calculatorArray.get(0);
-                    firstInput = Integer.parseInt(firstInputString);
+                    firstInput = Double.parseDouble(firstInputString);
                     if (calculatorArray.size() > 1) {
                         for (int i = 1; i < calculatorArray.size(); i++) {
 
                             if (calculatorArray.get(i - 1) == "+") {
                                 secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString);
+                                secondInput = Double.parseDouble(secondInputString);
                                 firstInput = firstInput + secondInput;
                             } else if (calculatorArray.get(i - 1) == "-") {
                                 secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString);
+                                secondInput = Double.parseDouble(secondInputString);
                                 firstInput = firstInput - secondInput;
                             } else if (calculatorArray.get(i - 1) == "*") {
                                 secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString);
+                                secondInput = Double.parseDouble(secondInputString);
                                 firstInput = firstInput * secondInput;
                             } else if (calculatorArray.get(i - 1) == "/") {
                                 secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString);
+                                secondInput = Double.parseDouble(secondInputString);
                                 firstInput = firstInput / secondInput;
                             }
-                            txtResult.setText(Integer.toString(firstInput));
+                            txtResult.setText(Double.toString(firstInput));
 
                         }
                     } else {
-                        txtResult.setText(Integer.toString(firstInput));
+                        txtResult.setText(Double.toString(firstInput));
                     }
                 } else {
                     firstInputString = "";
@@ -293,7 +291,6 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                 break;
             case "Binary":
                 if (calculatorArray.isEmpty() != true) {
-                    if (isTwoComplimentEnabled == false) {
                         firstInputString = calculatorArray.get(0);
                         firstInput = Integer.parseInt(firstInputString, 2);
                         if (calculatorArray.size() > 1) {
@@ -316,15 +313,13 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                     secondInput = Integer.parseInt(secondInputString, 2);
                                     firstInput = firstInput / secondInput;
                                 }
-                                txtResult.setText(Integer.toBinaryString(firstInput));
+                                txtResult.setText(Integer.toBinaryString((int)firstInput));
 
                             }
                         } else {
-                            txtResult.setText(Integer.toBinaryString(firstInput));
+                            txtResult.setText(Integer.toBinaryString((int)firstInput));
                         }
-                    } else if(isTwoComplimentEnabled == true){
-                        
-                    }
+
                 } else {
                     firstInputString = "";
                     txtResult.setText(firstInputString);
@@ -354,11 +349,11 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                 secondInput = Integer.parseInt(secondInputString, 16);
                                 firstInput = firstInput / secondInput;
                             }
-                            txtResult.setText(Integer.toHexString(firstInput));
+                            txtResult.setText(Integer.toHexString((int)firstInput));
 
                         }
                     } else {
-                        txtResult.setText(Integer.toHexString(firstInput));
+                        txtResult.setText(Integer.toHexString((int)firstInput));
                     }
                 } else {
                     firstInputString = "";
@@ -398,8 +393,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                     calculatorArray.get(i).contains("/")) {
 
                             } else {
-                                decimalVal = Integer.parseInt(calculatorArray.get(i));
-                                calculatorArray.set(i, Integer.toBinaryString(decimalVal));
+                                decimalVal = Double.parseDouble(calculatorArray.get(i));
+                                calculatorArray.set(i, Integer.toBinaryString((int)decimalVal));
                             }
                         }
                         break;
@@ -411,8 +406,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                     calculatorArray.get(i).contains("/")) {
 
                             } else {
-                                decimalVal = Integer.parseInt(calculatorArray.get(i));
-                                calculatorArray.set(i, Integer.toHexString(decimalVal));
+                                decimalVal = Double.parseDouble(calculatorArray.get(i));
+                                calculatorArray.set(i, Double.toHexString(decimalVal));
                             }
                         }
                         break;
@@ -430,7 +425,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
                             } else {
                                 decimalVal = Integer.parseInt(calculatorArray.get(i), 2);
-                                calculatorArray.set(i, Integer.toString(decimalVal));
+                                calculatorArray.set(i, Integer.toString((int)decimalVal));
                             }
                         }
                         break;
@@ -443,7 +438,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                 continue;
                             } else {
                                 decimalVal = Integer.parseInt(calculatorArray.get(i), 2);
-                                calculatorArray.set(i, Integer.toHexString(decimalVal));
+                                calculatorArray.set(i, Integer.toHexString((int)decimalVal));
                             }
                         }
                         break;
@@ -461,7 +456,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
                             } else {
                                 decimalVal = Integer.parseInt(calculatorArray.get(i), 16);
-                                calculatorArray.set(i, Integer.toBinaryString(decimalVal));
+                                calculatorArray.set(i, Integer.toBinaryString((int)decimalVal));
                             }
                         }
                         break;
@@ -474,7 +469,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
                             } else {
                                 decimalVal = Integer.parseInt(calculatorArray.get(i), 16);
-                                calculatorArray.set(i, Integer.toString(decimalVal));
+                                calculatorArray.set(i, Integer.toString((int)decimalVal));
                             }
                         }
                         break;
