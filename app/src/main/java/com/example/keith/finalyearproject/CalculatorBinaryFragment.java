@@ -2,6 +2,7 @@ package com.example.keith.finalyearproject;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -41,7 +42,7 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
     String lastOperation, input, operation, calculateResultString;
     TextView txtInput, txtResult;
     Button oneButton, zeroButton, plusButton, minusButton, multiplyButton, divideButton,
-            deleteButton, clearButton, equalsButton;
+            deleteButton, clearButton, equalsButton, twosComplementButton;
     String userInput;
     Activity activity;
 
@@ -87,6 +88,8 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
         deleteButton.setOnClickListener(this);
         clearButton = (Button) view.findViewById(R.id.buttonClear);
         clearButton.setOnClickListener(this);
+        twosComplementButton = (Button) view.findViewById(R.id.buttonTwoComplement);
+        twosComplementButton.setOnClickListener(this);
         /*
         twosComplimentButton = (Button) view.findViewById(R.id.buttonTwosComp);
         twosComplimentButton.setOnClickListener(this);*/
@@ -166,6 +169,9 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
             case R.id.buttonClear:
                 input = "Clear";
                 getInput(input);
+                break;
+            case R.id.buttonTwoComplement:
+                startActivity(new Intent(getActivity(),CalculatorTwosComplementPopup.class));
                 break;
             /*
             case R.id.buttonTwosComp:

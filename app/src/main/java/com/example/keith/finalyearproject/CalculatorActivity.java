@@ -3,12 +3,15 @@ package com.example.keith.finalyearproject;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,7 +40,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     TextView txtInput, txtResult;
     double decimalVal;
     int currentIndex;
-    String lastMode, currentMode, firstInputString, secondInputString, Operator;
+    String lastMode, firstInputString, secondInputString, Operator, twosComplementValue;
+    String currentMode="";
     Spinner calculatorMode;
     double firstInput, secondInput;
 
@@ -61,6 +65,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         currentIndex = 0;
         /*radioBinaryButton = (RadioButton) findViewById(R.id.binarybuttoncalculator);
         radioHexadecimalButton = (RadioButton) findViewById(R.id.hexadecimalbuttoncalculator);*/
+        GlobalVar.position = 32;
         txtInput = (TextView) findViewById(R.id.textViewInput);
         txtResult = (TextView) findViewById(R.id.textViewResult);
     }
@@ -291,34 +296,43 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                 break;
             case "Binary":
                 if (calculatorArray.isEmpty() != true) {
-                        firstInputString = calculatorArray.get(0);
-                        firstInput = Integer.parseInt(firstInputString, 2);
-                        if (calculatorArray.size() > 1) {
-                            for (int i = 1; i < calculatorArray.size(); i++) {
+                    firstInputString = calculatorArray.get(0);
+                    firstInput = Integer.parseInt(firstInputString, 2);
+                    if (calculatorArray.size() > 1) {
+                        for (int i = 1; i < calculatorArray.size(); i++) {
 
-                                if (calculatorArray.get(i - 1) == "+") {
-                                    secondInputString = calculatorArray.get(i);
-                                    secondInput = Integer.parseInt(secondInputString, 2);
-                                    firstInput = firstInput + secondInput;
-                                } else if (calculatorArray.get(i - 1) == "-") {
-                                    secondInputString = calculatorArray.get(i);
-                                    secondInput = Integer.parseInt(secondInputString, 2);
-                                    firstInput = firstInput - secondInput;
-                                } else if (calculatorArray.get(i - 1) == "*") {
-                                    secondInputString = calculatorArray.get(i);
-                                    secondInput = Integer.parseInt(secondInputString, 2);
-                                    firstInput = firstInput * secondInput;
-                                } else if (calculatorArray.get(i - 1) == "/") {
-                                    secondInputString = calculatorArray.get(i);
-                                    secondInput = Integer.parseInt(secondInputString, 2);
-                                    firstInput = firstInput / secondInput;
-                                }
-                                txtResult.setText(Integer.toBinaryString((int)firstInput));
-
+                            if (calculatorArray.get(i - 1) == "+") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString, 2);
+                                firstInput = firstInput + secondInput;
+                            } else if (calculatorArray.get(i - 1) == "-") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString, 2);
+                                firstInput = firstInput - secondInput;
+                            } else if (calculatorArray.get(i - 1) == "*") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString, 2);
+                                firstInput = firstInput * secondInput;
+                            } else if (calculatorArray.get(i - 1) == "/") {
+                                secondInputString = calculatorArray.get(i);
+                                secondInput = Integer.parseInt(secondInputString, 2);
+                                firstInput = firstInput / secondInput;
                             }
-                        } else {
-                            txtResult.setText(Integer.toBinaryString((int)firstInput));
+                            if (firstInput < 0) {
+                                /*
+                                * If the result is negative in binary, display twos complement value
+                                * corresponding to user selected length of bits for twos complement
+                                */
+                                twosComplementValue = Integer.toBinaryString((int) firstInput);
+                                twosComplementValue = twosComplementValue.substring(twosComplementValue.length() - GlobalVar.position, twosComplementValue.length());
+                                txtResult.setText(twosComplementValue);
+                            } else {
+                                txtResult.setText(Integer.toBinaryString((int) firstInput));
+                            }
                         }
+                    } else {
+                        txtResult.setText(Integer.toBinaryString((int) firstInput));
+                    }
 
                 } else {
                     firstInputString = "";
@@ -349,11 +363,11 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                 secondInput = Integer.parseInt(secondInputString, 16);
                                 firstInput = firstInput / secondInput;
                             }
-                            txtResult.setText(Integer.toHexString((int)firstInput));
+                            txtResult.setText(Integer.toHexString((int) firstInput));
 
                         }
                     } else {
-                        txtResult.setText(Integer.toHexString((int)firstInput));
+                        txtResult.setText(Integer.toHexString((int) firstInput));
                     }
                 } else {
                     firstInputString = "";
@@ -394,7 +408,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
                             } else {
                                 decimalVal = Double.parseDouble(calculatorArray.get(i));
-                                calculatorArray.set(i, Integer.toBinaryString((int)decimalVal));
+                                calculatorArray.set(i, Integer.toBinaryString((int) decimalVal));
                             }
                         }
                         break;
@@ -425,7 +439,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
                             } else {
                                 decimalVal = Integer.parseInt(calculatorArray.get(i), 2);
-                                calculatorArray.set(i, Integer.toString((int)decimalVal));
+                                calculatorArray.set(i, Integer.toString((int) decimalVal));
                             }
                         }
                         break;
@@ -438,7 +452,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                 continue;
                             } else {
                                 decimalVal = Integer.parseInt(calculatorArray.get(i), 2);
-                                calculatorArray.set(i, Integer.toHexString((int)decimalVal));
+                                calculatorArray.set(i, Integer.toHexString((int) decimalVal));
                             }
                         }
                         break;
@@ -456,7 +470,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
                             } else {
                                 decimalVal = Integer.parseInt(calculatorArray.get(i), 16);
-                                calculatorArray.set(i, Integer.toBinaryString((int)decimalVal));
+                                calculatorArray.set(i, Integer.toBinaryString((int) decimalVal));
                             }
                         }
                         break;
@@ -469,7 +483,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
                             } else {
                                 decimalVal = Integer.parseInt(calculatorArray.get(i), 16);
-                                calculatorArray.set(i, Integer.toString((int)decimalVal));
+                                calculatorArray.set(i, Integer.toString((int) decimalVal));
                             }
                         }
                         break;
@@ -540,4 +554,24 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         }
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(currentMode.equals("Binary")){
+            setCalculatorResultDisplay();
+        }
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        GlobalVar.position = 32;
+    }
 }

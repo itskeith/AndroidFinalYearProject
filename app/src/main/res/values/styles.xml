@@ -11,4 +11,14 @@
     <style name="DarkToolbarStyle" parent="Widget.AppCompat.Toolbar">
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
+
+    <style name="AppTheme.PopUpTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="colorPrimary">@color/ColourPrimary</item>
+        <item name="colorPrimaryDark">@color/ColourPrimaryDark</item>
+
+    </style>
 </resources>

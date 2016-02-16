@@ -82,6 +82,15 @@
                 android:text="0"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
+            <Button
+                android:id="@+id/buttonTwoComplement"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_below="@id/buttonZero"
+                android:layout_weight="0.5"
+                android:background="@drawable/buttons_calc"
+                android:text="Two's Complement Size"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         </LinearLayout>
 

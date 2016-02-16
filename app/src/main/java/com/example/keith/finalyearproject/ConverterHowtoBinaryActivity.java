@@ -62,6 +62,7 @@ public class ConverterHowtoBinaryActivity extends AppCompatActivity {
                 textViewDecimalConvert.append(" + ");
             }
         }
+
     }
 
     @Override

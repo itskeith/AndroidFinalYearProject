@@ -83,7 +83,7 @@
         android:layout_weight="0.1"
         android:gravity="right"
         android:text=""
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <FrameLayout
         android:id="@+id/calculator_frame"
