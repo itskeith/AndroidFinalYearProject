@@ -20,11 +20,12 @@ import java.util.List;
  */
 public class ConverterHowtoBinaryActivity extends AppCompatActivity {
 
-    TextView textViewToConvert, textViewDecimalConvert;
+    TextView textViewToConvert, textViewDecimalConvert, textViewHexadecimalConvert, textViewOctalConvert;
     String originalValue;
     double powerOf;
-    int test, test2,test3;
-    ArrayList<String> converterInputArray = new ArrayList<>();
+    int decimalValue;
+    ArrayList<String> hexArray = new ArrayList<>();
+    ArrayList<String> octalArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class ConverterHowtoBinaryActivity extends AppCompatActivity {
 
         textViewToConvert = (TextView) findViewById(R.id.textViewValueToConvert);
         textViewDecimalConvert = (TextView) findViewById(R.id.textViewDecimalStep);
+        textViewHexadecimalConvert = (TextView) findViewById(R.id.textViewHexadecimalStep);
+        textViewOctalConvert = (TextView) findViewById(R.id.textViewOctalStep);
 
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
@@ -44,6 +47,8 @@ public class ConverterHowtoBinaryActivity extends AppCompatActivity {
             textViewToConvert.setText(originalValue);
         }
         convertStep(originalValue);
+        convertHexStep(originalValue);
+        convertOctalStep(originalValue);
     }
 
     public void convertStep(String value) {
@@ -51,18 +56,64 @@ public class ConverterHowtoBinaryActivity extends AppCompatActivity {
         String values[] = value.split("(?!^)"); // (?!^) = regex-expression negative lookahead
         for (int i = 0; i < values.length; i++) {
             if (values[i].equals("0")) {
-                test = 5;
                 textViewDecimalConvert.append("0");
             } else if (values[i].equals("1")) {
 
                 powerOf = Math.pow(2, values.length - 1 - i);
-                textViewDecimalConvert.append(Integer.toString((int)powerOf));
+                textViewDecimalConvert.append(Integer.toString((int) powerOf));
             }
-            if (values.length-1 != i) {
+            if (values.length - 1 != i) {
                 textViewDecimalConvert.append(" + ");
             }
         }
+        textViewDecimalConvert.append("\nAll of these added together give you your decimal value: " + Integer.toString(Integer.parseInt(value, 2)));
 
+    }
+
+    /*
+    convertHexStep first checks length of input string until it is divisible by 4 so that the binary
+    number can be shown in blocks of 4 bits to correspond to hexadecimal values
+     */
+    public void convertHexStep(String value) {
+        if (value.length() % 4 != 0) {
+            value = "0" + value;
+            convertHexStep(value);
+        } else {
+            for (int i = 0; i < value.length(); i = i + 4) {
+                hexArray.add(value.substring(i, i + 4));
+            }
+            for (int j = 0; j < hexArray.size(); j++) {
+                decimalValue = Integer.parseInt(hexArray.get(j), 2);
+                if (j == 0) {
+                    textViewHexadecimalConvert.setText(hexArray.get(j) + " = " + Integer.toString(decimalValue) + " = " + Integer.toHexString(decimalValue).toUpperCase() + "\n");
+                } else {
+                    textViewHexadecimalConvert.append(hexArray.get(j) + " = " + Integer.toString(decimalValue) + " = " + Integer.toHexString(decimalValue).toUpperCase() + "\n");
+                }
+            }
+            textViewHexadecimalConvert.append("All of these in sequence give you your Hexadecimal value: " + Integer.toHexString(Integer.parseInt(value, 2)).toUpperCase());
+        }
+    }
+    /*
+    ConvertOctalStep performs the step display for showing how to convert from binary to octal
+     */
+    public void convertOctalStep(String value) {
+        if (value.length() % 3 != 0) {
+            value = "0" + value;
+            convertOctalStep(value);
+        } else {
+            for (int i = 0; i < value.length(); i = i + 3) {
+                octalArray.add(value.substring(i, i + 3));
+            }
+            for (int j = 0; j < octalArray.size(); j++) {
+                decimalValue = Integer.parseInt(octalArray.get(j), 2);
+                if (j == 0) {
+                    textViewOctalConvert.setText(octalArray.get(j) + " = " + Integer.toString(decimalValue) + " = " + Integer.toOctalString(decimalValue) + "\n");
+                } else {
+                    textViewOctalConvert.append(octalArray.get(j) + " = " + Integer.toString(decimalValue) + " = " + Integer.toOctalString(decimalValue) + "\n");
+                }
+            }
+            textViewOctalConvert.append("All of these in sequence give you your Octal value: " + Integer.toOctalString((Integer.parseInt(value, 2))));
+        }
     }
 
     @Override

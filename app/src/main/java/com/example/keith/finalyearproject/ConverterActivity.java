@@ -51,7 +51,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
         setSupportActionBar(myToolbar);
 
         converterMode = (Spinner) findViewById(R.id.spinnerSelectConverter);
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.number_formats, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.number_formats_converter, android.R.layout.simple_spinner_dropdown_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         converterMode.setAdapter(spinnerAdapter);

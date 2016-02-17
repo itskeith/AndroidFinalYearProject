@@ -38,12 +38,13 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     ArrayList<String> calculatorArray = new ArrayList<>();
     /*RadioButton radioBinaryButton, radioHexadecimalButton;*/
     TextView txtInput, txtResult;
-    double decimalVal;
+    Toast toast;
+    long decimalVal;
     int currentIndex;
     String lastMode, firstInputString, secondInputString, Operator, twosComplementValue;
-    String currentMode="";
+    String currentMode = "";
     Spinner calculatorMode;
-    double firstInput, secondInput;
+    long firstInput, secondInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
         //Sets dropdown from resource string array
         calculatorMode = (Spinner) findViewById(R.id.spinnerSelectCalculator);
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.number_formats, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.number_formats_calculator, android.R.layout.simple_spinner_dropdown_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         calculatorMode.setAdapter(spinnerAdapter);
@@ -164,7 +165,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
             case "*":
             case "/":
                 if (calculatorArray.isEmpty()) {
-                    Toast.makeText(this, "Need to enter a number before an operation", Toast.LENGTH_SHORT).show();
+                    displayToast("Need to enter a number before an operation");
                 } else if (calculatorArray.get(currentIndex) == "+" ||
                         calculatorArray.get(currentIndex) == "-" ||
                         calculatorArray.get(currentIndex) == "*" ||
@@ -205,11 +206,10 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
             case "Clear":
                 currentIndex = 0;
                 calculatorArray.clear();
+
                 txtResult.setText("");
-                break;/*
-            case "TwoCompliment":
-                if (isTwoComplimentEnabled == false) isTwoComplimentEnabled = true;
-                else isTwoComplimentEnabled = false;*/
+                txtInput.setText("");
+                break;
         }
         setCalculatorInputDisplay();
     }
@@ -246,9 +246,9 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                 }
                 for (int i = 0; i < calculatorArray.size(); i++) {
                     if (i == 0) {
-                        txtInput.setText(calculatorArray.get(i));
+                        txtInput.setText(calculatorArray.get(i).toUpperCase());
                     } else {
-                        txtInput.append(" " + calculatorArray.get(i) + " ");
+                        txtInput.append(" " + calculatorArray.get(i).toUpperCase() + " ");
                     }
                 }
                 break;
@@ -258,36 +258,37 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
 
     public void setCalculatorResultDisplay() {
+
         switch (currentMode) {
             case "Decimal":
                 if (calculatorArray.isEmpty() != true) {
                     firstInputString = calculatorArray.get(0);
-                    firstInput = Double.parseDouble(firstInputString);
+                    firstInput = Long.parseLong(firstInputString);
                     if (calculatorArray.size() > 1) {
                         for (int i = 1; i < calculatorArray.size(); i++) {
 
                             if (calculatorArray.get(i - 1) == "+") {
                                 secondInputString = calculatorArray.get(i);
-                                secondInput = Double.parseDouble(secondInputString);
+                                secondInput = Long.parseLong(secondInputString);
                                 firstInput = firstInput + secondInput;
                             } else if (calculatorArray.get(i - 1) == "-") {
                                 secondInputString = calculatorArray.get(i);
-                                secondInput = Double.parseDouble(secondInputString);
+                                secondInput = Long.parseLong(secondInputString);
                                 firstInput = firstInput - secondInput;
                             } else if (calculatorArray.get(i - 1) == "*") {
                                 secondInputString = calculatorArray.get(i);
-                                secondInput = Double.parseDouble(secondInputString);
+                                secondInput = Long.parseLong(secondInputString);
                                 firstInput = firstInput * secondInput;
                             } else if (calculatorArray.get(i - 1) == "/") {
                                 secondInputString = calculatorArray.get(i);
-                                secondInput = Double.parseDouble(secondInputString);
+                                secondInput = Long.parseLong(secondInputString);
                                 firstInput = firstInput / secondInput;
                             }
-                            txtResult.setText(Double.toString(firstInput));
+                            txtResult.setText(Long.toString(firstInput));
 
                         }
                     } else {
-                        txtResult.setText(Double.toString(firstInput));
+                        txtResult.setText(Long.toString(firstInput));
                     }
                 } else {
                     firstInputString = "";
@@ -296,42 +297,46 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                 break;
             case "Binary":
                 if (calculatorArray.isEmpty() != true) {
-                    firstInputString = calculatorArray.get(0);
-                    firstInput = Integer.parseInt(firstInputString, 2);
-                    if (calculatorArray.size() > 1) {
-                        for (int i = 1; i < calculatorArray.size(); i++) {
+                    try {
+                        firstInputString = calculatorArray.get(0);
+                        firstInput = Long.parseLong(firstInputString, 2);
+                        if (calculatorArray.size() > 1) {
+                            for (int i = 1; i < calculatorArray.size(); i++) {
 
-                            if (calculatorArray.get(i - 1) == "+") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString, 2);
-                                firstInput = firstInput + secondInput;
-                            } else if (calculatorArray.get(i - 1) == "-") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString, 2);
-                                firstInput = firstInput - secondInput;
-                            } else if (calculatorArray.get(i - 1) == "*") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString, 2);
-                                firstInput = firstInput * secondInput;
-                            } else if (calculatorArray.get(i - 1) == "/") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString, 2);
-                                firstInput = firstInput / secondInput;
-                            }
-                            if (firstInput < 0) {
+                                if (calculatorArray.get(i - 1) == "+") {
+                                    secondInputString = calculatorArray.get(i);
+                                    secondInput = Long.parseLong(secondInputString, 2);
+                                    firstInput = firstInput + secondInput;
+                                } else if (calculatorArray.get(i - 1) == "-") {
+                                    secondInputString = calculatorArray.get(i);
+                                    secondInput = Long.parseLong(secondInputString, 2);
+                                    firstInput = firstInput - secondInput;
+                                } else if (calculatorArray.get(i - 1) == "*") {
+                                    secondInputString = calculatorArray.get(i);
+                                    secondInput = Long.parseLong(secondInputString, 2);
+                                    firstInput = firstInput * secondInput;
+                                } else if (calculatorArray.get(i - 1) == "/") {
+                                    secondInputString = calculatorArray.get(i);
+                                    secondInput = Long.parseLong(secondInputString, 2);
+                                    firstInput = firstInput / secondInput;
+                                }
+                                if (firstInput < 0) {
                                 /*
                                 * If the result is negative in binary, display twos complement value
                                 * corresponding to user selected length of bits for twos complement
                                 */
-                                twosComplementValue = Integer.toBinaryString((int) firstInput);
-                                twosComplementValue = twosComplementValue.substring(twosComplementValue.length() - GlobalVar.position, twosComplementValue.length());
-                                txtResult.setText(twosComplementValue);
-                            } else {
-                                txtResult.setText(Integer.toBinaryString((int) firstInput));
+                                    twosComplementValue = Long.toBinaryString( firstInput);
+                                    twosComplementValue = twosComplementValue.substring(twosComplementValue.length() - GlobalVar.position, twosComplementValue.length());
+                                    txtResult.setText(twosComplementValue);
+                                } else {
+                                    txtResult.setText(Long.toBinaryString( firstInput));
+                                }
                             }
+                        } else {
+                            txtResult.setText(Long.toBinaryString( firstInput));
                         }
-                    } else {
-                        txtResult.setText(Integer.toBinaryString((int) firstInput));
+                    } catch (Exception e) {
+                        displayToast("Binary numbers too large, please delete or clear input");
                     }
 
                 } else {
@@ -341,37 +346,41 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                 break;
             case "Hexadecimal":
                 if (calculatorArray.isEmpty() != true) {
-                    firstInputString = calculatorArray.get(0);
-                    firstInput = Integer.parseInt(firstInputString, 16);
-                    if (calculatorArray.size() > 1) {
-                        for (int i = 1; i < calculatorArray.size(); i++) {
+                    try {
+                        firstInputString = calculatorArray.get(0);
+                        firstInput = Long.parseLong(firstInputString, 16);
+                        if (calculatorArray.size() > 1) {
+                            for (int i = 1; i < calculatorArray.size(); i++) {
 
-                            if (calculatorArray.get(i - 1) == "+") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString, 16);
-                                firstInput = firstInput + secondInput;
-                            } else if (calculatorArray.get(i - 1) == "-") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString, 16);
-                                firstInput = firstInput - secondInput;
-                            } else if (calculatorArray.get(i - 1) == "*") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString, 16);
-                                firstInput = firstInput * secondInput;
-                            } else if (calculatorArray.get(i - 1) == "/") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Integer.parseInt(secondInputString, 16);
-                                firstInput = firstInput / secondInput;
+                                if (calculatorArray.get(i - 1) == "+") {
+                                    secondInputString = calculatorArray.get(i);
+                                    secondInput = Long.parseLong(secondInputString, 16);
+                                    firstInput = firstInput + secondInput;
+                                } else if (calculatorArray.get(i - 1) == "-") {
+                                    secondInputString = calculatorArray.get(i);
+                                    secondInput = Long.parseLong(secondInputString, 16);
+                                    firstInput = firstInput - secondInput;
+                                } else if (calculatorArray.get(i - 1) == "*") {
+                                    secondInputString = calculatorArray.get(i);
+                                    secondInput = Long.parseLong(secondInputString, 16);
+                                    firstInput = firstInput * secondInput;
+                                } else if (calculatorArray.get(i - 1) == "/") {
+                                    secondInputString = calculatorArray.get(i);
+                                    secondInput = Long.parseLong(secondInputString, 16);
+                                    firstInput = firstInput / secondInput;
+                                }
+                                txtResult.setText(Long.toHexString( firstInput).toUpperCase());
+
                             }
-                            txtResult.setText(Integer.toHexString((int) firstInput));
-
+                        } else {
+                            txtResult.setText(Long.toHexString(firstInput).toUpperCase());
                         }
-                    } else {
-                        txtResult.setText(Integer.toHexString((int) firstInput));
+                    } catch (Exception e) {
+                        displayToast("Binary numbers too large, please delete or clear input");
                     }
                 } else {
                     firstInputString = "";
-                    txtResult.setText(firstInputString);
+                    txtResult.setText(firstInputString.toUpperCase());
                 }
                 break;
 
@@ -407,8 +416,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                     calculatorArray.get(i).contains("/")) {
 
                             } else {
-                                decimalVal = Double.parseDouble(calculatorArray.get(i));
-                                calculatorArray.set(i, Integer.toBinaryString((int) decimalVal));
+                                decimalVal = Long.parseLong(calculatorArray.get(i));
+                                calculatorArray.set(i, Long.toBinaryString( decimalVal));
                             }
                         }
                         break;
@@ -420,8 +429,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                     calculatorArray.get(i).contains("/")) {
 
                             } else {
-                                decimalVal = Double.parseDouble(calculatorArray.get(i));
-                                calculatorArray.set(i, Double.toHexString(decimalVal));
+                                decimalVal = Long.parseLong(calculatorArray.get(i));
+                                calculatorArray.set(i, Long.toHexString(decimalVal).toUpperCase());
                             }
                         }
                         break;
@@ -438,8 +447,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                     calculatorArray.get(i).contains("/")) {
 
                             } else {
-                                decimalVal = Integer.parseInt(calculatorArray.get(i), 2);
-                                calculatorArray.set(i, Integer.toString((int) decimalVal));
+                                decimalVal = Long.parseLong(calculatorArray.get(i), 2);
+                                calculatorArray.set(i, Long.toString(decimalVal));
                             }
                         }
                         break;
@@ -451,8 +460,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                     calculatorArray.get(i).contains("/")) {
                                 continue;
                             } else {
-                                decimalVal = Integer.parseInt(calculatorArray.get(i), 2);
-                                calculatorArray.set(i, Integer.toHexString((int) decimalVal));
+                                decimalVal = Long.parseLong(calculatorArray.get(i), 2);
+                                calculatorArray.set(i, Long.toHexString(decimalVal).toUpperCase());
                             }
                         }
                         break;
@@ -469,8 +478,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                     calculatorArray.get(i).contains("/")) {
 
                             } else {
-                                decimalVal = Integer.parseInt(calculatorArray.get(i), 16);
-                                calculatorArray.set(i, Integer.toBinaryString((int) decimalVal));
+                                decimalVal = Long.parseLong(calculatorArray.get(i), 16);
+                                calculatorArray.set(i, Long.toBinaryString(decimalVal));
                             }
                         }
                         break;
@@ -482,8 +491,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                     calculatorArray.get(i).contains("/")) {
 
                             } else {
-                                decimalVal = Integer.parseInt(calculatorArray.get(i), 16);
-                                calculatorArray.set(i, Integer.toString((int) decimalVal));
+                                decimalVal = Long.parseLong(calculatorArray.get(i), 16);
+                                calculatorArray.set(i, Long.toString(decimalVal));
                             }
                         }
                         break;
@@ -502,15 +511,11 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         switch (position) {
             case 0:
                 decimalCalculator(view);
-                //decimalCalculator();
                 break;
             case 1:
                 binaryCalculator(view);
                 break;
             case 2:
-                //octalCalculator(view);
-                break;
-            case 3:
                 hexadecimalCalculator(view);
                 break;
         }
@@ -554,21 +559,35 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         }
     }
 
+    /*
+    * Displays only one toast message at a time, preventing excessive messages displaying if user
+    * keeps hitting button triggering the toast
+    * */
+    public void displayToast(String message) {
+        if (toast != null)
+            toast.cancel();
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        if(currentMode.equals("Binary")){
+        if (currentMode.equals("Binary")) {
             setCalculatorResultDisplay();
         }
     }
+
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
     }
+
     @Override
     protected void onStop() {
         super.onStop();
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

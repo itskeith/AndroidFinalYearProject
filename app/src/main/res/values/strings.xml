@@ -15,7 +15,12 @@
         <item>XOR</item>
         <item>XNOR</item>
     </string-array>
-    <string-array name="number_formats">
+    <string-array name="number_formats_calculator">
+        <item>Decimal</item>
+        <item>Binary</item>
+        <item>Hexadecimal</item>
+    </string-array>
+    <string-array name="number_formats_converter">
         <item>Decimal</item>
         <item>Binary</item>
         <item>Octal</item>
@@ -27,6 +32,6 @@
     <string name="title_activity_calculator_hexadecimal_fragment">CalculatorHexadecimalFragment
     </string>
     <string name="decimalStepHowToBinary">Starting from the rightmost digit of the binary number the LSB(Least Significant Bit) you then work your way left to the MSB(Most Significant Bit), if it is a 0 then it represents a 0 in decimal too. However if it is a 1, depending on its placement in the binary number it represents 2 to the power of its postion in the number, with the position being determined by how many steps it is from the least significant bit which itself is position 0, you then add all of these together to get the decimal equivalent.\nFor example: 100 in binary represents 8 in decimal or 2 to the power of 3\nShown below is the summing of the numbers to get the decimal conversion of the previously entered Binary number.</string>
-
-
+    <string name="hexadecimalStepHowToBinary">Getting the hexadecimal value of a binary number is even more straightforward than getting the decimal value.\nFirst break the binary number into blocks of 4 with the rightmost bit as the starting point, if there isn\'t enough digits for a block of 4 this is fine, just add leading 0\'s until there is. Then all that is needed to do is to convert these blocks to their decimal equivalents as shown above. These will all be numbers between 0 and 16, which corresponds to the Hexadecimal number system which starts at 0 and ends at F which represents 15.</string>
+    <string name="octalStepHowToBinary">Octal is a lot like hexadecimal except the binary number is broken into blocks of 3.\nFirst break the binary number into blocks of 3 with the rightmost bit as the starting point, if there isn\'t enough digits for a block of 3 this is fine, just add leading 0\'s until there is. Then all that is needed to do is to convert these blocks to their decimal equivalents as shown above. These will all be numbers between 0 and 7, which corresponds to the Octal number system which starts at 0 and ends at 7</string>
 </resources>

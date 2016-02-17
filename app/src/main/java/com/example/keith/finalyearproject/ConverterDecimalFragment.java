@@ -120,14 +120,13 @@ public class ConverterDecimalFragment extends Fragment implements View.OnClickLi
             txtOctal.setText("");
             txtHexadecimal.setText("");
             return;
-        }
-        else{
+        } else {
             try {
                 decimalVal = Integer.parseInt(txtDecimal.getText().toString());
                 txtBinary.setText(Integer.toBinaryString(decimalVal));
                 txtOctal.setText(Integer.toOctalString(decimalVal));
-                txtHexadecimal.setText(Integer.toHexString(decimalVal));
-            } catch(Exception decimalValueTooLarge){
+                txtHexadecimal.setText(Integer.toHexString(decimalVal).toUpperCase());
+            } catch (Exception decimalValueTooLarge) {
                 Toast.makeText(getActivity(), "Hexadecimal value too large", Toast.LENGTH_SHORT).show();
             }
         }
@@ -145,7 +144,7 @@ public class ConverterDecimalFragment extends Fragment implements View.OnClickLi
                 Intent howtoIntent = new Intent();
                 howtoIntent.setClass(getActivity(), ConverterHowtoBinaryActivity.class);
 
-                howtoIntent.putExtra("value",valueToConvert);
+                howtoIntent.putExtra("value", valueToConvert);
                 startActivity(howtoIntent);
                 break;
             case R.id.converterButtonOne:
@@ -180,9 +179,9 @@ public class ConverterDecimalFragment extends Fragment implements View.OnClickLi
                 break;
             case R.id.converterButtonDelete:
                 int start = txtDecimal.getText().toString().length();
-                if(start>0) {
+                if (start > 0) {
                     txtDecimal.setText(txtDecimal.getEditableText().delete(start - 1, start));
-                }else{
+                } else {
                     return;
                 }
                 break;

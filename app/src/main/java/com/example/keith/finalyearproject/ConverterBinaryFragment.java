@@ -105,7 +105,7 @@ public class ConverterBinaryFragment extends Fragment implements View.OnClickLis
             try {
                 decimalVal = Integer.parseInt(txtBinary.getText().toString(), 2);
                 txtDecimal.setText(Integer.toString(decimalVal));
-                txtHexadecimal.setText(Integer.toHexString(decimalVal));
+                txtHexadecimal.setText(Integer.toHexString(decimalVal).toUpperCase());
                 txtOctal.setText(Integer.toOctalString(decimalVal));
             } catch (Exception decimalTooLarge) {
                 Toast.makeText(getActivity(), "Binary value too large", Toast.LENGTH_SHORT).show();
@@ -126,7 +126,7 @@ public class ConverterBinaryFragment extends Fragment implements View.OnClickLis
                 Intent howtoIntent = new Intent();
                 howtoIntent.setClass(getActivity(), ConverterHowtoBinaryActivity.class);
 
-                howtoIntent.putExtra("value",valueToConvert);
+                howtoIntent.putExtra("value", valueToConvert);
                 startActivity(howtoIntent);
                 break;
             case R.id.converterButtonOne:

@@ -139,15 +139,15 @@ public class ConverterOctalFragment extends Fragment implements View.OnClickList
             return;
         } else {
             try {
-            //Convert inputted hexadecimal value to decimal
-            decimalVal = Integer.parseInt(octalVal, 8);
-            //Set decimal value in textview
-            txtDecimal.setText(Integer.toString(decimalVal));
-            //Set binary value in textview
-            txtBinary.setText(Integer.toBinaryString(decimalVal));
-            //Set hexadecimal value in textview
-            txtHexadecimal.setText(Integer.toHexString(decimalVal));
-            } catch(Exception decimalValueTooLarge){
+                //Convert inputted hexadecimal value to decimal
+                decimalVal = Integer.parseInt(octalVal, 8);
+                //Set decimal value in textview
+                txtDecimal.setText(Integer.toString(decimalVal));
+                //Set binary value in textview
+                txtBinary.setText(Integer.toBinaryString(decimalVal));
+                //Set hexadecimal value in textview
+                txtHexadecimal.setText(Integer.toHexString(decimalVal).toUpperCase());
+            } catch (Exception decimalValueTooLarge) {
                 Toast.makeText(getActivity(), "Octal value too large", Toast.LENGTH_SHORT).show();
             }
         }
@@ -168,7 +168,7 @@ public class ConverterOctalFragment extends Fragment implements View.OnClickList
                 Intent howtoIntent = new Intent();
                 howtoIntent.setClass(getActivity(), ConverterHowtoBinaryActivity.class);
 
-                howtoIntent.putExtra("value",valueToConvert);
+                howtoIntent.putExtra("value", valueToConvert);
                 startActivity(howtoIntent);
                 break;
             case R.id.converterButtonZero:
