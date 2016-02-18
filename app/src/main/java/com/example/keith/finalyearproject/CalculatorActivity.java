@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,11 +34,12 @@ Electronic And Computer Engineering(LM118) 4th year
 Final Year Project
 */
 public class CalculatorActivity extends AppCompatActivity implements CalculatorBinaryFragment.calculatorArrayListener,
-        CalculatorHexadecimalFragment.calculatorArrayListener, CalculatorDecimalFragment.calculatorArrayListener, OnItemSelectedListener {
+        CalculatorHexadecimalFragment.calculatorArrayListener, CalculatorDecimalFragment.calculatorArrayListener, OnItemSelectedListener, View.OnClickListener {
 
     ArrayList<String> calculatorArray = new ArrayList<>();
     /*RadioButton radioBinaryButton, radioHexadecimalButton;*/
     TextView txtInput, txtResult;
+    Button buttonFixedPoint;
     Toast toast;
     long decimalVal;
     int currentIndex;
@@ -61,6 +63,9 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
         calculatorMode.setAdapter(spinnerAdapter);
         calculatorMode.setOnItemSelectedListener(this);
+
+        buttonFixedPoint = (Button) findViewById(R.id.buttonFixedPoint);
+        buttonFixedPoint.setOnClickListener(this);
 
         // For Setting Logo in toolbar myToolbar.setLogo();
         currentIndex = 0;
@@ -503,6 +508,10 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         setCalculatorResultDisplay();
     }
 
+    public void fixedPoint(){
+
+    }
+
     /*
     onItemSelected and onNothingSelected are selection handlers for dropdown
      */
@@ -592,5 +601,14 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     public void onDestroy() {
         super.onDestroy();
         GlobalVar.position = 32;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.buttonFixedPoint:
+                startActivity(new Intent(this,CalculatorFixedPointPopUp.class));
+                break;
+        }
     }
 }

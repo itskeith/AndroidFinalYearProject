@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 /*
 Created by: Keith Ryan
 Student Number: 11125268
@@ -34,7 +35,7 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
     Button oneButton, zeroButton, twoButton, threeButton, fourButton, fiveButton, sixButton,
             sevenButton, eightButton, nineButton, aButton, bButton, cButton, dButton, eButton,
             fButton, plusButton, minusButton, multiplyButton, divideButton, deleteButton,
-            clearButton, equalsButton;
+            clearButton, pointButton;
     String input;
     Boolean isLastInputOperation;
     Activity activity;
@@ -99,8 +100,8 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
         divideButton.setOnClickListener(this);
         multiplyButton = (Button) view.findViewById(R.id.buttonMultiply);
         multiplyButton.setOnClickListener(this);
-        equalsButton = (Button) view.findViewById(R.id.buttonEquals);
-        equalsButton.setOnClickListener(this);
+        pointButton = (Button) view.findViewById(R.id.buttonPoint);
+        pointButton.setOnClickListener(this);
         deleteButton = (Button) view.findViewById(R.id.buttonDelete);
         deleteButton.setOnClickListener(this);
         clearButton = (Button) view.findViewById(R.id.buttonClear);
@@ -222,10 +223,7 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
                 isLastInputOperation = true;
                 getInput(input);
                 break;
-            case R.id.buttonEquals:
-                input = "=";
-                isLastInputOperation = true;
-                getInput(input);
+            case R.id.buttonPoint:
                 break;
             case R.id.buttonDivide:
                 input = "/";

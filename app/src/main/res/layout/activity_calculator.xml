@@ -20,16 +20,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/my_toolbar"
+        android:background="@color/lighter_grey"
         android:text="Mode:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:background="@color/lighter_grey" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
     <Spinner
         android:id="@+id/spinnerSelectCalculator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:spinnerMode="dropdown"
+        android:background="@color/lighter_grey"
         android:elevation="4dp"
-        android:background="@color/lighter_grey"/>
+        android:spinnerMode="dropdown" />
     <!--<RadioGroup
         android:id="@+id/radioGroupCalculator"
         android:layout_width="wrap_content"
@@ -62,12 +63,20 @@
             android:text="Hexadecimal"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
     </RadioGroup>-->
+    <Button
+        android:id="@+id/buttonFixedPoint"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/buttons_calc"
+        android:layout_weight=".075"
+        android:text="Enable Fixed-Point" />
+
     <TextView
         android:id="@+id/textViewInput"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_below="@+id/textViewMode"
-        android:layout_weight="0.35"
+        android:layout_weight="0.275"
         android:background="@color/grey"
         android:gravity="right|bottom"
         android:scrollbars="vertical"

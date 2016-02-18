@@ -1,22 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_grey"
-    android:elevation="4dp">
-
-    <SeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/seekBar"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    android:elevation="4dp"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/seekBarTextView"
+        android:text="Warning:"
+        android:textStyle="bold"
+        android:layout_above="@+id/textView2"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/twocomplementwarning"
+        android:id="@+id/textView2"
+        android:layout_above="@+id/space"
+        android:layout_alignParentLeft="true" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_above="@+id/seekBar"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/space" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:id="@+id/space2"
         android:layout_below="@+id/seekBar"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/seekBarTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@+id/space2"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

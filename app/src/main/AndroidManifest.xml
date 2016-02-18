@@ -45,6 +45,10 @@
             android:name=".CalculatorTwosComplementPopup"
             android:parentActivityName=".CalculatorActivity"
             android:theme="@style/AppTheme.PopUpTheme" />
+        <activity
+            android:name=".CalculatorFixedPointPopUp"
+            android:parentActivityName=".CalculatorActivity"
+            android:theme="@style/AppTheme.PopUpTheme" />
     </application>
 
 </manifest>

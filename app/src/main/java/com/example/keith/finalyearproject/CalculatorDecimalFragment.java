@@ -33,7 +33,7 @@ public class CalculatorDecimalFragment extends Fragment implements View.OnClickL
     TextView txtInput, txtResult;
     Button oneButton, zeroButton, twoButton, threeButton, fourButton, fiveButton, sixButton,
             sevenButton, eightButton, nineButton, plusButton, minusButton, multiplyButton,
-            divideButton, deleteButton, clearButton, equalsButton;
+            divideButton, deleteButton, clearButton, pointButton;
     String input;
     Boolean isLastInputOperation;
     Activity activity;
@@ -86,8 +86,8 @@ public class CalculatorDecimalFragment extends Fragment implements View.OnClickL
         divideButton.setOnClickListener(this);
         multiplyButton = (Button) view.findViewById(R.id.buttonMultiply);
         multiplyButton.setOnClickListener(this);
-        equalsButton = (Button) view.findViewById(R.id.buttonEquals);
-        equalsButton.setOnClickListener(this);
+        pointButton = (Button) view.findViewById(R.id.buttonPoint);
+        pointButton.setOnClickListener(this);
         deleteButton = (Button) view.findViewById(R.id.buttonDelete);
         deleteButton.setOnClickListener(this);
         clearButton = (Button) view.findViewById(R.id.buttonClear);
@@ -179,7 +179,7 @@ public class CalculatorDecimalFragment extends Fragment implements View.OnClickL
                 isLastInputOperation = true;
                 getInput(input);
                 break;
-            case R.id.buttonEquals:
+            case R.id.buttonPoint:
                 input = "=";
                 isLastInputOperation = true;
                 getInput(input);

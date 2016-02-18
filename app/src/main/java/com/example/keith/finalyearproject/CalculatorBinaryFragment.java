@@ -42,7 +42,7 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
     String lastOperation, input, operation, calculateResultString;
     TextView txtInput, txtResult;
     Button oneButton, zeroButton, plusButton, minusButton, multiplyButton, divideButton,
-            deleteButton, clearButton, equalsButton, twosComplementButton;
+            deleteButton, clearButton, pointButton, twosComplementButton;
     String userInput;
     Activity activity;
 
@@ -82,8 +82,8 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
         divideButton.setOnClickListener(this);
         multiplyButton = (Button) view.findViewById(R.id.buttonMultiply);
         multiplyButton.setOnClickListener(this);
-        equalsButton = (Button) view.findViewById(R.id.buttonEquals);
-        equalsButton.setOnClickListener(this);
+        pointButton = (Button) view.findViewById(R.id.buttonPoint);
+        pointButton.setOnClickListener(this);
         deleteButton = (Button) view.findViewById(R.id.buttonDelete);
         deleteButton.setOnClickListener(this);
         clearButton = (Button) view.findViewById(R.id.buttonClear);
@@ -144,12 +144,7 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
                 isLastInputOperation = true;
                 input = "+";
                 getInput(input);
-                break;/*
-            case R.id.buttonEquals:
-                isLastInputOperation = true;
-                input = "=";
-                getInput(input);
-                break;*/
+                break;
             case R.id.buttonDivide:
                 isLastInputOperation = true;
                 input = "/";
@@ -168,6 +163,10 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
                 break;
             case R.id.buttonClear:
                 input = "Clear";
+                getInput(input);
+                break;
+            case R.id.buttonPoint:
+                input = ".";
                 getInput(input);
                 break;
             case R.id.buttonTwoComplement:

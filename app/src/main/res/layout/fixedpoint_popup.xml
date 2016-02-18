@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey"
+    android:elevation="4dp"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="Select the amount of bits to the left and right of the fixed point below." />
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_below="@+id/textViewTitle"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textViewLeftTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/space"
+        android:layout_alignParentLeft="true"
+        android:text="Left of fixed point bit length:" />
+
+    <SeekBar
+        android:id="@+id/seekBarLeft"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textViewLeftTitle"/>
+
+    <Space
+        android:id="@+id/space2"
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_below="@+id/seekBarLeft"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textViewRightTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/space2"
+        android:text="Right of fixed point bit length:" />
+
+    <SeekBar
+        android:id="@+id/seekBarRight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewRightTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <Space
+        android:id="@+id/space3"
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_below="@+id/seekBarRight"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/seekBarResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/space3"
+        android:layout_centerHorizontal="true"
+        android:text="" />
+</RelativeLayout>

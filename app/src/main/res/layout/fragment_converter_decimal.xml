@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -20,8 +21,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#636366"
-                android:text="Number to be converted:"
                 android:elevation="4dp"
+                android:text="Number to be converted:"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/white" />
 
@@ -33,17 +34,19 @@
                 android:elevation="8dp"
                 android:inputType="number" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2">
+
             <Button
                 android:id="@+id/converterButtonHowto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="How to?"
                 android:background="@drawable/buttons_calc"
-                />
+                android:elevation="4dp"
+                android:text="How to?" />
         </LinearLayout>
     </LinearLayout>
 
@@ -65,6 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#989898"
+        android:elevation="4dp"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -86,6 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#989898"
+        android:elevation="4dp"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -107,13 +112,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#989898"
+        android:elevation="4dp"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Space
         android:layout_width="20px"
-        android:layout_height="20px"
-        />
+        android:layout_height="20px" />
 
     <LinearLayout
         android:id="@+id/converterLinearLayoutButtonFirstRow"
@@ -129,7 +134,9 @@
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@drawable/buttons_calc"
+            android:elevation="4dp"
             android:text="7" />
+
         <Button
             android:id="@+id/converterButtonEight"
             android:layout_width="0dp"
@@ -137,7 +144,9 @@
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@drawable/buttons_calc"
+            android:elevation="4dp"
             android:text="8" />
+
         <Button
             android:id="@+id/converterButtonNine"
             android:layout_width="0dp"
@@ -145,6 +154,7 @@
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@drawable/buttons_calc"
+            android:elevation="4dp"
             android:text="9" />
     </LinearLayout>
 
@@ -155,6 +165,7 @@
         android:layout_below="@id/converterLinearLayoutButtonFirstRow"
         android:layout_weight="1"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/converterButtonFour"
             android:layout_width="0dp"
@@ -162,7 +173,9 @@
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@drawable/buttons_calc"
+            android:elevation="4dp"
             android:text="4" />
+
         <Button
             android:id="@+id/converterButtonFive"
             android:layout_width="0dp"
@@ -170,7 +183,9 @@
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@drawable/buttons_calc"
+            android:elevation="4dp"
             android:text="5" />
+
         <Button
             android:id="@+id/converterButtonSix"
             android:layout_width="0dp"
@@ -178,6 +193,7 @@
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@drawable/buttons_calc"
+            android:elevation="4dp"
             android:text="6" />
     </LinearLayout>
 
@@ -188,6 +204,7 @@
         android:layout_below="@id/converterLinearLayoutButtonSecondRow"
         android:layout_weight="1"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/converterButtonOne"
             android:layout_width="0dp"
@@ -195,7 +212,9 @@
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@drawable/buttons_calc"
+            android:elevation="4dp"
             android:text="1" />
+
         <Button
             android:id="@+id/converterButtonTwo"
             android:layout_width="0dp"
@@ -203,7 +222,9 @@
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@drawable/buttons_calc"
+            android:elevation="4dp"
             android:text="2" />
+
         <Button
             android:id="@+id/converterButtonThree"
             android:layout_width="0dp"
@@ -221,6 +242,7 @@
         android:layout_below="@id/converterLinearLayoutButtonThirdRow"
         android:layout_weight="1"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/converterButtonZero"
             android:layout_width="0dp"
@@ -228,7 +250,9 @@
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@drawable/buttons_calc"
+            android:elevation="4dp"
             android:text="0" />
+
         <Button
             android:id="@+id/converterButtonDelete"
             android:layout_width="0dp"
@@ -236,6 +260,7 @@
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@drawable/buttons_calc"
+            android:elevation="4dp"
             android:text="Delete" />
     </LinearLayout>
 
