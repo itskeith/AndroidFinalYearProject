@@ -15,7 +15,7 @@
             android:id="@+id/buttonClear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.25"
+            android:layout_weight="0.375"
             android:background="@drawable/buttons_calc"
             android:text="Clr"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -25,21 +25,11 @@
             android:id="@+id/buttonDelete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.25"
+            android:layout_weight="0.375"
             android:background="@drawable/buttons_calc"
             android:text="Del"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/dark_orange" />
-
-        <Button
-            android:id="@+id/buttonEquals"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            android:background="@drawable/buttons_calc"
-            android:text="="
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/seagreen" />
 
         <Button
             android:id="@+id/buttonPlus"
@@ -72,13 +62,14 @@
                 android:layout_height="0dp"
                 android:layout_weight="0.25">
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/hexCalcLinearLayoutNumbersSecondRow"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.25">
+                <Button
+                    android:id="@+id/buttonSeven"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:background="@drawable/buttons_calc"
+                    android:text="7"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
                 <Button
                     android:id="@+id/buttonEight"
@@ -101,7 +92,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/hexCalcLinearLayoutNumbersThirdRow"
+                android:id="@+id/hexCalcLinearLayoutNumbersSecondRow"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.25">
@@ -133,32 +124,14 @@
                     android:text="6"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-                <Button
-                    android:id="@+id/buttonSeven"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:background="@drawable/buttons_calc"
-                    android:text="7"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/hexCalcLinearLayoutNumbersFourthRow"
+                android:id="@+id/hexCalcLinearLayoutNumbersThirdRow"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.25">
 
-                <Button
-                    android:id="@+id/buttonZero"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:background="@drawable/buttons_calc"
-                    android:text="0"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-
-                    />
 
                 <Button
                     android:id="@+id/buttonOne"
@@ -186,6 +159,26 @@
                     android:background="@drawable/buttons_calc"
                     android:text="3"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/hexCalcLinearLayoutNumbersFourthRow"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.25">
+
+                <Button
+                    android:id="@+id/buttonZero"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:background="@drawable/buttons_calc"
+                    android:text="0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+
+                    />
+                
+
             </LinearLayout>
 
         </LinearLayout>

@@ -123,14 +123,6 @@
         android:layout_gravity="bottom"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/converterButtonZero"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="bottom"
-            android:background="@drawable/buttons_calc"
-            android:text = "0"/>
-        <Button
             android:id="@+id/converterButtonOne"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -138,6 +130,14 @@
             android:layout_gravity="bottom"
             android:background="@drawable/buttons_calc"
             android:text = "1"/>
+        <Button
+            android:id="@+id/converterButtonZero"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            android:background="@drawable/buttons_calc"
+            android:text = "0"/>
         <Button
             android:id="@+id/converterButtonDelete"
             android:layout_width="0dp"

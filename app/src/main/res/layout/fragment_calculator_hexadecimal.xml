@@ -15,7 +15,7 @@
             android:id="@+id/buttonClear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.25"
+            android:layout_weight="0.375"
             android:background="@drawable/buttons_calc"
             android:text="Clr"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -25,21 +25,11 @@
             android:id="@+id/buttonDelete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.25"
+            android:layout_weight="0.375"
             android:background="@drawable/buttons_calc"
             android:text="Del"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/dark_orange" />
-
-        <Button
-            android:id="@+id/buttonEquals"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            android:background="@drawable/buttons_calc"
-            android:text="="
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/seagreen" />
 
         <Button
             android:id="@+id/buttonPlus"
