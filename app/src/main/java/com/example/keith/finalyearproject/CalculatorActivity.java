@@ -191,17 +191,17 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                             calculatorArray.get(currentIndex) == "-" ||
                             calculatorArray.get(currentIndex) == "*" ||
                             calculatorArray.get(currentIndex) == "/" ||
-                            calculatorArray.get(currentIndex) == "."){
-                    //if current array entry is an operation, replace it with the latest user input operation
-                    calculatorArray.set(currentIndex, userInput);
-                }else{
-                    currentIndex++;
-                    calculatorArray.add(userInput);
-                }
+                            calculatorArray.get(currentIndex) == ".") {
+                        //if current array entry is an operation, replace it with the latest user input operation
+                        calculatorArray.set(currentIndex, userInput);
+                    } else {
+                        currentIndex++;
+                        calculatorArray.add(userInput);
+                    }
 
-                //currentIndex += 2;
-                //calculatorArray.add("");
-                break;
+                    //currentIndex += 2;
+                    //calculatorArray.add("");
+                    break;
                 case "Delete":
                     int arrayEntryLength;
                     if (calculatorArray.isEmpty()) {

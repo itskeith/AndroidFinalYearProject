@@ -9,6 +9,7 @@ Student Number: 11125268
 Electronic And Computer Engineering(LM118) 4th year
 Final Year Project
 */
+
 /**
  * Created by Keith on 17/11/2015.
  * ReferenceDetailsActivity checks screen orientation and calls ReferenceDetailsFragment for
@@ -27,13 +28,13 @@ public class ReferenceDetailsActivity extends Activity {
         }
 
         //Checks for previous saved state
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
 
             ReferenceDetailsFragment details = new ReferenceDetailsFragment();
 
             details.setArguments(getIntent().getExtras());
 
-            getFragmentManager().beginTransaction().add(android.R.id.content,details).commit();
+            getFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
         }
     }
 }

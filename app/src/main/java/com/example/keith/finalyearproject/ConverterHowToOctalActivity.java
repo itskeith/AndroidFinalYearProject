@@ -11,9 +11,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Keith on 22/02/2016.
- */
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
 public class ConverterHowToOctalActivity extends AppCompatActivity {
     TextView textViewToConvert, textViewBinaryConvert, textViewHexadecimalConvert, textViewOctalConvert;
     String originalValue;

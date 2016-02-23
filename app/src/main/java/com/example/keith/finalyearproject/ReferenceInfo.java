@@ -10,7 +10,6 @@ Final Year Project
 */
 
 /**
- * Created by Keith on 17/11/2015.
  * Activity called for information from other reference activities and fragments
  */
 public class ReferenceInfo {

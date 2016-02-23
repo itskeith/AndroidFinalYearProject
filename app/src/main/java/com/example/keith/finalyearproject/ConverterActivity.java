@@ -95,7 +95,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
     }
 
     //Called on radio button click for octal, inflates ConverterOctalFragment
-    public void selectOctal(View view){
+    public void selectOctal(View view) {
         choice = "Octal";
         Toast.makeText(ConverterActivity.this, "You chose: Octal", Toast.LENGTH_SHORT).show();
 
@@ -174,6 +174,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
     //Menu item options in toolbar for launching other activities
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -202,7 +203,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
 
     @Override
     public void onClick(View view) {
-        switch (choice){
+        switch (choice) {
             case "Decimal":
                 Intent decimalIntent = new Intent();
                 decimalIntent.setClass(ConverterActivity.this, ReferenceDetailsActivity.class);

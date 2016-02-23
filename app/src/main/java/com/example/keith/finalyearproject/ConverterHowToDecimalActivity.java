@@ -11,10 +11,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Keith on 22/02/2016.
- */
-public class ConverterHowToDecimalActivity extends AppCompatActivity{
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
+public class ConverterHowToDecimalActivity extends AppCompatActivity {
     TextView textViewToConvert, textViewBinaryConvert, textViewHexadecimalConvert, textViewOctalConvert;
     String originalValue;
     double powerOf;
@@ -51,7 +54,7 @@ public class ConverterHowToDecimalActivity extends AppCompatActivity{
         //String valuesarray[] = ;
         int values = Integer.parseInt(value);
         int remainder;
-        while(values > 0){
+        while (values > 0) {
             textViewBinaryConvert.append(values + "/2 = ");
             remainder = values % 2;
             values = values / 2;
@@ -68,7 +71,7 @@ public class ConverterHowToDecimalActivity extends AppCompatActivity{
 
         int values = Integer.parseInt(value);
         int remainder;
-        while(values > 0){
+        while (values > 0) {
             textViewHexadecimalConvert.append(values + "/16 = ");
             remainder = values % 16;
             values = values / 16;
@@ -76,13 +79,14 @@ public class ConverterHowToDecimalActivity extends AppCompatActivity{
         }
         textViewHexadecimalConvert.append("The Hexadecimal value is the remainders as read from the bottom of the list, so in this case the Hexadecimal value is: " + Integer.toHexString(Integer.parseInt(value)).toUpperCase());
     }
+
     /*
     ConvertOctalStep performs the step display for showing how to convert from binary to octal
      */
     public void convertOctalStep(String value) {
         int values = Integer.parseInt(value);
         int remainder;
-        while(values > 0){
+        while (values > 0) {
             textViewOctalConvert.append(values + "/8 = ");
             remainder = values % 8;
             values = values / 8;

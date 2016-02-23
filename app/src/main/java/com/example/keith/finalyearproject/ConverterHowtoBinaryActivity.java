@@ -11,9 +11,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Keith on 09/02/2016.
- */
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
 public class ConverterHowToBinaryActivity extends AppCompatActivity {
 
     TextView textViewToConvert, textViewDecimalConvert, textViewHexadecimalConvert, textViewOctalConvert;
@@ -90,6 +93,7 @@ public class ConverterHowToBinaryActivity extends AppCompatActivity {
             textViewHexadecimalConvert.append("All of these in sequence give you your Hexadecimal value: " + Integer.toHexString(Integer.parseInt(value, 2)).toUpperCase());
         }
     }
+
     /*
     ConvertOctalStep performs the step display for showing how to convert from binary to octal
      */

@@ -14,8 +14,8 @@ Student Number: 11125268
 Electronic And Computer Engineering(LM118) 4th year
 Final Year Project
 */
+
 /**
- *
  * ReferenceListFragment shows user a list of reference information
  * Depending on device orientation, it displays a list only if in portrait mode and the list and
  * details simultaneously if in landscape mode

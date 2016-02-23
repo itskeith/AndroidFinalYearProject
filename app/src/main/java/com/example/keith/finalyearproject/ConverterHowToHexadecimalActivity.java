@@ -11,9 +11,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Keith on 22/02/2016.
- */
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
 public class ConverterHowToHexadecimalActivity extends AppCompatActivity {
     TextView textViewToConvert, textViewBinaryConvert, textViewDecimalConvert, textViewOctalConvert;
     String originalValue;
@@ -54,14 +57,14 @@ public class ConverterHowToHexadecimalActivity extends AppCompatActivity {
         int hexvalue;
         String values[] = value.split("(?!^)"); // (?!^) = regex-expression negative lookahead
         for (int i = 0; i < values.length; i++) {
-            hexvalue = Integer.parseInt(values[values.length - (1 + i)],16);
-            hexvalue = hexvalue * (int)Math.pow(16, i);
+            hexvalue = Integer.parseInt(values[values.length - (1 + i)], 16);
+            hexvalue = hexvalue * (int) Math.pow(16, i);
             //textViewBinaryConvert.append(values[values.length - 1 + i] + " = " + values[values.length - 1 + i] + " x 16^" + Integer.toString(i) + " = " + Integer.toHexString(Integer.parseInt(values[values.length - 1 + i])).toUpperCase() + " x " + Double.toString(Math.pow(16,(double)i)) + " = " + Integer.toString(hexvalue) + "\n");
             textViewDecimalConvert.append(values[values.length - (1 + i)] + " = ");
             textViewDecimalConvert.append(values[values.length - (1 + i)] + " x 16^");
             textViewDecimalConvert.append(Integer.toString(i) + " = ");
-            textViewDecimalConvert.append(Integer.toHexString(Integer.parseInt(values[values.length - (1 + i)],16)).toUpperCase() + " x ");
-            textViewDecimalConvert.append(Integer.toString((int)Math.pow(16,(double)i)) + " = ");
+            textViewDecimalConvert.append(Integer.toHexString(Integer.parseInt(values[values.length - (1 + i)], 16)).toUpperCase() + " x ");
+            textViewDecimalConvert.append(Integer.toString((int) Math.pow(16, (double) i)) + " = ");
             textViewDecimalConvert.append(Integer.toString(hexvalue) + "\n");
         }
 

@@ -182,7 +182,7 @@ public class ConverterHexadecimalFragment extends Fragment implements View.OnCli
                 Intent howtoIntent = new Intent();
                 howtoIntent.setClass(getActivity(), ConverterHowToHexadecimalActivity.class);
 
-                howtoIntent.putExtra("value",valueToConvert);
+                howtoIntent.putExtra("value", valueToConvert);
                 startActivity(howtoIntent);
                 break;
             case R.id.converterButtonZero:

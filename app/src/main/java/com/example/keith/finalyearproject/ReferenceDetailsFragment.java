@@ -18,14 +18,14 @@ Student Number: 11125268
 Electronic And Computer Engineering(LM118) 4th year
 Final Year Project
 */
+
 /**
- *
  * ReferenceDetailsFragment is responsible for displaying the details of the reference item chosen
  * by the user
  */
-public class ReferenceDetailsFragment extends Fragment{
+public class ReferenceDetailsFragment extends Fragment {
 
-    public static ReferenceDetailsFragment newInstance(int index){
+    public static ReferenceDetailsFragment newInstance(int index) {
 
         ReferenceDetailsFragment f = new ReferenceDetailsFragment();
 
@@ -37,8 +37,8 @@ public class ReferenceDetailsFragment extends Fragment{
         return f;
     }
 
-    public int getShownIndex(){
-        return getArguments().getInt("index",0);
+    public int getShownIndex() {
+        return getArguments().getInt("index", 0);
     }
 
     @Override
@@ -55,10 +55,10 @@ public class ReferenceDetailsFragment extends Fragment{
         //Set layout parameters for images added to scrollView
         LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        linearLayoutParams.gravity=Gravity.CENTER;
+        linearLayoutParams.gravity = Gravity.CENTER;
         //Set padding for images
         int padding = (int)
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,4,getActivity().getResources().getDisplayMetrics());
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getActivity().getResources().getDisplayMetrics());
 
         //Creates imageView image for displaying details
         ImageView image = new ImageView(getActivity());
@@ -82,7 +82,7 @@ public class ReferenceDetailsFragment extends Fragment{
 
         TextView textView = new TextView(getActivity());
 
-        textView.setPadding(padding,padding,padding,padding);
+        textView.setPadding(padding, padding, padding, padding);
         textView.setGravity(Gravity.CENTER);
         dataLinearLayout.addView(textView);
         textView.setText(ReferenceInfo.TEXTINFO[getShownIndex() - 1]);

@@ -143,14 +143,4 @@ public class ConverterBinaryFragment extends Fragment implements View.OnClickLis
         }
     }
 
-   /* Believe this is redundant now
-   public void calculate(int base, TextView txtView) {
-
-
-        decimalVal = Integer.parseInt(txtBinary.getText().toString(), base);
-        txtDecimal.setText(Integer.toString(decimalVal));
-        txtHexadecimal.setText(Integer.toHexString(decimalVal));
-        txtOctal.setText(Integer.toOctalString(decimalVal));
-    }*/
-
 }

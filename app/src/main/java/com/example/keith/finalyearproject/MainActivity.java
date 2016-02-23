@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+
 /*
 Created by: Keith Ryan
 Student Number: 11125268
@@ -69,17 +70,17 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_references:
-                Intent launchReferencesIntent = new Intent(MainActivity.this,ReferenceActivity.class);
+                Intent launchReferencesIntent = new Intent(MainActivity.this, ReferenceActivity.class);
                 startActivity(launchReferencesIntent);
                 return true;
 
             case R.id.action_calculator:
-                Intent launchCalculatorIntent = new Intent(MainActivity.this,CalculatorActivity.class);
+                Intent launchCalculatorIntent = new Intent(MainActivity.this, CalculatorActivity.class);
                 startActivity(launchCalculatorIntent);
                 return true;
 
             case R.id.action_converter:
-                Intent launchNewIntent = new Intent(MainActivity.this,ConverterActivity.class);
+                Intent launchNewIntent = new Intent(MainActivity.this, ConverterActivity.class);
                 startActivity(launchNewIntent);
                 return true;
 

@@ -2,9 +2,12 @@ package com.example.keith.finalyearproject;
 
 import android.app.Application;
 
-/**
- * Created by Keith on 16/02/2016.
- */
+/*
+Created by: Keith Ryan
+Student Number: 11125268
+Electronic And Computer Engineering(LM118) 4th year
+Final Year Project
+*/
 public class GlobalVar extends Application {
     //Global variable for position of seekbar for 2's complement
     public static int position;

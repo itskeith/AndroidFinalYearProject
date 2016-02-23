@@ -170,7 +170,7 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
                 getInput(input);
                 break;
             case R.id.buttonTwoComplement:
-                startActivity(new Intent(getActivity(),CalculatorTwosComplementPopup.class));
+                startActivity(new Intent(getActivity(), CalculatorTwosComplementPopup.class));
                 break;
             /*
             case R.id.buttonTwosComp:
@@ -183,7 +183,7 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
 
     public void getInput(String input) {
         //
-        ((calculatorArrayListener) activity).calculatorArrayActivity(input,GlobalVar.fixedPointEnabled);
+        ((calculatorArrayListener) activity).calculatorArrayActivity(input, GlobalVar.fixedPointEnabled);
 
     }
 

@@ -22,7 +22,6 @@ public class CalculatorFixedPointPopUp extends Activity implements View.OnClickL
         super.onCreate(savedInstanceState);
 
 
-
         setContentView(R.layout.fixedpoint_popup);
 
         enableDisableButton = (Button) findViewById(R.id.buttonFPEnableDisable);
