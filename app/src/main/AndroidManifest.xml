@@ -38,7 +38,19 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ConverterHowtoBinaryActivity"
+            android:name=".ConverterHowToBinaryActivity"
+            android:parentActivityName=".ConverterActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ConverterHowToDecimalActivity"
+            android:parentActivityName=".ConverterActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ConverterHowToHexadecimalActivity"
+            android:parentActivityName=".ConverterActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ConverterHowToOctalActivity"
             android:parentActivityName=".ConverterActivity"
             android:theme="@style/AppTheme" />
         <activity

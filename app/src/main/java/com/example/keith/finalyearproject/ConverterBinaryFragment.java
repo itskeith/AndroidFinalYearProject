@@ -13,11 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Stack;
 
 /*
 Created by: Keith Ryan
@@ -124,7 +121,7 @@ public class ConverterBinaryFragment extends Fragment implements View.OnClickLis
             case R.id.converterButtonHowto:
                 valueToConvert = txtBinary.getText().toString();
                 Intent howtoIntent = new Intent();
-                howtoIntent.setClass(getActivity(), ConverterHowtoBinaryActivity.class);
+                howtoIntent.setClass(getActivity(), ConverterHowToBinaryActivity.class);
 
                 howtoIntent.putExtra("value", valueToConvert);
                 startActivity(howtoIntent);

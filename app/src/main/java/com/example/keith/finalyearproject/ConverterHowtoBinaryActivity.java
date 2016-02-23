@@ -9,16 +9,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by Keith on 09/02/2016.
  */
-public class ConverterHowtoBinaryActivity extends AppCompatActivity {
+public class ConverterHowToBinaryActivity extends AppCompatActivity {
 
     TextView textViewToConvert, textViewDecimalConvert, textViewHexadecimalConvert, textViewOctalConvert;
     String originalValue;
@@ -30,7 +26,8 @@ public class ConverterHowtoBinaryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_converter_howto);
+        //Set appropriate view
+        setContentView(R.layout.activity_converter_howto_binary);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
@@ -46,12 +43,12 @@ public class ConverterHowtoBinaryActivity extends AppCompatActivity {
             originalValue = extras.getString("value");
             textViewToConvert.setText(originalValue);
         }
-        convertStep(originalValue);
+        convertDecimalStep(originalValue);
         convertHexStep(originalValue);
         convertOctalStep(originalValue);
     }
 
-    public void convertStep(String value) {
+    public void convertDecimalStep(String value) {
         //Break string into a digit per array index
         String values[] = value.split("(?!^)"); // (?!^) = regex-expression negative lookahead
         for (int i = 0; i < values.length; i++) {
@@ -129,17 +126,17 @@ public class ConverterHowtoBinaryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_references:
-                Intent launchReferencesIntent = new Intent(ConverterHowtoBinaryActivity.this, ReferenceActivity.class);
+                Intent launchReferencesIntent = new Intent(ConverterHowToBinaryActivity.this, ReferenceActivity.class);
                 startActivity(launchReferencesIntent);
                 return true;
 
             case R.id.action_converter:
-                Intent launchConverterIntent = new Intent(ConverterHowtoBinaryActivity.this, ConverterActivity.class);
+                Intent launchConverterIntent = new Intent(ConverterHowToBinaryActivity.this, ConverterActivity.class);
                 startActivity(launchConverterIntent);
                 return true;
 
             case R.id.home_button:
-                Intent launchMainActivityIntent = new Intent(ConverterHowtoBinaryActivity.this, MainActivity.class);
+                Intent launchMainActivityIntent = new Intent(ConverterHowToBinaryActivity.this, MainActivity.class);
                 startActivity(launchMainActivityIntent);
                 return true;
             default:

@@ -3,7 +3,6 @@ package com.example.keith.finalyearproject;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.SpannableString;
@@ -14,13 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
-import java.util.Stack;
 
 /*
 Created by: Keith Ryan
@@ -186,7 +180,7 @@ public class ConverterHexadecimalFragment extends Fragment implements View.OnCli
             case R.id.converterButtonHowto:
                 valueToConvert = txtHexadecimal.getText().toString();
                 Intent howtoIntent = new Intent();
-                howtoIntent.setClass(getActivity(), ConverterHowtoBinaryActivity.class);
+                howtoIntent.setClass(getActivity(), ConverterHowToHexadecimalActivity.class);
 
                 howtoIntent.putExtra("value",valueToConvert);
                 startActivity(howtoIntent);

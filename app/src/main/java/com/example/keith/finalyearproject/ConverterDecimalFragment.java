@@ -140,9 +140,9 @@ public class ConverterDecimalFragment extends Fragment implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.converterButtonHowto:
-                valueToConvert = txtBinary.getText().toString();
+                valueToConvert = txtDecimal.getText().toString();
                 Intent howtoIntent = new Intent();
-                howtoIntent.setClass(getActivity(), ConverterHowtoBinaryActivity.class);
+                howtoIntent.setClass(getActivity(), ConverterHowToDecimalActivity.class);
 
                 howtoIntent.putExtra("value", valueToConvert);
                 startActivity(howtoIntent);
