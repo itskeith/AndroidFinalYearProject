@@ -69,6 +69,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:text="How to convert to binary:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/textViewTitleBinary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:text="@string/binaryStepHowToOctal" />
+
+        <TextView
+            android:id="@+id/textViewBinaryStep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white" />
+
+        <Space
+            android:layout_width="20px"
+            android:layout_height="20px"
+            android:background="@color/orange" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
             android:text="How to convert to hexadecimal:"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -87,33 +115,11 @@
             android:text=""
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/white" />
+
         <Space
             android:layout_width="20px"
             android:layout_height="20px"
             android:background="@color/orange" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:text="How to convert to octal:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:text="@string/binaryStepHowToOctal" />
-
-        <TextView
-            android:id="@+id/textViewOctalStep"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/grey"
-            android:text=""
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/white" />
 
     </LinearLayout>
 </ScrollView>

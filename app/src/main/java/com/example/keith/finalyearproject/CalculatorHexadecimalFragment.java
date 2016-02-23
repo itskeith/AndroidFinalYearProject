@@ -226,8 +226,12 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
             case R.id.buttonPoint:
                 input = ".";
                 isLastInputOperation = true;
-                getInput(input);
-                break;
+                if(GlobalVar.fixedPointEnabled==true){
+                    getInput(input);
+                    break;
+                }else{
+                    break;
+                }
             case R.id.buttonDivide:
                 input = "/";
                 isLastInputOperation = true;
@@ -250,7 +254,25 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
         }
     }
 
+    /*
+    getInput uses interface to communicate this fragments button clicks with calculatorACtivity
+     */
     public void getInput(String input) {
         ((calculatorArrayListener) activity).calculatorArrayActivity(input, GlobalVar.fixedPointEnabled);
+    }
+
+    /*
+    onResume greys out and disables point button if fixed point is disabled or makes it appear like
+    other buttons to show it is enabled when fixed point is enabled
+     */
+    public void onResume() {
+        super.onResume();
+        if (GlobalVar.fixedPointEnabled == true) {
+            pointButton.setActivated(true);
+            pointButton.setBackgroundResource(R.drawable.buttons_calc);
+        } else if (GlobalVar.fixedPointEnabled == false) {
+            pointButton.setActivated(false);
+            pointButton.setBackgroundResource(R.drawable.buttons_disable);
+        }
     }
 }

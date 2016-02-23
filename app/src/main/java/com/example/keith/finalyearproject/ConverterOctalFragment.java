@@ -162,7 +162,7 @@ public class ConverterOctalFragment extends Fragment implements View.OnClickList
             case R.id.converterButtonHowto:
                 valueToConvert = txtOctal.getText().toString();
                 Intent howtoIntent = new Intent();
-                howtoIntent.setClass(getActivity(), ConverterHowToBinaryActivity.class);
+                howtoIntent.setClass(getActivity(), ConverterHowToOctalActivity.class);
 
                 howtoIntent.putExtra("value", valueToConvert);
                 startActivity(howtoIntent);

@@ -33,12 +33,24 @@ Student Number: 11125268
 Electronic And Computer Engineering(LM118) 4th year
 Final Year Project
 */
+/*
+CalculatorActivity inflates a fragment depending on which mode is selected from its dropdown, these fragments
+only send information regarding button clicks back to CalculatorActivity which interprets them.
+Calculator Activity stores values it gets from the fragments in an ArrayList which adds new elements
+to the arraylist when an operation or fixedpoint is entered, this is to break up entries in the array
+
+i.e. if 1010 is entered then it is stored in the first index of the array when an operation or fixed point is
+entered this adds a new entry to the array and increments the currentIndex counter, if another operation is
+then entered it replaces the current one. If a number is then entered again it checks the currentIndex value of the
+arraylist and if it is an operator it adds the number as a new entry in the arraylist
+ */
 public class CalculatorActivity extends AppCompatActivity implements CalculatorBinaryFragment.calculatorArrayListener,
         CalculatorHexadecimalFragment.calculatorArrayListener, CalculatorDecimalFragment.calculatorArrayListener, OnItemSelectedListener, View.OnClickListener {
 
     //ArrayList for taking in all of users input
     ArrayList<String> calculatorArray = new ArrayList<>();
 
+    //Initialising views that will be used for activity
     TextView txtInput, txtResult;
     Button buttonFixedPoint;
     Toast toast;
@@ -65,13 +77,12 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         //Set listeners for button clicks/dropdown selection
+        //Dropdown for selecting the mode of operation for calculator
         calculatorMode.setAdapter(spinnerAdapter);
         calculatorMode.setOnItemSelectedListener(this);
-
+        //Buton for starting the CalculatorFixedPointPopUp to facilitate enableing/disabling of fixed point numbers
         buttonFixedPoint = (Button) findViewById(R.id.buttonFixedPoint);
         buttonFixedPoint.setOnClickListener(this);
-
-        // For Setting Logo in toolbar myToolbar.setLogo();
 
         currentIndex = 0;
 
@@ -82,7 +93,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     }
 
     /*
-    Displays the decimal mode of operation of the calculator activity when user selects hexadecimal
+    Displays the decimal mode of operation of the calculator activity when user selects decimal
     from the dropdown
     */
     public void decimalCalculator(View view) {
@@ -141,190 +152,132 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     the latest array entry is a digit.
     If the input is an operation it checks to make sure that there is a digit entered
     before the operator otherwise it is not accepted.
+    If the input is a point then a 0 is put before it if there is no number before the point, it also
+    checks as to whether another point was before it and also if there was another point used in the number
+    that the point is part of.
      */
     @Override
     public void calculatorArrayActivity(String userInput, boolean fixedPointEnabled) {
-        if (fixedPointEnabled == true) {
-            switch (userInput) {
-                case "0":
-                case "1":
-                case "2":
-                case "3":
-                case "4":
-                case "5":
-                case "6":
-                case "7":
-                case "8":
-                case "9":
-                case "A":
-                case "B":
-                case "C":
-                case "D":
-                case "E":
-                case "F":
-                    if (calculatorArray.size() == 0) {
+        switch (userInput) {
+            case "0":
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+            case "7":
+            case "8":
+            case "9":
+            case "A":
+            case "B":
+            case "C":
+            case "D":
+            case "E":
+            case "F":
+                if (calculatorArray.size() == 0) {
+                    calculatorArray.add(userInput);
+                } else if (calculatorArray.get(currentIndex) == "+" ||
+                        calculatorArray.get(currentIndex) == "-" ||
+                        calculatorArray.get(currentIndex) == "*" ||
+                        calculatorArray.get(currentIndex) == "/" ||
+                        calculatorArray.get(currentIndex) == ".") {
+                    currentIndex++;
+                    calculatorArray.add(userInput);
+                } else {
+                    //if the array is not empty and the current index in the array is not an operator
+                    //then the array entry at the current index must be a number so then the current
+                    //user input is appended to the end
+                    calculatorArray.set(currentIndex, calculatorArray.get(currentIndex) + userInput);
+                }
+                setCalculatorResultDisplay();
+                break;
+            case "+":
+            case "-":
+            case "*":
+            case "/":
+                if (calculatorArray.isEmpty()) {
+                    displayToast("Need to enter a number before an operation");
+                } else if (calculatorArray.get(currentIndex) == "+" ||
+                        calculatorArray.get(currentIndex) == "-" ||
+                        calculatorArray.get(currentIndex) == "*" ||
+                        calculatorArray.get(currentIndex) == "/" ||
+                        calculatorArray.get(currentIndex) == ".") {
+                    //if current array entry is an operation, replace it with the latest user input operation
+                    calculatorArray.set(currentIndex, userInput);
+                } else {
+                    currentIndex++;
+                    calculatorArray.add(userInput);
+                }
+                break;
+            case ".":
+                if (calculatorArray.isEmpty()) {
+                    calculatorArray.add("0");
+                    calculatorArray.add(userInput);
+                    currentIndex++;
+                } else if (calculatorArray.get(currentIndex) == "+" ||
+                        calculatorArray.get(currentIndex) == "-" ||
+                        calculatorArray.get(currentIndex) == "*" ||
+                        calculatorArray.get(currentIndex) == "/") {
+                    calculatorArray.add("0");
+                    calculatorArray.add(userInput);
+                    currentIndex = currentIndex + 2;
+                } else if (calculatorArray.size() > 1) {
+                    if (calculatorArray.get(currentIndex) == ".") {
+                        displayToast("Can't use point twice in the same number");
+                    } else if (calculatorArray.get(currentIndex - 1) == ".") {
+                        displayToast("Can't use point twice in the same number");
+                    } else {
                         calculatorArray.add(userInput);
-                    } else if (calculatorArray.get(currentIndex) == "+" ||
-                            calculatorArray.get(currentIndex) == "-" ||
-                            calculatorArray.get(currentIndex) == "*" ||
-                            calculatorArray.get(currentIndex) == "/" ||
-                            calculatorArray.get(currentIndex) == ".") {
                         currentIndex++;
-                        calculatorArray.add(userInput);
-                    } else {
-                        //if the array is not empty and the current index in the array is not an operator
-                        //then the array entry at the current index must be a number so then the current
-                        //user input is appended to the end
-                        calculatorArray.set(currentIndex, calculatorArray.get(currentIndex) + userInput);
                     }
-
-                    setCalculatorResultDisplay();
-                    break;
-                case "+":
-                case "-":
-                case "*":
-                case "/":
-                case ".":
-                    if (calculatorArray.isEmpty()) {
-                        displayToast("Need to enter a number before an operation");
-                    } else if (calculatorArray.get(currentIndex) == "+" ||
-                            calculatorArray.get(currentIndex) == "-" ||
-                            calculatorArray.get(currentIndex) == "*" ||
-                            calculatorArray.get(currentIndex) == "/" ||
-                            calculatorArray.get(currentIndex) == ".") {
-                        //if current array entry is an operation, replace it with the latest user input operation
-                        calculatorArray.set(currentIndex, userInput);
-                    } else {
-                        currentIndex++;
-                        calculatorArray.add(userInput);
-                    }
-
-                    //currentIndex += 2;
-                    //calculatorArray.add("");
-                    break;
-                case "Delete":
-                    int arrayEntryLength;
-                    if (calculatorArray.isEmpty()) {
-                        currentIndex = 0;
-                    } else if (calculatorArray.get(currentIndex).length() == 0) {
-                        calculatorArray.remove(currentIndex);
-                        currentIndex--;
-                        arrayEntryLength = calculatorArray.get(currentIndex).length();
-                        if (arrayEntryLength > 0) {
-                            calculatorArray.set(currentIndex, calculatorArray.get(currentIndex).substring(0, arrayEntryLength - 1));
-                        }
-                    } else {
-                        arrayEntryLength = calculatorArray.get(currentIndex).length();
-                        calculatorArray.set(currentIndex, calculatorArray.get(currentIndex).substring(0, arrayEntryLength - 1));
-                        if (calculatorArray.get(currentIndex).length() == 0) {
-                            calculatorArray.remove(currentIndex);
-                            if (currentIndex > 0) {
-                                currentIndex--;
-                            }
-                        }
-                    }
-                    setCalculatorResultDisplay();
-                    break;
-                case "Clear":
+                } else {
+                    calculatorArray.add(userInput);
+                    currentIndex++;
+                }
+                break;
+            case "Delete":
+                int arrayEntryLength;
+                if (calculatorArray.isEmpty()) {
                     currentIndex = 0;
-                    calculatorArray.clear();
-
-                    txtResult.setText("");
-                    txtInput.setText("");
-                    break;
-            }
-            setCalculatorInputDisplay();
-        } else if (fixedPointEnabled == false) {
-            switch (userInput) {
-                case "0":
-                case "1":
-                case "2":
-                case "3":
-                case "4":
-                case "5":
-                case "6":
-                case "7":
-                case "8":
-                case "9":
-                case "A":
-                case "B":
-                case "C":
-                case "D":
-                case "E":
-                case "F":
-                    if (calculatorArray.size() == 0) {
-                        calculatorArray.add(userInput);
-                    } else if (calculatorArray.get(currentIndex) == "+" ||
-                            calculatorArray.get(currentIndex) == "-" ||
-                            calculatorArray.get(currentIndex) == "*" ||
-                            calculatorArray.get(currentIndex) == "/") {
-                        currentIndex++;
-                        calculatorArray.add(userInput);
-                    } else {
-                        //if the array is not empty and the current index in the array is not an operator
-                        //then the array entry at the current index must be a number so then the current
-                        //user input is appended to the end
-                        calculatorArray.set(currentIndex, calculatorArray.get(currentIndex) + userInput);
-                    }
-
-                    setCalculatorResultDisplay();
-                    break;
-                case "+":
-                case "-":
-                case "*":
-                case "/":
-                    if (calculatorArray.isEmpty()) {
-                        displayToast("Need to enter a number before an operation");
-                    } else if (calculatorArray.get(currentIndex) == "+" ||
-                            calculatorArray.get(currentIndex) == "-" ||
-                            calculatorArray.get(currentIndex) == "*" ||
-                            calculatorArray.get(currentIndex) == "/") {
-                        //if current array entry is an operation, replace it with the latest user input operation
-                        calculatorArray.set(currentIndex, userInput);
-                    } else {
-                        currentIndex++;
-                        calculatorArray.add(userInput);
-                    }
-
-                    //currentIndex += 2;
-                    //calculatorArray.add("");
-                    break;
-                case "Delete":
-                    int arrayEntryLength;
-                    if (calculatorArray.isEmpty()) {
-                        currentIndex = 0;
-                    } else if (calculatorArray.get(currentIndex).length() == 0) {
-                        calculatorArray.remove(currentIndex);
-                        currentIndex--;
-                        arrayEntryLength = calculatorArray.get(currentIndex).length();
-                        if (arrayEntryLength > 0) {
-                            calculatorArray.set(currentIndex, calculatorArray.get(currentIndex).substring(0, arrayEntryLength - 1));
-                        }
-                    } else {
-                        arrayEntryLength = calculatorArray.get(currentIndex).length();
+                } else if (calculatorArray.get(currentIndex).length() == 0) {
+                    calculatorArray.remove(currentIndex);
+                    currentIndex--;
+                    arrayEntryLength = calculatorArray.get(currentIndex).length();
+                    if (arrayEntryLength > 0) {
                         calculatorArray.set(currentIndex, calculatorArray.get(currentIndex).substring(0, arrayEntryLength - 1));
-                        if (calculatorArray.get(currentIndex).length() == 0) {
-                            calculatorArray.remove(currentIndex);
-                            if (currentIndex > 0) {
-                                currentIndex--;
-                            }
+                    }
+                } else {
+                    arrayEntryLength = calculatorArray.get(currentIndex).length();
+                    calculatorArray.set(currentIndex, calculatorArray.get(currentIndex).substring(0, arrayEntryLength - 1));
+                    if (calculatorArray.get(currentIndex).length() == 0) {
+                        calculatorArray.remove(currentIndex);
+                        if (currentIndex > 0) {
+                            currentIndex--;
                         }
                     }
-                    setCalculatorResultDisplay();
-                    break;
-                case "Clear":
-                    currentIndex = 0;
-                    calculatorArray.clear();
+                }
+                setCalculatorResultDisplay();
+                break;
+            case "Clear":
+                currentIndex = 0;
+                calculatorArray.clear();
 
-                    txtResult.setText("");
-                    txtInput.setText("");
-                    break;
-            }
-            setCalculatorInputDisplay();
+                txtResult.setText("");
+                txtInput.setText("");
+                break;
         }
+        setCalculatorInputDisplay();
+
 
     }
 
+    /*
+    setCalculatorInputDisplay sets the input view for the calculator activity, it only adds text based on
+    user inputs.
+    Has multiple switch cases depending on current mode for calculator, incase a mode requires
+    something unique to be done in the future
+     */
     public void setCalculatorInputDisplay() {
         switch (currentMode) {
             case "Decimal":
@@ -334,6 +287,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                 for (int i = 0; i < calculatorArray.size(); i++) {
                     if (i == 0) {
                         txtInput.setText(calculatorArray.get(i));
+                    } else if (calculatorArray.get(i) == ".") {
+                        txtInput.append(calculatorArray.get(i));
                     } else {
                         txtInput.append(" " + calculatorArray.get(i) + " ");
                     }
@@ -346,6 +301,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                 for (int i = 0; i < calculatorArray.size(); i++) {
                     if (i == 0) {
                         txtInput.setText(calculatorArray.get(i));
+                    } else if (calculatorArray.get(i) == ".") {
+                        txtInput.append(calculatorArray.get(i));
                     } else {
                         txtInput.append(" " + calculatorArray.get(i) + " ");
                     }
@@ -358,6 +315,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                 for (int i = 0; i < calculatorArray.size(); i++) {
                     if (i == 0) {
                         txtInput.setText(calculatorArray.get(i).toUpperCase());
+                    } else if (calculatorArray.get(i) == ".") {
+                        txtInput.append(calculatorArray.get(i));
                     } else {
                         txtInput.append(" " + calculatorArray.get(i).toUpperCase() + " ");
                     }
@@ -497,12 +456,6 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
         }
     }
-
-    /*
-        Displays the binary mode of operation of the calculator activity when user selects the
-        radio binary button
-        */
-
 
     /*
     convertInputAndResult is responsible for converting all previous inputs and the result to

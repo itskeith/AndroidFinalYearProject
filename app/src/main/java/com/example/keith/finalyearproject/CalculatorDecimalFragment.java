@@ -2,7 +2,9 @@ package com.example.keith.finalyearproject;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -183,8 +185,12 @@ public class CalculatorDecimalFragment extends Fragment implements View.OnClickL
             case R.id.buttonPoint:
                 input = ".";
                 isLastInputOperation = true;
-                getInput(input);
-                break;
+                if(GlobalVar.fixedPointEnabled==true){
+                    getInput(input);
+                    break;
+                }else{
+                    break;
+                }
             case R.id.buttonDivide:
                 input = "/";
                 isLastInputOperation = true;
@@ -198,8 +204,6 @@ public class CalculatorDecimalFragment extends Fragment implements View.OnClickL
             case R.id.buttonDelete:
                 input = "Delete";
                 getInput(input);
-                //int start = txtInput.getText().toString().length();
-                //txtInput.setText(txtInput.getEditableText().delete(start - 1,start - 1));
                 break;
             case R.id.buttonClear:
                 input = "Clear";
@@ -209,5 +213,20 @@ public class CalculatorDecimalFragment extends Fragment implements View.OnClickL
 
     public void getInput(String input) {
         ((calculatorArrayListener) activity).calculatorArrayActivity(input, GlobalVar.fixedPointEnabled);
+    }
+
+    /*
+    onResume greys out and disables point button if fixed point is disabled or makes it appear like
+    other buttons to show it is enabled when fixed point is enabled
+     */
+    public void onResume(){
+        super.onResume();
+        if(GlobalVar.fixedPointEnabled == true){
+            pointButton.setActivated(true);
+            pointButton.setBackgroundResource(R.drawable.buttons_calc);
+        } else if(GlobalVar.fixedPointEnabled == false){
+            pointButton.setActivated(false);
+            pointButton.setBackgroundResource(R.drawable.buttons_disable);
+        }
     }
 }

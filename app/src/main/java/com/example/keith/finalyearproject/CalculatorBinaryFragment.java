@@ -167,8 +167,12 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
                 break;
             case R.id.buttonPoint:
                 input = ".";
-                getInput(input);
-                break;
+                if(GlobalVar.fixedPointEnabled==true){
+                    getInput(input);
+                    break;
+                }else{
+                    break;
+                }
             case R.id.buttonTwoComplement:
                 startActivity(new Intent(getActivity(), CalculatorTwosComplementPopup.class));
                 break;
@@ -180,11 +184,11 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
         }
     }
 
-
+    /*
+    getInput uses interface to communicate this fragments button clicks with calculatorACtivity
+    */
     public void getInput(String input) {
-        //
         ((calculatorArrayListener) activity).calculatorArrayActivity(input, GlobalVar.fixedPointEnabled);
-
     }
 
     /*
@@ -196,5 +200,20 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
            the operation between firstInputString and secondInputString and secondInputString is
            reassigned to be empty everytime this is done.
      */
+
+    /*
+    onResume greys out and disables point button if fixed point is disabled or makes it appear like
+    other buttons to show it is enabled when fixed point is enabled
+     */
+    public void onResume() {
+        super.onResume();
+        if (GlobalVar.fixedPointEnabled == true) {
+            pointButton.setActivated(true);
+            pointButton.setBackgroundResource(R.drawable.buttons_calc);
+        } else if (GlobalVar.fixedPointEnabled == false) {
+            pointButton.setActivated(false);
+            pointButton.setBackgroundResource(R.drawable.buttons_disable);
+        }
+    }
 }
 

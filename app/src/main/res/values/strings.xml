@@ -40,13 +40,13 @@
     <string name="hexadecimalStepHowToDecimal">Converting from decimal to hexadecimal is similar to converting from decimal to binary, but instead of dividing by 2, you divide by 16 and the remainders are represented in hex format (0-F). The hexadecimal number is the remainders as ordered from bottom to top.</string>
     <string name="octalStepHowToDecimal">Converting from decimal to octal is also similar to the other formats, but by dividing by 8 and the remainders are between 0 to 7. The octal number is the remainders as ordered from bottom to top.</string>
 
-    <string name="decimalStepHowToHexadecimal">To convert from hexadecimal to decimal you first take the rightmost value and multiply it by 16 to the power of its place in the number, starting from 0. These are then all added together to get the decimal value.</string>
-    <string name="binaryStepHowToHexadecimal"></string>
-    <string name="octalStepHowToHexadecimal"></string>
+    <string name="decimalStepHowToHexadecimal">To convert from hexadecimal to decimal you first take the rightmost value and multiply it by 16 to the power of its place in the number(the rightmost digits place counts as 0 and this is incremented up 1 every place to the left). These are then all added together to get the decimal value.</string>
+    <string name="binaryStepHowToHexadecimal">To convert from hexadecimal to binary simply take 4 bits for each hexadecimal digit and convert the individual hexadecimal digits to their decimal equivalents, then you just convert that to a 4 bit binary number. Keeping the same order for the 4 bits as there was for the hexadecimal number.</string>
+    <string name="octalStepHowToHexadecimal">To convert from hexadecimal to octal do the same as with converting hexadecimal to binary and then convert from that to octal. Break the blocks of 4 bits into blocks of 3 and simply convert to octal. Again ordering the numbers as before. </string>
 
-    <string name="decimalStepHowToOctal"></string>
-    <string name="binaryStepHowToOctal"></string>
-    <string name="hexadecimalStepHowToOctal"></string>
+    <string name="decimalStepHowToOctal">To convert from octal to decimal first take the rightmost value of the octal number and multiply it by 8 to the power of its place in the number(the rightmost digits place counts as 0 and this is incremented up 1 every place to the left) and then work your way left through the rest of the digits. Finally you add all these values together to get your result.</string>
+    <string name="binaryStepHowToOctal">To convert from octal to binary simply represent each digit in the octal number as 3 bits.</string>
+    <string name="hexadecimalStepHowToOctal">To convert from octal to hexadecimal do the same as before but take the blocks of 3 and change them to blocks of 4 bits by taking the binary number in one block and then breaking it up into blocks of 4, padding with 0\'s to the left if necessary.</string>
 
 
     <string name="twocomplementwarning">Setting the 2\'s complement bit length to too low can result in a loss of important information for the number</string>

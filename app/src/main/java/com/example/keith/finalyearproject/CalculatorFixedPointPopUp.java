@@ -14,7 +14,7 @@ import android.widget.TextView;
 public class CalculatorFixedPointPopUp extends Activity implements View.OnClickListener {
     SeekBar leftFixedPoint, rightFixedPoint;
     TextView seekbarPosition, seekbarPositionRight;
-    Button enableDisableButton;
+    Button enableDisableButton, pointButton;
     int positionLeft, positionRight;
 
     @Override
