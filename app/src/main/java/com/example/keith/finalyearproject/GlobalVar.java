@@ -10,4 +10,6 @@ public class GlobalVar extends Application {
     public static int position;
     //Global variables for postion of seekbar's for fixed point
     public static int positionLeft, positionRight;
+    //Global boolean variable for fixedpoint being enabled or not
+    public static boolean fixedPointEnabled;
 }

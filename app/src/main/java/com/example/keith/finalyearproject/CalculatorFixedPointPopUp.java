@@ -3,31 +3,46 @@ package com.example.keith.finalyearproject;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 /**
  * Created by Keith on 18/02/2016.
  */
-public class CalculatorFixedPointPopUp extends Activity {
+public class CalculatorFixedPointPopUp extends Activity implements View.OnClickListener {
     SeekBar leftFixedPoint, rightFixedPoint;
     TextView seekbarPosition, seekbarPositionRight;
+    Button enableDisableButton;
     int positionLeft, positionRight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         setContentView(R.layout.fixedpoint_popup);
+
+        enableDisableButton = (Button) findViewById(R.id.buttonFPEnableDisable);
+        enableDisableButton.setOnClickListener(this);
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * 0.75), (int) (height * 0.35));
+        getWindow().setLayout((int) (width * 0.75), (int) (height * 0.45));
 
         seekBar();
+
+        if (GlobalVar.fixedPointEnabled == true) {
+            enableDisableButton.setText("Disable Fixed Point");
+        } else if (GlobalVar.fixedPointEnabled == false) {
+            enableDisableButton.setText("Enable Fixed Point");
+        }
 
     }
 
@@ -104,4 +119,18 @@ public class CalculatorFixedPointPopUp extends Activity {
         });
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.buttonFPEnableDisable:
+                //Set text for button when user clicks button to show whether fixedpoint is enabled/disabled
+                if (GlobalVar.fixedPointEnabled == false) {
+                    enableDisableButton.setText("Disable Fixed Point");
+                    GlobalVar.fixedPointEnabled = true;
+                } else if (GlobalVar.fixedPointEnabled == true) {
+                    enableDisableButton.setText("Enable Fixed Point");
+                    GlobalVar.fixedPointEnabled = false;
+                }
+        }
+    }
 }

@@ -98,7 +98,7 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
 
     /*Interface for communicating from fragment to activity*/
     public interface calculatorArrayListener {
-        public void calculatorArrayActivity(String userInput);
+        public void calculatorArrayActivity(String userInput, boolean fixedPointEnabled);
     }
 
     @Override
@@ -183,7 +183,7 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
 
     public void getInput(String input) {
         //
-        ((calculatorArrayListener) activity).calculatorArrayActivity(input);
+        ((calculatorArrayListener) activity).calculatorArrayActivity(input,GlobalVar.fixedPointEnabled);
 
     }
 

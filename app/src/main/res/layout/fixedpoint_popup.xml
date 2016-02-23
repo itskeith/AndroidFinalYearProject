@@ -73,4 +73,12 @@
         android:layout_below="@+id/space3"
         android:layout_centerHorizontal="true"
         android:text="" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/buttonFPEnableDisable"
+        android:layout_below="@+id/seekBarResult"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

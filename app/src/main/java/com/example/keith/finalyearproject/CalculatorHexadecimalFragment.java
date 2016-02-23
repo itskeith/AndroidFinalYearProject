@@ -112,7 +112,7 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
 
     /*Interface for communicating from fragment to activity*/
     public interface calculatorArrayListener {
-        public void calculatorArrayActivity(String userInput);
+        public void calculatorArrayActivity(String userInput, boolean fixedPointEnabled);
     }
 
     @Override
@@ -224,6 +224,9 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
                 getInput(input);
                 break;
             case R.id.buttonPoint:
+                input = ".";
+                isLastInputOperation = true;
+                getInput(input);
                 break;
             case R.id.buttonDivide:
                 input = "/";
@@ -248,6 +251,6 @@ public class CalculatorHexadecimalFragment extends Fragment implements View.OnCl
     }
 
     public void getInput(String input) {
-        ((calculatorArrayListener) activity).calculatorArrayActivity(input);
+        ((calculatorArrayListener) activity).calculatorArrayActivity(input, GlobalVar.fixedPointEnabled);
     }
 }

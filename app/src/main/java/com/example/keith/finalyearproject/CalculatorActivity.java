@@ -36,17 +36,20 @@ Final Year Project
 public class CalculatorActivity extends AppCompatActivity implements CalculatorBinaryFragment.calculatorArrayListener,
         CalculatorHexadecimalFragment.calculatorArrayListener, CalculatorDecimalFragment.calculatorArrayListener, OnItemSelectedListener, View.OnClickListener {
 
+    //ArrayList for taking in all of users input
     ArrayList<String> calculatorArray = new ArrayList<>();
-    /*RadioButton radioBinaryButton, radioHexadecimalButton;*/
+
     TextView txtInput, txtResult;
     Button buttonFixedPoint;
     Toast toast;
+    Spinner calculatorMode;
+
     long decimalVal;
     int currentIndex;
-    String lastMode, firstInputString, secondInputString, Operator, twosComplementValue;
-    String currentMode = "";
-    Spinner calculatorMode;
     long firstInput, secondInput;
+
+    String lastMode, firstInputString, secondInputString, twosComplementValue;
+    String currentMode = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.number_formats_calculator, android.R.layout.simple_spinner_dropdown_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        //Set listeners for button clicks/dropdown selection
         calculatorMode.setAdapter(spinnerAdapter);
         calculatorMode.setOnItemSelectedListener(this);
 
@@ -68,14 +72,19 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         buttonFixedPoint.setOnClickListener(this);
 
         // For Setting Logo in toolbar myToolbar.setLogo();
+
         currentIndex = 0;
-        /*radioBinaryButton = (RadioButton) findViewById(R.id.binarybuttoncalculator);
-        radioHexadecimalButton = (RadioButton) findViewById(R.id.hexadecimalbuttoncalculator);*/
-        GlobalVar.position = 32;
+
+        GlobalVar.position = 32; //2's complement number of bits by default
+        GlobalVar.fixedPointEnabled = false; //FixedPoint disabled by default
         txtInput = (TextView) findViewById(R.id.textViewInput);
         txtResult = (TextView) findViewById(R.id.textViewResult);
     }
 
+    /*
+    Displays the decimal mode of operation of the calculator activity when user selects hexadecimal
+    from the dropdown
+    */
     public void decimalCalculator(View view) {
         Fragment decimalFragment = new CalculatorDecimalFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -88,6 +97,10 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         lastMode = "Decimal";
     }
 
+    /*
+    Displays the binary mode of operation of the calculator activity when user selects hexadecimal
+    from the dropdown
+    */
     public void binaryCalculator(View view) {
         Fragment binaryFragment = new CalculatorBinaryFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -104,8 +117,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     }
 
     /*
-    Displays the hexadecimal mode of operation of the calculator activity when user selects the
-    radio hexadecimal button
+    Displays the hexadecimal mode of operation of the calculator activity when user selects hexadecimal
+    from the dropdown
     */
     public void hexadecimalCalculator(View view) {
         Fragment hexadecimalFragment = new CalculatorHexadecimalFragment();
@@ -130,54 +143,58 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     before the operator otherwise it is not accepted.
      */
     @Override
-    public void calculatorArrayActivity(String userInput) {
-        switch (userInput) {
-            case "0":
-            case "1":
-            case "2":
-            case "3":
-            case "4":
-            case "5":
-            case "6":
-            case "7":
-            case "8":
-            case "9":
-            case "A":
-            case "B":
-            case "C":
-            case "D":
-            case "E":
-            case "F":
-                if (calculatorArray.size() == 0) {
-                    calculatorArray.add(userInput);
-                } else if (calculatorArray.get(currentIndex) == "+" ||
-                        calculatorArray.get(currentIndex) == "-" ||
-                        calculatorArray.get(currentIndex) == "*" ||
-                        calculatorArray.get(currentIndex) == "/") {
-                    currentIndex++;
-                    calculatorArray.add(userInput);
-                } else {
-                    //if the array is not empty and the current index in the array is not an operator
-                    //then the array entry at the current index must be a number so then the current
-                    //user input is appended to the end
-                    calculatorArray.set(currentIndex, calculatorArray.get(currentIndex) + userInput);
-                }
+    public void calculatorArrayActivity(String userInput, boolean fixedPointEnabled) {
+        if (fixedPointEnabled == true) {
+            switch (userInput) {
+                case "0":
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                case "A":
+                case "B":
+                case "C":
+                case "D":
+                case "E":
+                case "F":
+                    if (calculatorArray.size() == 0) {
+                        calculatorArray.add(userInput);
+                    } else if (calculatorArray.get(currentIndex) == "+" ||
+                            calculatorArray.get(currentIndex) == "-" ||
+                            calculatorArray.get(currentIndex) == "*" ||
+                            calculatorArray.get(currentIndex) == "/" ||
+                            calculatorArray.get(currentIndex) == ".") {
+                        currentIndex++;
+                        calculatorArray.add(userInput);
+                    } else {
+                        //if the array is not empty and the current index in the array is not an operator
+                        //then the array entry at the current index must be a number so then the current
+                        //user input is appended to the end
+                        calculatorArray.set(currentIndex, calculatorArray.get(currentIndex) + userInput);
+                    }
 
-                setCalculatorResultDisplay();
-                break;
-            case "+":
-            case "-":
-            case "*":
-            case "/":
-                if (calculatorArray.isEmpty()) {
-                    displayToast("Need to enter a number before an operation");
-                } else if (calculatorArray.get(currentIndex) == "+" ||
-                        calculatorArray.get(currentIndex) == "-" ||
-                        calculatorArray.get(currentIndex) == "*" ||
-                        calculatorArray.get(currentIndex) == "/") {
+                    setCalculatorResultDisplay();
+                    break;
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                case ".":
+                    if (calculatorArray.isEmpty()) {
+                        displayToast("Need to enter a number before an operation");
+                    } else if (calculatorArray.get(currentIndex) == "+" ||
+                            calculatorArray.get(currentIndex) == "-" ||
+                            calculatorArray.get(currentIndex) == "*" ||
+                            calculatorArray.get(currentIndex) == "/" ||
+                            calculatorArray.get(currentIndex) == "."){
                     //if current array entry is an operation, replace it with the latest user input operation
                     calculatorArray.set(currentIndex, userInput);
-                } else {
+                }else{
                     currentIndex++;
                     calculatorArray.add(userInput);
                 }
@@ -185,38 +202,127 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                 //currentIndex += 2;
                 //calculatorArray.add("");
                 break;
-            case "Delete":
-                int arrayEntryLength;
-                if (calculatorArray.isEmpty()) {
-                    currentIndex = 0;
-                } else if (calculatorArray.get(currentIndex).length() == 0) {
-                    calculatorArray.remove(currentIndex);
-                    currentIndex--;
-                    arrayEntryLength = calculatorArray.get(currentIndex).length();
-                    if (arrayEntryLength > 0) {
-                        calculatorArray.set(currentIndex, calculatorArray.get(currentIndex).substring(0, arrayEntryLength - 1));
-                    }
-                } else {
-                    arrayEntryLength = calculatorArray.get(currentIndex).length();
-                    calculatorArray.set(currentIndex, calculatorArray.get(currentIndex).substring(0, arrayEntryLength - 1));
-                    if (calculatorArray.get(currentIndex).length() == 0) {
+                case "Delete":
+                    int arrayEntryLength;
+                    if (calculatorArray.isEmpty()) {
+                        currentIndex = 0;
+                    } else if (calculatorArray.get(currentIndex).length() == 0) {
                         calculatorArray.remove(currentIndex);
-                        if (currentIndex > 0) {
-                            currentIndex--;
+                        currentIndex--;
+                        arrayEntryLength = calculatorArray.get(currentIndex).length();
+                        if (arrayEntryLength > 0) {
+                            calculatorArray.set(currentIndex, calculatorArray.get(currentIndex).substring(0, arrayEntryLength - 1));
+                        }
+                    } else {
+                        arrayEntryLength = calculatorArray.get(currentIndex).length();
+                        calculatorArray.set(currentIndex, calculatorArray.get(currentIndex).substring(0, arrayEntryLength - 1));
+                        if (calculatorArray.get(currentIndex).length() == 0) {
+                            calculatorArray.remove(currentIndex);
+                            if (currentIndex > 0) {
+                                currentIndex--;
+                            }
                         }
                     }
-                }
-                setCalculatorResultDisplay();
-                break;
-            case "Clear":
-                currentIndex = 0;
-                calculatorArray.clear();
+                    setCalculatorResultDisplay();
+                    break;
+                case "Clear":
+                    currentIndex = 0;
+                    calculatorArray.clear();
 
-                txtResult.setText("");
-                txtInput.setText("");
-                break;
+                    txtResult.setText("");
+                    txtInput.setText("");
+                    break;
+            }
+            setCalculatorInputDisplay();
+        } else if (fixedPointEnabled == false) {
+            switch (userInput) {
+                case "0":
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                case "A":
+                case "B":
+                case "C":
+                case "D":
+                case "E":
+                case "F":
+                    if (calculatorArray.size() == 0) {
+                        calculatorArray.add(userInput);
+                    } else if (calculatorArray.get(currentIndex) == "+" ||
+                            calculatorArray.get(currentIndex) == "-" ||
+                            calculatorArray.get(currentIndex) == "*" ||
+                            calculatorArray.get(currentIndex) == "/") {
+                        currentIndex++;
+                        calculatorArray.add(userInput);
+                    } else {
+                        //if the array is not empty and the current index in the array is not an operator
+                        //then the array entry at the current index must be a number so then the current
+                        //user input is appended to the end
+                        calculatorArray.set(currentIndex, calculatorArray.get(currentIndex) + userInput);
+                    }
+
+                    setCalculatorResultDisplay();
+                    break;
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                    if (calculatorArray.isEmpty()) {
+                        displayToast("Need to enter a number before an operation");
+                    } else if (calculatorArray.get(currentIndex) == "+" ||
+                            calculatorArray.get(currentIndex) == "-" ||
+                            calculatorArray.get(currentIndex) == "*" ||
+                            calculatorArray.get(currentIndex) == "/") {
+                        //if current array entry is an operation, replace it with the latest user input operation
+                        calculatorArray.set(currentIndex, userInput);
+                    } else {
+                        currentIndex++;
+                        calculatorArray.add(userInput);
+                    }
+
+                    //currentIndex += 2;
+                    //calculatorArray.add("");
+                    break;
+                case "Delete":
+                    int arrayEntryLength;
+                    if (calculatorArray.isEmpty()) {
+                        currentIndex = 0;
+                    } else if (calculatorArray.get(currentIndex).length() == 0) {
+                        calculatorArray.remove(currentIndex);
+                        currentIndex--;
+                        arrayEntryLength = calculatorArray.get(currentIndex).length();
+                        if (arrayEntryLength > 0) {
+                            calculatorArray.set(currentIndex, calculatorArray.get(currentIndex).substring(0, arrayEntryLength - 1));
+                        }
+                    } else {
+                        arrayEntryLength = calculatorArray.get(currentIndex).length();
+                        calculatorArray.set(currentIndex, calculatorArray.get(currentIndex).substring(0, arrayEntryLength - 1));
+                        if (calculatorArray.get(currentIndex).length() == 0) {
+                            calculatorArray.remove(currentIndex);
+                            if (currentIndex > 0) {
+                                currentIndex--;
+                            }
+                        }
+                    }
+                    setCalculatorResultDisplay();
+                    break;
+                case "Clear":
+                    currentIndex = 0;
+                    calculatorArray.clear();
+
+                    txtResult.setText("");
+                    txtInput.setText("");
+                    break;
+            }
+            setCalculatorInputDisplay();
         }
-        setCalculatorInputDisplay();
+
     }
 
     public void setCalculatorInputDisplay() {
@@ -330,15 +436,15 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                 * If the result is negative in binary, display twos complement value
                                 * corresponding to user selected length of bits for twos complement
                                 */
-                                    twosComplementValue = Long.toBinaryString( firstInput);
+                                    twosComplementValue = Long.toBinaryString(firstInput);
                                     twosComplementValue = twosComplementValue.substring(twosComplementValue.length() - GlobalVar.position, twosComplementValue.length());
                                     txtResult.setText(twosComplementValue);
                                 } else {
-                                    txtResult.setText(Long.toBinaryString( firstInput));
+                                    txtResult.setText(Long.toBinaryString(firstInput));
                                 }
                             }
                         } else {
-                            txtResult.setText(Long.toBinaryString( firstInput));
+                            txtResult.setText(Long.toBinaryString(firstInput));
                         }
                     } catch (Exception e) {
                         displayToast("Binary numbers too large, please delete or clear input");
@@ -374,7 +480,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                                     secondInput = Long.parseLong(secondInputString, 16);
                                     firstInput = firstInput / secondInput;
                                 }
-                                txtResult.setText(Long.toHexString( firstInput).toUpperCase());
+                                txtResult.setText(Long.toHexString(firstInput).toUpperCase());
 
                             }
                         } else {
@@ -422,7 +528,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
                             } else {
                                 decimalVal = Long.parseLong(calculatorArray.get(i));
-                                calculatorArray.set(i, Long.toBinaryString( decimalVal));
+                                calculatorArray.set(i, Long.toBinaryString(decimalVal));
                             }
                         }
                         break;
@@ -508,7 +614,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         setCalculatorResultDisplay();
     }
 
-    public void fixedPoint(){
+    public void fixedPoint() {
 
     }
 
@@ -605,9 +711,9 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.buttonFixedPoint:
-                startActivity(new Intent(this,CalculatorFixedPointPopUp.class));
+                startActivity(new Intent(this, CalculatorFixedPointPopUp.class));
                 break;
         }
     }

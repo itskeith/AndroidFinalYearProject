@@ -98,7 +98,7 @@ public class CalculatorDecimalFragment extends Fragment implements View.OnClickL
 
     /*Interface for communicating from fragment to activity*/
     public interface calculatorArrayListener {
-        public void calculatorArrayActivity(String userInput);
+        public void calculatorArrayActivity(String userInput, boolean fixedPointEnabled);
     }
 
     @Override
@@ -180,7 +180,7 @@ public class CalculatorDecimalFragment extends Fragment implements View.OnClickL
                 getInput(input);
                 break;
             case R.id.buttonPoint:
-                input = "=";
+                input = ".";
                 isLastInputOperation = true;
                 getInput(input);
                 break;
@@ -207,6 +207,6 @@ public class CalculatorDecimalFragment extends Fragment implements View.OnClickL
     }
 
     public void getInput(String input) {
-        ((calculatorArrayListener) activity).calculatorArrayActivity(input);
+        ((calculatorArrayListener) activity).calculatorArrayActivity(input, GlobalVar.fixedPointEnabled);
     }
 }
