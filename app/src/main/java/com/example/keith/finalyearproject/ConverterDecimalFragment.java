@@ -141,11 +141,15 @@ public class ConverterDecimalFragment extends Fragment implements View.OnClickLi
         switch (view.getId()) {
             case R.id.converterButtonHowto:
                 valueToConvert = txtDecimal.getText().toString();
-                Intent howtoIntent = new Intent();
-                howtoIntent.setClass(getActivity(), ConverterHowToDecimalActivity.class);
+                if (valueToConvert.isEmpty()) {
+                    Toast.makeText(getActivity(), "Enter a value first!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent howtoIntent = new Intent();
+                    howtoIntent.setClass(getActivity(), ConverterHowToDecimalActivity.class);
 
-                howtoIntent.putExtra("value", valueToConvert);
-                startActivity(howtoIntent);
+                    howtoIntent.putExtra("value", valueToConvert);
+                    startActivity(howtoIntent);
+                }
                 break;
             case R.id.converterButtonOne:
                 txtDecimal.setText(txtDecimal.getText() + "1");

@@ -179,11 +179,15 @@ public class ConverterHexadecimalFragment extends Fragment implements View.OnCli
         switch (view.getId()) {
             case R.id.converterButtonHowto:
                 valueToConvert = txtHexadecimal.getText().toString();
-                Intent howtoIntent = new Intent();
-                howtoIntent.setClass(getActivity(), ConverterHowToHexadecimalActivity.class);
+                if (valueToConvert.isEmpty()) {
+                    Toast.makeText(getActivity(), "Enter a value first!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent howtoIntent = new Intent();
+                    howtoIntent.setClass(getActivity(), ConverterHowToHexadecimalActivity.class);
 
-                howtoIntent.putExtra("value", valueToConvert);
-                startActivity(howtoIntent);
+                    howtoIntent.putExtra("value", valueToConvert);
+                    startActivity(howtoIntent);
+                }
                 break;
             case R.id.converterButtonZero:
                 txtHexadecimal.setText(txtHexadecimal.getText() + "0");

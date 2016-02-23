@@ -120,11 +120,15 @@ public class ConverterBinaryFragment extends Fragment implements View.OnClickLis
         switch (view.getId()) {
             case R.id.converterButtonHowto:
                 valueToConvert = txtBinary.getText().toString();
-                Intent howtoIntent = new Intent();
-                howtoIntent.setClass(getActivity(), ConverterHowToBinaryActivity.class);
+                if (valueToConvert.isEmpty()) {
+                    Toast.makeText(getActivity(), "Enter a value first!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent howtoIntent = new Intent();
+                    howtoIntent.setClass(getActivity(), ConverterHowToBinaryActivity.class);
 
-                howtoIntent.putExtra("value", valueToConvert);
-                startActivity(howtoIntent);
+                    howtoIntent.putExtra("value", valueToConvert);
+                    startActivity(howtoIntent);
+                }
                 break;
             case R.id.converterButtonOne:
                 txtBinary.setText(txtBinary.getText() + "1");

@@ -161,11 +161,15 @@ public class ConverterOctalFragment extends Fragment implements View.OnClickList
         switch (view.getId()) {
             case R.id.converterButtonHowto:
                 valueToConvert = txtOctal.getText().toString();
-                Intent howtoIntent = new Intent();
-                howtoIntent.setClass(getActivity(), ConverterHowToOctalActivity.class);
+                if(valueToConvert.isEmpty()){
+                    Toast.makeText(getActivity(), "Enter a number first!", Toast.LENGTH_SHORT).show();
+                } else{
+                    Intent howtoIntent = new Intent();
+                    howtoIntent.setClass(getActivity(), ConverterHowToOctalActivity.class);
 
-                howtoIntent.putExtra("value", valueToConvert);
-                startActivity(howtoIntent);
+                    howtoIntent.putExtra("value", valueToConvert);
+                    startActivity(howtoIntent);
+                }
                 break;
             case R.id.converterButtonZero:
                 txtOctal.setText(txtOctal.getText() + "0");

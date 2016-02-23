@@ -47,6 +47,8 @@ arraylist and if it is an operator it adds the number as a new entry in the arra
 public class CalculatorActivity extends AppCompatActivity implements CalculatorBinaryFragment.calculatorArrayListener,
         CalculatorHexadecimalFragment.calculatorArrayListener, CalculatorDecimalFragment.calculatorArrayListener, OnItemSelectedListener, View.OnClickListener {
 
+    static CalculatorActivity calculatorActivity;
+
     //ArrayList for taking in all of users input
     ArrayList<String> calculatorArray = new ArrayList<>();
 
@@ -71,6 +73,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        calculatorActivity = this;
+
         //Sets dropdown from resource string array
         calculatorMode = (Spinner) findViewById(R.id.spinnerSelectCalculator);
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.number_formats_calculator, android.R.layout.simple_spinner_dropdown_item);
@@ -90,6 +94,10 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         GlobalVar.fixedPointEnabled = false; //FixedPoint disabled by default
         txtInput = (TextView) findViewById(R.id.textViewInput);
         txtResult = (TextView) findViewById(R.id.textViewResult);
+    }
+
+    public static CalculatorActivity getInstance() {
+        return calculatorActivity;
     }
 
     /*

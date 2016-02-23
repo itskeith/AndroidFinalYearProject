@@ -1,6 +1,7 @@
 package com.example.keith.finalyearproject;
 
 import android.app.Application;
+import android.widget.Toast;
 
 /*
 Created by: Keith Ryan
@@ -15,4 +16,6 @@ public class GlobalVar extends Application {
     public static int positionLeft, positionRight;
     //Global boolean variable for fixedpoint being enabled or not
     public static boolean fixedPointEnabled;
+
+
 }
