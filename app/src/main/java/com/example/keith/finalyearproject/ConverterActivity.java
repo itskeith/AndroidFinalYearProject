@@ -34,12 +34,8 @@ Electronic And Computer Engineering(LM118) 4th year
 Final Year Project
 */
 public class ConverterActivity extends AppCompatActivity implements TextWatcher, View.OnClickListener, AdapterView.OnItemSelectedListener {
-    EditText txtDecimal;
     String choice;
-    TextView txtBinary, txtHexadecimal;
     Spinner converterMode;
-    RadioGroup radioGroup;
-    RadioButton radioButtonDecimal, radioButtonBinary, radioButtonOctal, radioButtonHexadecimal;
     ImageButton referenceButton;
 
     @Override
@@ -136,9 +132,6 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-//        calculate(2, txtBinary);        // for base 2 (binary)
-//        //calculate(8, txtOctal);        // for base 8 (octal)
-//        calculate(16, txtHexadecimal);    // for base 16 (hexadecimal)
     }
 
     public void afterTextChanged(Editable editable) {
@@ -208,7 +201,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
                 Intent decimalIntent = new Intent();
                 decimalIntent.setClass(ConverterActivity.this, ReferenceDetailsActivity.class);
 
-                decimalIntent.putExtra("index", 8);
+                decimalIntent.putExtra("index", 7);
 
                 startActivity(decimalIntent);
                 break;
@@ -216,15 +209,15 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
                 Intent binaryIntent = new Intent();
                 binaryIntent.setClass(ConverterActivity.this, ReferenceDetailsActivity.class);
 
-                binaryIntent.putExtra("index", 9);
+                binaryIntent.putExtra("index", 8);
 
                 startActivity(binaryIntent);
                 break;
-            case "octal":
+            case "Octal":
                 Intent octalIntent = new Intent();
                 octalIntent.setClass(ConverterActivity.this, ReferenceDetailsActivity.class);
 
-                octalIntent.putExtra("index", 10);
+                octalIntent.putExtra("index", 9);
 
                 startActivity(octalIntent);
                 break;
@@ -232,7 +225,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
                 Intent hexadecimalIntent = new Intent();
                 hexadecimalIntent.setClass(ConverterActivity.this, ReferenceDetailsActivity.class);
 
-                hexadecimalIntent.putExtra("index", 11);
+                hexadecimalIntent.putExtra("index", 10);
 
                 startActivity(hexadecimalIntent);
                 break;

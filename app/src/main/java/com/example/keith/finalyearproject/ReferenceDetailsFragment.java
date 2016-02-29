@@ -67,7 +67,7 @@ public class ReferenceDetailsFragment extends Fragment {
         ImageView.ScaleType CENTER;
         dataLinearLayout.addView(image);
 
-        image.setImageResource(ReferenceInfo.GATESPIC[getShownIndex() - 1]);
+        image.setImageResource(ReferenceInfo.GATESPIC[getShownIndex()]);
         //End of imageView image
 
         //Creates imageview imageView image2 for displaying details
@@ -77,7 +77,7 @@ public class ReferenceDetailsFragment extends Fragment {
         //dataLinearLayout.addView(image);
         dataLinearLayout.addView(image2);
 
-        image2.setImageResource(ReferenceInfo.GATESTT[getShownIndex() - 1]);
+        image2.setImageResource(ReferenceInfo.GATESTT[getShownIndex()]);
         //End of imageView image2
 
         TextView textView = new TextView(getActivity());
@@ -85,7 +85,7 @@ public class ReferenceDetailsFragment extends Fragment {
         textView.setPadding(padding, padding, padding, padding);
         textView.setGravity(Gravity.CENTER);
         dataLinearLayout.addView(textView);
-        textView.setText(ReferenceInfo.TEXTINFO[getShownIndex() - 1]);
+        textView.setText(ReferenceInfo.TEXTINFO[getShownIndex()]);
         scroller.addView(dataLinearLayout);
 
         return scroller;

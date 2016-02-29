@@ -16,7 +16,6 @@ public class ReferenceInfo {
 
     public static final String[] GATES =
             {
-                    "",
                     "AND",
                     "OR",
                     "NOT",
@@ -62,6 +61,7 @@ public class ReferenceInfo {
                     R.drawable.base2,
                     R.drawable.base8,
                     R.drawable.base10,
+                    R.drawable.base16
             };
 
     public static final String[] TEXTINFO =
