@@ -26,7 +26,12 @@ public class ReferenceInfo {
                     "Decimal",
                     "Binary",
                     "Octal",
-                    "Hexadecimal"
+                    "Hexadecimal",
+                    "1's complement",
+                    "2's complement",
+                    "Fixed point arithmetic",
+                    "Floating point arithmetic"
+
             };
 
     /*
@@ -40,11 +45,15 @@ public class ReferenceInfo {
                     R.drawable.nandgate,
                     R.drawable.norgate,
                     R.drawable.xorgate,
-                    R.drawable.xorgate,//need to add correct image here
+                    R.drawable.xorgate,
                     R.drawable.decimal,
                     R.drawable.binary,
                     R.drawable.octal,
                     R.drawable.hexadecimal,
+                    R.drawable.onescomplement,
+                    R.drawable.twoscomplement,
+                    R.drawable.fixedpoint,
+                    R.drawable.floatingpoint
 
             };
 
@@ -60,8 +69,11 @@ public class ReferenceInfo {
                     R.drawable.base10,
                     R.drawable.base2,
                     R.drawable.base8,
-                    R.drawable.base10,
-                    R.drawable.base16
+                    R.drawable.base16,
+                    R.drawable.onescomplementpicture,
+                    R.drawable.twoscomplementpicture,
+                    R.drawable.fixedpoinpicture,
+                    R.drawable.floatingpointpicture
             };
 
     public static final String[] TEXTINFO =
@@ -106,7 +118,12 @@ public class ReferenceInfo {
                             " A hexadecimal number is the sum" +
                             "of its digits multiplied with 16 to the power of n\n" +
                             "A in hexadecimal represents a 10 in decimal and F represents 15\n" +
-                            "a 10 in hexadecimal represents 16 in decimal and 100 represents 256"
+                            "a 10 in hexadecimal represents 16 in decimal and 100 represents 256",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
 
             };
 }

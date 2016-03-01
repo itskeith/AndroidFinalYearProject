@@ -46,19 +46,21 @@ public class ReferenceDetailsFragment extends Fragment {
 
         //Declare scroller and set layout Parameters
         ScrollView scroller = new ScrollView(getActivity());
-        ScrollView.LayoutParams scrollerLayoutParams = new ScrollView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        ScrollView.LayoutParams scrollerLayoutParams = new ScrollView.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         scroller.setLayoutParams(scrollerLayoutParams);
 
         LinearLayout dataLinearLayout = new LinearLayout(getActivity());
         dataLinearLayout.setOrientation(LinearLayout.VERTICAL);
 
         //Set layout parameters for images added to scrollView
-        LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         linearLayoutParams.gravity = Gravity.CENTER;
         //Set padding for images
         int padding = (int)
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getActivity().getResources().getDisplayMetrics());
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4,
+                        getActivity().getResources().getDisplayMetrics());
 
         //Creates imageView image for displaying details
         ImageView image = new ImageView(getActivity());

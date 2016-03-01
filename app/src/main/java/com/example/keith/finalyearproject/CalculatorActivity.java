@@ -73,6 +73,9 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        firstInputString = "";
+        secondInputString = "";
+
         calculatorActivity = this;
 
         //Sets dropdown from resource string array
@@ -336,133 +339,200 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
 
     public void setCalculatorResultDisplay() {
-
-        switch (currentMode) {
-            case "Decimal":
-                if (calculatorArray.isEmpty() != true) {
-                    firstInputString = calculatorArray.get(0);
-                    firstInput = Long.parseLong(firstInputString);
-                    if (calculatorArray.size() > 1) {
-                        for (int i = 1; i < calculatorArray.size(); i++) {
-
-                            if (calculatorArray.get(i - 1) == "+") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Long.parseLong(secondInputString);
-                                firstInput = firstInput + secondInput;
-                            } else if (calculatorArray.get(i - 1) == "-") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Long.parseLong(secondInputString);
-                                firstInput = firstInput - secondInput;
-                            } else if (calculatorArray.get(i - 1) == "*") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Long.parseLong(secondInputString);
-                                firstInput = firstInput * secondInput;
-                            } else if (calculatorArray.get(i - 1) == "/") {
-                                secondInputString = calculatorArray.get(i);
-                                secondInput = Long.parseLong(secondInputString);
-                                firstInput = firstInput / secondInput;
-                            }
-                            txtResult.setText(Long.toString(firstInput));
-
-                        }
-                    } else {
-                        txtResult.setText(Long.toString(firstInput));
-                    }
-                } else {
-                    firstInputString = "";
-                    txtResult.setText(firstInputString);
-                }
-                break;
-            case "Binary":
-                if (calculatorArray.isEmpty() != true) {
-                    try {
-                        firstInputString = calculatorArray.get(0);
-                        firstInput = Long.parseLong(firstInputString, 2);
-                        if (calculatorArray.size() > 1) {
-                            for (int i = 1; i < calculatorArray.size(); i++) {
-
-                                if (calculatorArray.get(i - 1) == "+") {
-                                    secondInputString = calculatorArray.get(i);
-                                    secondInput = Long.parseLong(secondInputString, 2);
-                                    firstInput = firstInput + secondInput;
-                                } else if (calculatorArray.get(i - 1) == "-") {
-                                    secondInputString = calculatorArray.get(i);
-                                    secondInput = Long.parseLong(secondInputString, 2);
-                                    firstInput = firstInput - secondInput;
-                                } else if (calculatorArray.get(i - 1) == "*") {
-                                    secondInputString = calculatorArray.get(i);
-                                    secondInput = Long.parseLong(secondInputString, 2);
-                                    firstInput = firstInput * secondInput;
-                                } else if (calculatorArray.get(i - 1) == "/") {
-                                    secondInputString = calculatorArray.get(i);
-                                    secondInput = Long.parseLong(secondInputString, 2);
-                                    firstInput = firstInput / secondInput;
-                                }
-                                if (firstInput < 0) {
+        if (GlobalVar.fixedPointEnabled == true) {
+            switch (currentMode) {
+                case "Binary":
+                    if (calculatorArray.isEmpty() != true) {
+                        try {
+                            firstInputString = calculatorArray.get(0);
+                            firstInput = Long.parseLong(firstInputString, 2);
+                            if (calculatorArray.size() > 1) {
+                                for (int i = 1; i < calculatorArray.size(); i++) {
+                                    if (calculatorArray.get(i - 1) == ".") {
+                                        if (secondInputString.isEmpty() || secondInputString == null) {
+                                            firstInputString = firstInputString + calculatorArray.get(i);
+                                            txtResult.setText(firstInputString);
+                                        } else{
+                                            secondInputString = secondInputString + calculatorArray.get(i);
+                                        }
+                                    }
+                                    if (calculatorArray.get(i - 1) == "+") {
+                                        secondInputString = calculatorArray.get(i);
+                                        secondInput = Long.parseLong(secondInputString, 2);
+                                        firstInput = firstInput + secondInput;
+                                        firstInputString = Long.toBinaryString(firstInput);
+                                    } else if (calculatorArray.get(i - 1) == "-") {
+                                        secondInputString = calculatorArray.get(i);
+                                        secondInput = Long.parseLong(secondInputString, 2);
+                                        firstInput = firstInput - secondInput;
+                                        firstInputString = Long.toBinaryString(firstInput);
+                                    } else if (calculatorArray.get(i - 1) == "*") {
+                                        secondInputString = calculatorArray.get(i);
+                                        secondInput = Long.parseLong(secondInputString, 2);
+                                        firstInput = firstInput * secondInput;
+                                        firstInputString = Long.toBinaryString(firstInput);
+                                    } else if (calculatorArray.get(i - 1) == "/") {
+                                        secondInputString = calculatorArray.get(i);
+                                        secondInput = Long.parseLong(secondInputString, 2);
+                                        firstInput = firstInput / secondInput;
+                                        firstInputString = Long.toBinaryString(firstInput);
+                                    }
+                                    secondInputString = "";
+                                    if (firstInput < 0) {
                                 /*
                                 * If the result is negative in binary, display twos complement value
                                 * corresponding to user selected length of bits for twos complement
                                 */
-                                    twosComplementValue = Long.toBinaryString(firstInput);
-                                    twosComplementValue = twosComplementValue.substring(twosComplementValue.length() - GlobalVar.position, twosComplementValue.length());
-                                    txtResult.setText(twosComplementValue);
-                                } else {
-                                    txtResult.setText(Long.toBinaryString(firstInput));
+                                        twosComplementValue = Long.toBinaryString(firstInput);
+                                        twosComplementValue = twosComplementValue.substring(twosComplementValue.length() - GlobalVar.position, twosComplementValue.length());
+                                        txtResult.setText(twosComplementValue);
+                                    } else {
+                                        txtResult.setText(firstInputString);
+                                    }
                                 }
+                            } else {
+                                txtResult.setText(firstInputString);
                             }
-                        } else {
-                            txtResult.setText(Long.toBinaryString(firstInput));
+                        } catch (Exception e) {
+                            displayToast("Binary numbers too large, please delete or clear input");
                         }
-                    } catch (Exception e) {
-                        displayToast("Binary numbers too large, please delete or clear input");
-                    }
 
-                } else {
-                    firstInputString = "";
-                    txtResult.setText(firstInputString);
-                }
-                break;
-            case "Hexadecimal":
-                if (calculatorArray.isEmpty() != true) {
-                    try {
+                    } else {
+                        firstInputString = "";
+                        txtResult.setText(firstInputString);
+                    }
+                    break;
+
+            }
+        } else {
+            switch (currentMode) {
+                case "Decimal":
+                    if (calculatorArray.isEmpty() != true) {
                         firstInputString = calculatorArray.get(0);
-                        firstInput = Long.parseLong(firstInputString, 16);
+                        firstInput = Long.parseLong(firstInputString);
                         if (calculatorArray.size() > 1) {
                             for (int i = 1; i < calculatorArray.size(); i++) {
 
                                 if (calculatorArray.get(i - 1) == "+") {
                                     secondInputString = calculatorArray.get(i);
-                                    secondInput = Long.parseLong(secondInputString, 16);
+                                    secondInput = Long.parseLong(secondInputString);
                                     firstInput = firstInput + secondInput;
                                 } else if (calculatorArray.get(i - 1) == "-") {
                                     secondInputString = calculatorArray.get(i);
-                                    secondInput = Long.parseLong(secondInputString, 16);
+                                    secondInput = Long.parseLong(secondInputString);
                                     firstInput = firstInput - secondInput;
                                 } else if (calculatorArray.get(i - 1) == "*") {
                                     secondInputString = calculatorArray.get(i);
-                                    secondInput = Long.parseLong(secondInputString, 16);
+                                    secondInput = Long.parseLong(secondInputString);
                                     firstInput = firstInput * secondInput;
                                 } else if (calculatorArray.get(i - 1) == "/") {
                                     secondInputString = calculatorArray.get(i);
-                                    secondInput = Long.parseLong(secondInputString, 16);
+                                    secondInput = Long.parseLong(secondInputString);
                                     firstInput = firstInput / secondInput;
                                 }
-                                txtResult.setText(Long.toHexString(firstInput).toUpperCase());
+                                txtResult.setText(Long.toString(firstInput));
 
                             }
                         } else {
-                            txtResult.setText(Long.toHexString(firstInput).toUpperCase());
+                            txtResult.setText(Long.toString(firstInput));
                         }
-                    } catch (Exception e) {
-                        displayToast("Binary numbers too large, please delete or clear input");
+                    } else {
+                        firstInputString = "";
+                        txtResult.setText(firstInputString);
                     }
-                } else {
-                    firstInputString = "";
-                    txtResult.setText(firstInputString.toUpperCase());
-                }
-                break;
+                    break;
+                case "Binary":
+                    if (calculatorArray.isEmpty() != true) {
+                        try {
+                            firstInputString = calculatorArray.get(0);
+                            firstInput = Long.parseLong(firstInputString, 2);
+                            if (calculatorArray.size() > 1) {
+                                for (int i = 1; i < calculatorArray.size(); i++) {
 
+                                    if (calculatorArray.get(i - 1) == "+") {
+                                        secondInputString = calculatorArray.get(i);
+                                        secondInput = Long.parseLong(secondInputString, 2);
+                                        firstInput = firstInput + secondInput;
+                                    } else if (calculatorArray.get(i - 1) == "-") {
+                                        secondInputString = calculatorArray.get(i);
+                                        secondInput = Long.parseLong(secondInputString, 2);
+                                        firstInput = firstInput - secondInput;
+                                    } else if (calculatorArray.get(i - 1) == "*") {
+                                        secondInputString = calculatorArray.get(i);
+                                        secondInput = Long.parseLong(secondInputString, 2);
+                                        firstInput = firstInput * secondInput;
+                                    } else if (calculatorArray.get(i - 1) == "/") {
+                                        secondInputString = calculatorArray.get(i);
+                                        secondInput = Long.parseLong(secondInputString, 2);
+                                        firstInput = firstInput / secondInput;
+                                    }
+                                    if (firstInput < 0) {
+                                /*
+                                * If the result is negative in binary, display twos complement value
+                                * corresponding to user selected length of bits for twos complement
+                                */
+                                        twosComplementValue = Long.toBinaryString(firstInput);
+                                        twosComplementValue = twosComplementValue.substring(twosComplementValue.length() - GlobalVar.position, twosComplementValue.length());
+                                        txtResult.setText(twosComplementValue);
+                                    } else {
+                                        txtResult.setText(Long.toBinaryString(firstInput));
+                                    }
+                                }
+                            } else {
+                                txtResult.setText(Long.toBinaryString(firstInput));
+                            }
+                        } catch (Exception e) {
+                            displayToast("Binary numbers too large, please delete or clear input");
+                        }
+
+                    } else {
+                        firstInputString = "";
+                        txtResult.setText(firstInputString);
+                    }
+                    break;
+                case "Hexadecimal":
+                    if (calculatorArray.isEmpty() != true) {
+                        try {
+                            firstInputString = calculatorArray.get(0);
+                            firstInput = Long.parseLong(firstInputString, 16);
+                            if (calculatorArray.size() > 1) {
+                                for (int i = 1; i < calculatorArray.size(); i++) {
+
+                                    if (calculatorArray.get(i - 1) == "+") {
+                                        secondInputString = calculatorArray.get(i);
+                                        secondInput = Long.parseLong(secondInputString, 16);
+                                        firstInput = firstInput + secondInput;
+                                    } else if (calculatorArray.get(i - 1) == "-") {
+                                        secondInputString = calculatorArray.get(i);
+                                        secondInput = Long.parseLong(secondInputString, 16);
+                                        firstInput = firstInput - secondInput;
+                                    } else if (calculatorArray.get(i - 1) == "*") {
+                                        secondInputString = calculatorArray.get(i);
+                                        secondInput = Long.parseLong(secondInputString, 16);
+                                        firstInput = firstInput * secondInput;
+                                    } else if (calculatorArray.get(i - 1) == "/") {
+                                        secondInputString = calculatorArray.get(i);
+                                        secondInput = Long.parseLong(secondInputString, 16);
+                                        firstInput = firstInput / secondInput;
+                                    }
+                                    txtResult.setText(Long.toHexString(firstInput).toUpperCase());
+
+                                }
+                            } else {
+                                txtResult.setText(Long.toHexString(firstInput).toUpperCase());
+                            }
+                        } catch (Exception e) {
+                            displayToast("Binary numbers too large, please delete or clear input");
+                        }
+                    } else {
+                        firstInputString = "";
+                        txtResult.setText(firstInputString.toUpperCase());
+                    }
+                    break;
+
+            }
         }
+
     }
 
     /*
