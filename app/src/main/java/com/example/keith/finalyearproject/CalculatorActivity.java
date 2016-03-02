@@ -51,6 +51,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
     //ArrayList for taking in all of users input
     ArrayList<String> calculatorArray = new ArrayList<>();
+    ArrayList<String> fixedPointArray = new ArrayList<>();
 
     //Initialising views that will be used for activity
     TextView txtInput, txtResult;
@@ -273,7 +274,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
             case "Clear":
                 currentIndex = 0;
                 calculatorArray.clear();
-
+                firstInputString = "";
+                secondInputString = "";
                 txtResult.setText("");
                 txtInput.setText("");
                 break;
@@ -345,39 +347,58 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                     if (calculatorArray.isEmpty() != true) {
                         try {
                             firstInputString = calculatorArray.get(0);
-                            firstInput = Long.parseLong(firstInputString, 2);
                             if (calculatorArray.size() > 1) {
                                 for (int i = 1; i < calculatorArray.size(); i++) {
                                     if (calculatorArray.get(i - 1) == ".") {
-                                        if (secondInputString.isEmpty() || secondInputString == null) {
+                                        if (i < 4 ) {
                                             firstInputString = firstInputString + calculatorArray.get(i);
                                             txtResult.setText(firstInputString);
                                         } else{
                                             secondInputString = secondInputString + calculatorArray.get(i);
+                                            if (calculatorArray.get(i - 3) == "+") {
+                                                secondInput = Long.parseLong(secondInputString, 2);
+                                                firstInput = Long.parseLong(firstInputString, 2);
+                                                firstInput = firstInput + secondInput;
+                                            } else if (calculatorArray.get(i - 3) == "-") {
+                                                secondInput = Long.parseLong(secondInputString, 2);
+                                                firstInput = Long.parseLong(firstInputString, 2);
+                                                firstInput = firstInput - secondInput;
+                                            } else if (calculatorArray.get(i - 3) == "*") {
+                                                secondInput = Long.parseLong(secondInputString, 2);
+                                                firstInput = Long.parseLong(firstInputString, 2);
+                                                firstInput = firstInput * secondInput;
+                                            } else if (calculatorArray.get(i - 3) == "/") {
+                                                secondInput = Long.parseLong(secondInputString, 2);
+                                                firstInput = Long.parseLong(firstInputString, 2);
+                                                firstInput = firstInput / secondInput;
+                                            }
                                         }
                                     }
                                     if (calculatorArray.get(i - 1) == "+") {
                                         secondInputString = calculatorArray.get(i);
                                         secondInput = Long.parseLong(secondInputString, 2);
+                                        firstInput = Long.parseLong(firstInputString, 2);
                                         firstInput = firstInput + secondInput;
                                         firstInputString = Long.toBinaryString(firstInput);
                                     } else if (calculatorArray.get(i - 1) == "-") {
                                         secondInputString = calculatorArray.get(i);
                                         secondInput = Long.parseLong(secondInputString, 2);
+                                        firstInput = Long.parseLong(firstInputString, 2);
                                         firstInput = firstInput - secondInput;
                                         firstInputString = Long.toBinaryString(firstInput);
                                     } else if (calculatorArray.get(i - 1) == "*") {
                                         secondInputString = calculatorArray.get(i);
                                         secondInput = Long.parseLong(secondInputString, 2);
+                                        firstInput = Long.parseLong(firstInputString, 2);
                                         firstInput = firstInput * secondInput;
                                         firstInputString = Long.toBinaryString(firstInput);
                                     } else if (calculatorArray.get(i - 1) == "/") {
                                         secondInputString = calculatorArray.get(i);
                                         secondInput = Long.parseLong(secondInputString, 2);
+                                        firstInput = Long.parseLong(firstInputString, 2);
                                         firstInput = firstInput / secondInput;
                                         firstInputString = Long.toBinaryString(firstInput);
                                     }
-                                    secondInputString = "";
                                     if (firstInput < 0) {
                                 /*
                                 * If the result is negative in binary, display twos complement value
@@ -646,7 +667,6 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     }
 
     public void fixedPoint() {
-
     }
 
     /*

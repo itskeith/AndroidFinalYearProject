@@ -58,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    public void showLogicDesigner(View view){
+        Intent intent = new Intent(this, LogicDesignerActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

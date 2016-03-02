@@ -118,6 +118,7 @@
                 android:elevation="10dp"
                 android:minHeight="50dp"
                 android:text="@string/logic_s"
+                android:onClick="showLogicDesigner"
                 android:textColor="@color/black"
                 android:background="@drawable/buttons_main"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />

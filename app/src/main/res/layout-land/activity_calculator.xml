@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/my_toolbar"
+                android:background="@color/lighter_grey"
+                android:text="Mode:"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <Spinner
+                android:id="@+id/spinnerSelectCalculator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lighter_grey"
+                android:elevation="4dp"
+                android:spinnerMode="dropdown" />
+            <!--<RadioGroup
+                android:id="@+id/radioGroupCalculator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView">
+
+                <RadioButton
+                    android:id="@+id/decimalbuttoncalculator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="decimalCalculator"
+                    android:text="Decimal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    />
+                <RadioButton
+                    android:id="@+id/binarybuttoncalculator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="binaryCalculator"
+                    android:text="Binary"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <RadioButton
+                    android:id="@+id/hexadecimalbuttoncalculator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="hexadecimalCalculator"
+                    android:text="Hexadecimal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            </RadioGroup>-->
+            <Button
+                android:id="@+id/buttonFixedPoint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttons_calc"
+                android:text="Enable Fixed-Point" />
+
+            <TextView
+                android:id="@+id/textViewInput"
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                android:layout_below="@+id/textViewMode"
+                android:background="@color/grey"
+                android:gravity="right|bottom"
+                android:scrollbars="vertical"
+                android:text=""
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/textViewResult"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:layout_below="@id/textViewInput"
+                android:gravity="right"
+                android:text=""
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            <FrameLayout
+                android:id="@+id/calculator_frame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/textViewInput"
+                android:layout_weight="0.55"></FrameLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
