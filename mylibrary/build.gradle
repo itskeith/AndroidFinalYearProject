@@ -1,11 +1,9 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion '23.0.2'
-
+    buildToolsVersion "23.0.2"
     defaultConfig {
-        applicationId "com.example.keith.finalyearproject"
         minSdkVersion 16
         versionCode 1
         versionName "1.0"
@@ -16,10 +14,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:22.2.1'
-    compile project(':mylibrary')
 }

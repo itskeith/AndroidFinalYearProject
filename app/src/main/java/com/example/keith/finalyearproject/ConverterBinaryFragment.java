@@ -28,6 +28,7 @@ public class ConverterBinaryFragment extends Fragment implements View.OnClickLis
     Button oneButton, zeroButton, deleteButton, howtoButton;
     String valueToConvert;
     int decimalVal;
+    Toast toast;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,6 +85,16 @@ public class ConverterBinaryFragment extends Fragment implements View.OnClickLis
         }
     };
 
+    /*
+        * Displays only one toast message at a time, preventing excessive messages displaying if user
+        * keeps hitting button triggering the toast
+        * */
+    public void displayToast(String message) {
+        if (toast != null)
+            toast.cancel();
+        toast = Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT);
+        toast.show();
+    }
 
     public void beforeTextChanged(CharSequence sequence, int start, int count, int after) {
 
@@ -105,7 +116,7 @@ public class ConverterBinaryFragment extends Fragment implements View.OnClickLis
                 txtHexadecimal.setText(Integer.toHexString(decimalVal).toUpperCase());
                 txtOctal.setText(Integer.toOctalString(decimalVal));
             } catch (Exception decimalTooLarge) {
-                Toast.makeText(getActivity(), "Binary value too large", Toast.LENGTH_SHORT).show();
+                displayToast("Entered Binary value too large");
             }
         }
 

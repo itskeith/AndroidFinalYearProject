@@ -41,6 +41,7 @@ public class ReferenceActivity extends AppCompatActivity {
         //adds toolbar to top of activity
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Educational Binary Learning App");
         // For Setting Logo in toolbar myToolbar.setLogo();
     }
 

@@ -30,6 +30,7 @@ public class ConverterHexadecimalFragment extends Fragment implements View.OnCli
             howtoButton;
     String hexVal, valueToConvert;
     int binaryVal, decimalVal;
+    Toast toast;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,7 +42,6 @@ public class ConverterHexadecimalFragment extends Fragment implements View.OnCli
         txtOctal = (TextView) view.findViewById(R.id.textViewOctal);
         txtDecimal = (TextView) view.findViewById(R.id.textViewDecimal);
         txtHexadecimal.addTextChangedListener(this);
-        txtHexadecimal.setFilters(new InputFilter[]{filter});
 
         oneButton = (Button) view.findViewById(R.id.converterButtonOne);
         oneButton.setOnClickListener(this);
@@ -85,58 +85,16 @@ public class ConverterHexadecimalFragment extends Fragment implements View.OnCli
         return view;
     }
 
-    InputFilter filter = new InputFilter() {
-        @Override
-        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-            boolean keepOriginal = true;
-            StringBuilder sb = new StringBuilder(end - start);
-            for (int i = start; i < end; i++) {
-                char c = source.charAt(i);
-                if (isCharAllowed(c)) // put your condition here
-                    sb.append(c);
-                else
-                    Toast.makeText(getActivity(), "You can only enter a number or letter from A to F for hexadecimal ", Toast.LENGTH_LONG).show();
-                keepOriginal = false;
-            }
-            if (keepOriginal)
-                return null;
-            else {
-                if (source instanceof Spanned) {
-                    SpannableString sp = new SpannableString(sb);
-                    TextUtils.copySpansFrom((Spanned) source, start, sb.length(), null, sp, 0);
-                    return sp;
-                } else {
-                    return sb;
-                }
-            }
-        }
-
-        private boolean isCharAllowed(char c) {
-            return Character.isDigit(c)
-                    || c == 'a'
-                    || c == 'A'
-                    || c == 'b'
-                    || c == 'B'
-                    || c == 'c'
-                    || c == 'C'
-                    || c == 'd'
-                    || c == 'D'
-                    || c == 'e'
-                    || c == 'E'
-                    || c == 'f'
-                    || c == 'F';
-        }
-    };
-    //    @Override
-//    public void onClick(View v) {
-//        if (radioGroup.getCheckedRadioButtonId() == R.id.radioButtonDecimal) {
-//            String choice = radioButtonDecimal.getText().toString();
-//
-//            Toast.makeText(this, "You chose: " + choice, Toast.LENGTH_LONG).show();
-//        }
-//        int selectedId = radioGroup.getCheckedRadioButtonId();
-//        //radioGroup=(RadioButton)findViewById(selectedId);111111111111111
-//    }
+    /*
+        * Displays only one toast message at a time, preventing excessive messages displaying if user
+        * keeps hitting button triggering the toast
+        * */
+    public void displayToast(String message) {
+        if (toast != null)
+            toast.cancel();
+        toast = Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT);
+        toast.show();
+    }
 
     public void beforeTextChanged(CharSequence sequence, int start, int count, int after) {
 
@@ -162,7 +120,7 @@ public class ConverterHexadecimalFragment extends Fragment implements View.OnCli
                 //Set octal value in textView
                 txtOctal.setText(Integer.toOctalString(decimalVal));
             } catch (Exception decimalTooLarge) {
-                Toast.makeText(getActivity(), "Hexadecimal value too large", Toast.LENGTH_SHORT).show();
+               displayToast("Entered Hexadecimal value too large.");
             }
         }
 

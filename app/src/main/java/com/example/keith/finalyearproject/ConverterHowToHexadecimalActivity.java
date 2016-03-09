@@ -38,6 +38,7 @@ public class ConverterHowToHexadecimalActivity extends AppCompatActivity {
         textViewBinaryConvert = (TextView) findViewById(R.id.textViewBinaryStep);
         textViewOctalConvert = (TextView) findViewById(R.id.textViewOctalStep);
 
+
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
             originalValue = "";

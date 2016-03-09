@@ -55,7 +55,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
 
     //Initialising views that will be used for activity
     TextView txtInput, txtResult;
-    Button buttonFixedPoint;
+    Button calculatorProblemGenerator;
     Toast toast;
     Spinner calculatorMode;
 
@@ -73,9 +73,13 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         //adds toolbar to top of activity
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Educational Binary Learning App");
 
         firstInputString = "";
         secondInputString = "";
+
+        calculatorProblemGenerator = (Button) findViewById(R.id.buttonProblemGenerator);
+        calculatorProblemGenerator.setOnClickListener(this);
 
         calculatorActivity = this;
 
@@ -89,8 +93,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
         calculatorMode.setAdapter(spinnerAdapter);
         calculatorMode.setOnItemSelectedListener(this);
         //Buton for starting the CalculatorFixedPointPopUp to facilitate enableing/disabling of fixed point numbers
-        buttonFixedPoint = (Button) findViewById(R.id.buttonFixedPoint);
-        buttonFixedPoint.setOnClickListener(this);
+        /*buttonFixedPoint = (Button) findViewById(R.id.buttonFixedPoint);
+        buttonFixedPoint.setOnClickListener(this);*/
 
         currentIndex = 0;
 
@@ -269,6 +273,9 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                         }
                     }
                 }
+                if(txtInput.getText().equals("")){
+                    txtResult.setText("");
+                }
                 setCalculatorResultDisplay();
                 break;
             case "Clear":
@@ -350,10 +357,10 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                             if (calculatorArray.size() > 1) {
                                 for (int i = 1; i < calculatorArray.size(); i++) {
                                     if (calculatorArray.get(i - 1) == ".") {
-                                        if (i < 4 ) {
+                                        if (i < 4) {
                                             firstInputString = firstInputString + calculatorArray.get(i);
                                             txtResult.setText(firstInputString);
-                                        } else{
+                                        } else {
                                             secondInputString = secondInputString + calculatorArray.get(i);
                                             if (calculatorArray.get(i - 3) == "+") {
                                                 secondInput = Long.parseLong(secondInputString, 2);
@@ -763,9 +770,11 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.buttonFixedPoint:
+            case R.id.buttonProblemGenerator:
+                startActivity(new Intent(this,CalculatorProblemGenerator.class));
+            /*case R.id.buttonFixedPoint:
                 startActivity(new Intent(this, CalculatorFixedPointPopUp.class));
-                break;
+                break;*/
         }
     }
 }

@@ -11,7 +11,7 @@ import java.nio.FloatBuffer;
  */
 public class Inverter {
 
-    private FloatBuffer vertexBuffer;
+/*    private FloatBuffer vertexBuffer;
 
 
     private final String fragmentShaderCode =
@@ -122,5 +122,5 @@ public class Inverter {
 
         // Disable vertex array
         GLES20.glDisableVertexAttribArray(mPositionHandle);
-    }
+    }*/
 }

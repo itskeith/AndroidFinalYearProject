@@ -13,7 +13,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +24,8 @@
         <activity
             android:name=".ReferenceActivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".ReferenceDetailsActivity"
             android:label="@string/app_name"
@@ -35,41 +37,44 @@
         <activity
             android:name=".ConverterActivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".CalculatorActivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ConverterHowToBinaryActivity"
             android:parentActivityName=".ConverterActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ConverterHowToDecimalActivity"
             android:parentActivityName=".ConverterActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ConverterHowToHexadecimalActivity"
             android:parentActivityName=".ConverterActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ConverterHowToOctalActivity"
             android:parentActivityName=".ConverterActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".CalculatorTwosComplementPopup"
             android:parentActivityName=".CalculatorActivity"
-            android:theme="@style/AppTheme.PopUpTheme" />
+            android:theme="@style/AppTheme.PopUpTheme"/>
         <activity
             android:name=".CalculatorFixedPointPopUp"
             android:parentActivityName=".CalculatorActivity"
-            android:theme="@style/AppTheme.PopUpTheme" />
+            android:theme="@style/AppTheme.PopUpTheme"/>
 
         <activity
             android:name=".LogicDesignerActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme"
-            />
+            /><!--
+        <activity android:name="com.example.keith.mylibrary.Stage"
+            android:parentActivityName=".LogicDesignerActivity"
+            android:theme="@style/AppTheme"/>-->
     </application>
 
 </manifest>

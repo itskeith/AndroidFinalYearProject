@@ -38,50 +38,20 @@
                 android:background="@color/lighter_grey"
                 android:elevation="4dp"
                 android:spinnerMode="dropdown" />
-            <!--<RadioGroup
-                android:id="@+id/radioGroupCalculator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView">
-
-                <RadioButton
-                    android:id="@+id/decimalbuttoncalculator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="decimalCalculator"
-                    android:text="Decimal"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    />
-                <RadioButton
-                    android:id="@+id/binarybuttoncalculator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="binaryCalculator"
-                    android:text="Binary"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-                <RadioButton
-                    android:id="@+id/hexadecimalbuttoncalculator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="hexadecimalCalculator"
-                    android:text="Hexadecimal"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-            </RadioGroup>-->
             <Button
                 android:id="@+id/buttonFixedPoint"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:background="@drawable/buttons_calc"
+                android:layout_weight=".075"
                 android:text="Enable Fixed-Point" />
 
             <TextView
                 android:id="@+id/textViewInput"
                 android:layout_width="match_parent"
-                android:layout_height="115dp"
+                android:layout_height="0dp"
                 android:layout_below="@+id/textViewMode"
+                android:layout_weight="0.275"
                 android:background="@color/grey"
                 android:gravity="right|bottom"
                 android:scrollbars="vertical"
@@ -92,15 +62,17 @@
             <TextView
                 android:id="@+id/textViewResult"
                 android:layout_width="match_parent"
-                android:layout_height="53dp"
+                android:layout_height="0dp"
                 android:layout_below="@id/textViewInput"
+                android:layout_weight="0.1"
                 android:gravity="right"
                 android:text=""
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
             <FrameLayout
                 android:id="@+id/calculator_frame"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"

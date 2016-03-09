@@ -13,7 +13,48 @@ import javax.microedition.khronos.opengles.GL10;
  */
 public class MyGLRenderer implements GLSurfaceView.Renderer {
 
-    private Inverter mInverter;
+    public final void onDrawFrame(GL10 gl) {
+
+    }
+
+    public final void onSurfaceChanged(GL10 gl, int width, int height) {
+        gl.glClearColor(0, 0, 0, 1);
+
+        float w, h;
+
+        if (width > height) {
+            h = 600;
+            w = width * h / height;
+        } else {
+            w = 600;
+            h = height * w / width;
+        }
+
+        gl.glMatrixMode(GL10.GL_PROJECTION);
+        gl.glLoadIdentity();
+        gl.glOrthof(0, w, h, 0, -1, 1);
+        gl.glMatrixMode(GL10.GL_MODELVIEW);
+        gl.glLoadIdentity();
+    }
+
+    public final void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        // Set up alpha blending
+        gl.glEnable(GL10.GL_ALPHA_TEST);
+        gl.glEnable(GL10.GL_BLEND);
+
+        // We will discuss this line later along with textures
+        gl.glBlendFunc(GL10.GL_ONE, GL10.GL_ONE_MINUS_SRC_ALPHA);
+
+        // We are in 2D. Who needs depth?
+        gl.glDisable(GL10.GL_DEPTH_TEST);
+
+        // Enable vertex arrays (we'll use them to draw primitives).
+        gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
+
+        // Enable texture coordinate arrays.
+        gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+    }
+/*    private Inverter mInverter;
 
     public void onSurfaceCreated(GL10 unused, EGLConfig config) {
         // Set the background frame color
@@ -76,5 +117,5 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         // this projection matrix is applied to object coordinates
         // in the onDrawFrame() method
         Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
-    }
+    }*/
 }

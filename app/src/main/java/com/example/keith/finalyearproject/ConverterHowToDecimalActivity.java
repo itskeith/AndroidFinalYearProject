@@ -37,6 +37,8 @@ public class ConverterHowToDecimalActivity extends AppCompatActivity {
         textViewHexadecimalConvert = (TextView) findViewById(R.id.textViewHexadecimalStep);
         textViewOctalConvert = (TextView) findViewById(R.id.textViewOctalStep);
 
+
+
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
             originalValue = "";

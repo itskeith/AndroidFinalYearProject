@@ -119,10 +119,17 @@ public class ReferenceInfo {
                             "of its digits multiplied with 16 to the power of n\n" +
                             "A in hexadecimal represents a 10 in decimal and F represents 15\n" +
                             "a 10 in hexadecimal represents 16 in decimal and 100 represents 256",
-                    "",
-                    "",
-                    "",
-                    "",
+                    "One's complement is a way of representing binary numbers as negative values.\n" +
+                            "This involves taking the binary value and inverting the bits so that a 3 typically represented as " +
+                            "0101 would instead be represented as 1010 for -3",
+                    "Two's complement is another way of representing binary numbers as negative values that is similar to one's complement.\n" +
+                            "The difference between one's and two's complement is that a 1 is added to the one's complement" +
+                            "so if -3 is 1010 in one's complement then it would be 1011 in two's complement",
+                    "Fixed point arithmetic, is a means of expressing a fractional number in an indirect" +
+                            "manner by using scaling, so that a number such as 1.23 would instead be represented as 1230" +
+                            ",this would be a scaling factor of 1000.",
+                    "Floating point is a similar representation to scientific notation, floating point approximates a real number in a trade-off between the size of the number that can be used" +
+                            "and the precision of that number",
                     "",
 
             };

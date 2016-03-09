@@ -35,6 +35,7 @@ public class ConverterDecimalFragment extends Fragment implements View.OnClickLi
             eightButton, nineButton, deleteButton, howtoButton;
     String valueToConvert;
     int decimalVal;
+    Toast toast;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,36 +78,16 @@ public class ConverterDecimalFragment extends Fragment implements View.OnClickLi
         return view;
     }
 
-    InputFilter filter = new InputFilter() {
-        @Override
-        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
-            boolean keepOriginal = true;
-            StringBuilder sb = new StringBuilder(end - start);
-            for (int i = start; i < end; i++) {
-                char c = source.charAt(i);
-                if (isCharAllowed(c)) // put your condition here
-                    sb.append(c);
-                else
-                    Toast.makeText(getActivity(), "You can only enter numbers when converting from decimal", Toast.LENGTH_LONG).show();
-                keepOriginal = false;
-            }
-            if (keepOriginal)
-                return null;
-            else {
-                if (source instanceof Spanned) {
-                    SpannableString sp = new SpannableString(sb);
-                    TextUtils.copySpansFrom((Spanned) source, start, sb.length(), null, sp, 0);
-                    return sp;
-                } else {
-                    return sb;
-                }
-            }
-        }
-
-        private boolean isCharAllowed(char c) {
-            return Character.isDigit(c);
-        }
-    };
+    /*
+            * Displays only one toast message at a time, preventing excessive messages displaying if user
+            * keeps hitting button triggering the toast
+            * */
+    public void displayToast(String message) {
+        if (toast != null)
+            toast.cancel();
+        toast = Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT);
+        toast.show();
+    }
 
     public void beforeTextChanged(CharSequence sequence, int start, int count, int after) {
 
@@ -127,7 +108,7 @@ public class ConverterDecimalFragment extends Fragment implements View.OnClickLi
                 txtOctal.setText(Integer.toOctalString(decimalVal));
                 txtHexadecimal.setText(Integer.toHexString(decimalVal).toUpperCase());
             } catch (Exception decimalValueTooLarge) {
-                Toast.makeText(getActivity(), "Hexadecimal value too large", Toast.LENGTH_SHORT).show();
+                displayToast("Entered Decimal value too large.");
             }
         }
     }

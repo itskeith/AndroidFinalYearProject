@@ -31,45 +31,13 @@
         android:background="@color/lighter_grey"
         android:elevation="4dp"
         android:spinnerMode="dropdown" />
-    <!--<RadioGroup
-        android:id="@+id/radioGroupCalculator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView">
-
-        <RadioButton
-            android:id="@+id/decimalbuttoncalculator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="decimalCalculator"
-            android:text="Decimal"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            />
-        <RadioButton
-            android:id="@+id/binarybuttoncalculator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="binaryCalculator"
-            android:text="Binary"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        <RadioButton
-            android:id="@+id/hexadecimalbuttoncalculator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="hexadecimalCalculator"
-            android:text="Hexadecimal"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-    </RadioGroup>-->
     <Button
-        android:id="@+id/buttonFixedPoint"
+        android:id="@+id/buttonProblemGenerator"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/buttons_calc"
         android:layout_weight=".075"
-        android:text="Enable Fixed-Point" />
+        android:text="Genereate a problem" />
 
     <TextView
         android:id="@+id/textViewInput"
@@ -103,4 +71,5 @@
         android:layout_alignParentStart="true"
         android:layout_below="@id/textViewInput"
         android:layout_weight="0.55"></FrameLayout>
+
 </LinearLayout>

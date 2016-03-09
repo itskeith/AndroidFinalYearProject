@@ -38,12 +38,13 @@ public class ConverterHowToOctalActivity extends AppCompatActivity {
         textViewHexadecimalConvert = (TextView) findViewById(R.id.textViewHexadecimalStep);
         textViewDecimalConvert = (TextView) findViewById(R.id.textViewDecimalStep);
 
+        textViewToConvert.setText("Octal value to convert:");
+
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
             originalValue = "";
         } else {
             originalValue = extras.getString("value");
-            textViewToConvert.setText(originalValue);
         }
         convertDecimalStep(originalValue);
         convertBinaryStep(originalValue);

@@ -45,6 +45,7 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
         //adds toolbar to top of activity
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("Educational Binary Learning App");
 
         converterMode = (Spinner) findViewById(R.id.spinnerSelectConverter);
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.number_formats_converter, android.R.layout.simple_spinner_dropdown_item);
