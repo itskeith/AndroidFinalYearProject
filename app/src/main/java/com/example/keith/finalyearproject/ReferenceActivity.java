@@ -66,6 +66,11 @@ public class ReferenceActivity extends AppCompatActivity {
                 startActivity(launchCalculatorIntent);
                 return true;
 
+            case R.id.action_designer:
+                Intent launchDesignerIntent = new Intent(ReferenceActivity.this, LogicDesignerActivity.class);
+                startActivity(launchDesignerIntent);
+                return true;
+
             case R.id.home_button:
                 Intent launchMainActivityIntent = new Intent(ReferenceActivity.this, MainActivity.class);
                 startActivity(launchMainActivityIntent);

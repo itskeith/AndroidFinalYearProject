@@ -182,6 +182,10 @@ public class ConverterActivity extends AppCompatActivity implements TextWatcher,
                 Intent launchCalculatorIntent = new Intent(ConverterActivity.this, CalculatorActivity.class);
                 startActivity(launchCalculatorIntent);
                 return true;
+            case R.id.action_designer:
+                Intent launchDesignerIntent = new Intent(ConverterActivity.this, LogicDesignerActivity.class);
+                startActivity(launchDesignerIntent);
+                return true;
 
             case R.id.home_button:
                 Intent launchMainActivityIntent = new Intent(ConverterActivity.this, MainActivity.class);

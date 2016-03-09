@@ -1,110 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/light_grey"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/orange"
-        android:orientation="vertical">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/my_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-
-        <TextView
-            android:id="@+id/textViewTitleConvert"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:text="A random problem is generated here, hit the check button to find out if you&apos;re correct or hit the generate button the make a new random problem."
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-        <TextView
-            android:id="@+id/textViewValueToConvert"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/grey"
-            android:text=""
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/white" />
-
-        <Space
-            android:layout_width="20px"
-            android:layout_height="20px"
-            android:background="@color/orange" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:layout_height="match_parent"
+            android:background="@color/orange"
+            android:orientation="vertical">
+
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/textViewTitleConvert"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/textView3"
-                android:layout_gravity="center_horizontal" />
+                android:background="@color/white"
+                android:text="A random problem is generated here, hit the check button to find out if you&apos;re correct or hit the generate button the make a new random problem."
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/textView4"
-                android:layout_gravity="center_horizontal" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/binaryProblemGenerator"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttons_calc"
+                    android:elevation="4dp"
+                    android:onClick="generateBinaryProblem"
+                    android:text="Binary problem" />
+
+                <Button
+                    android:id="@+id/hexProblemGenerator"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttons_calc"
+                    android:elevation="4dp"
+                    android:onClick="generateHexadecimalProblem"
+                    android:text="Hexadecimal problem" />
+            </LinearLayout>
+
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:background="@color/orange" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/textView5"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/textViewNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/textViewOperator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/light_grey"
+                    android:elevation="4dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textViewUserInput"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewEquals"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="="
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/textViewAnswer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/calculator_problem_frame"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/textView6"
-                android:layout_gravity="center_horizontal" />
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"></FrameLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/textView7"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:background="@color/orange"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/textViewCheckAnswer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:elevation="4dp"
+                    android:gravity="center"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/grey"></LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button5" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button6" />
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

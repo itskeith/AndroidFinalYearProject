@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         Sets the screen of the device to fullscreen for the application and screen will not turn
         off if left idle
          */
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
     }
@@ -93,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_calculator:
                 Intent launchCalculatorIntent = new Intent(MainActivity.this, CalculatorActivity.class);
                 startActivity(launchCalculatorIntent);
+                return true;
+
+            case R.id.action_designer:
+                Intent launchDesignerIntent = new Intent(MainActivity.this, LogicDesignerActivity.class);
+                startActivity(launchDesignerIntent);
                 return true;
 
             case R.id.action_converter:

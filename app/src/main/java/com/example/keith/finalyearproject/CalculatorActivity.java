@@ -1,17 +1,11 @@
 package com.example.keith.finalyearproject;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,7 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -273,7 +266,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                         }
                     }
                 }
-                if(txtInput.getText().equals("")){
+                if (txtInput.getText().equals("")) {
                     txtResult.setText("");
                 }
                 setCalculatorResultDisplay();
@@ -720,6 +713,11 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
                 startActivity(launchConverterIntent);
                 return true;
 
+            case R.id.action_designer:
+                Intent launchDesignerIntent = new Intent(CalculatorActivity.this, LogicDesignerActivity.class);
+                startActivity(launchDesignerIntent);
+                return true;
+
             case R.id.home_button:
                 Intent launchMainActivityIntent = new Intent(CalculatorActivity.this, MainActivity.class);
                 startActivity(launchMainActivityIntent);
@@ -771,7 +769,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorB
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.buttonProblemGenerator:
-                startActivity(new Intent(this,CalculatorProblemGenerator.class));
+                startActivity(new Intent(this, CalculatorProblemGeneratorActivity.class));
+                break;
             /*case R.id.buttonFixedPoint:
                 startActivity(new Intent(this, CalculatorFixedPointPopUp.class));
                 break;*/

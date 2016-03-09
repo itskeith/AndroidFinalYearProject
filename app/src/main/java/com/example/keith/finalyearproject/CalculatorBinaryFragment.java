@@ -61,10 +61,6 @@ public class CalculatorBinaryFragment extends Fragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calculator_binary, container, false);
         currentIndex = 0;
-        //Text views for displaying users input and results
-        txtInput = (TextView) getActivity().findViewById(R.id.textViewInput);
-        txtResult = (TextView) getActivity().findViewById(R.id.textViewResult);
-        txtInput.addTextChangedListener(this);
 
         //Make results view scrollable
         // txtResult.setMovementMethod(new ScrollingMovementMethod());

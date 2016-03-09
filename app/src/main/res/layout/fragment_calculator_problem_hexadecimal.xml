@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/hexCalcLinearLayoutParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/hexCalcLinearLayoutNumbers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.75"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/hexCalcLinearLayoutNumbersFirstRow"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25">
+
+            <Button
+                android:id="@+id/buttonC"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="C"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/teal" />
+
+            <Button
+                android:id="@+id/buttonD"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="D"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/teal" />
+
+            <Button
+                android:id="@+id/buttonE"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="E"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/teal" />
+
+            <Button
+                android:id="@+id/buttonF"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="F"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/teal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hexCalcLinearLayoutNumbersSecondRow"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2">
+
+            <Button
+                android:id="@+id/buttonEight"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="8"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Button
+                android:id="@+id/buttonNine"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="9"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Button
+                android:id="@+id/buttonA"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="A"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/teal" />
+
+            <Button
+                android:id="@+id/buttonB"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="B"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/teal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hexCalcLinearLayoutNumbersThirdRow"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2">
+
+            <Button
+                android:id="@+id/buttonFour"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="4"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Button
+                android:id="@+id/buttonFive"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="5"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Button
+                android:id="@+id/buttonSix"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="6"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Button
+                android:id="@+id/buttonSeven"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="7"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hexCalcLinearLayoutNumbersFourthRow"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2">
+
+            <Button
+                android:id="@+id/buttonZero"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+
+                />
+
+            <Button
+                android:id="@+id/buttonOne"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Button
+                android:id="@+id/buttonTwo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Button
+                android:id="@+id/buttonThree"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:background="@drawable/buttons_calc"
+                android:text="3"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/hexCalcLinearLayoutTopRow"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonCheck"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/buttons_calc"
+                android:text="Check"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/dark_orange" />
+
+            <Button
+                android:id="@+id/buttonDelete"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/buttons_calc"
+                android:text="Delete"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/dark_orange" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
