@@ -1,5 +1,6 @@
 package com.example.keith.mylibrary.sprites;
 
+import com.example.keith.mylibrary.animation.AnimationHandler;
 import com.example.keith.mylibrary.types.Point2D;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -13,6 +14,7 @@ public abstract class Sprite {
     protected final Point2D scale;
     protected float rotation;
     protected float alpha;
+    protected AnimationHandler anim = null;
 
     protected Sprite() {
         pos = new Point2D(0.0f, 0.0f);
@@ -21,8 +23,28 @@ public abstract class Sprite {
         alpha = 1.0f;
     }
 
-    public final Point2D getPosition() { return pos; }
-    public final Point2D getScale() { return scale; }
+    public final void setAnimation(AnimationHandler animation) {
+        anim = animation;
+    }
+
+    public final AnimationHandler getAnimation() {
+        return anim;
+    }
+
+    final void advanceAnimation(float elapsedTime) {
+        if(anim == null)
+            return;
+
+        anim.advance(this, elapsedTime);
+    }
+
+    public final Point2D getPosition() {
+        return pos;
+    }
+
+    public final Point2D getScale() {
+        return scale;
+    }
 
     public final void setScale(float scaleValue) {
         scale.x = scale.y = scaleValue;
@@ -34,12 +56,12 @@ public abstract class Sprite {
     }
 
     public final void setScale(Point2D sc) {
-        if(sc != null)
+        if (sc != null)
             setScale(sc.x, sc.y);
     }
 
     public final void setPosition(Point2D position) {
-        if(position != null)
+        if (position != null)
             setPosition(position.x, position.y);
     }
 

@@ -25,7 +25,7 @@ public class Stage extends GLSurfaceView {
         public final void onDrawFrame(GL10 gl) {
             gl.glClear(GLES10.GL_COLOR_BUFFER_BIT);
             gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertexBuffer);
-            tex.prepare(gl, GL10.GL_CLAMP_TO_EDGE);
+            tex.prepare(gl,vertexBuffer, GL10.GL_CLAMP_TO_EDGE);
             tex.draw(gl, w / 2, h / 2, tex.getWidth(), tex.getHeight(), 0);
         }
 

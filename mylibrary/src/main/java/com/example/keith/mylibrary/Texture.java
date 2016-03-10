@@ -19,6 +19,7 @@ import javax.microedition.khronos.opengles.GL10;
  * Created by Keith on 09/03/2016.
  */
 public class Texture {
+
     /**
      * The OpenGL ES texture name associated with this texture.
      */
@@ -39,11 +40,6 @@ public class Texture {
      */
     boolean mipmaps;
 
-    /**
-     * The buffer containing texture mappings.
-     */
-    private FloatBuffer tempTextureBuffer = null;
-
     Texture(int resourceId, boolean mipmaps) {
         this.resourceId = resourceId;
         this.textureId = -1;
@@ -58,7 +54,7 @@ public class Texture {
      * Generates a new OpenGL ES texture name (identifier).
      * @return The newly generated texture name.
      */
-    private static final int newTextureID() {
+    private static int newTextureID() {
         int[] temp = new int[1];
         GLES10.glGenTextures(1, temp, 0);
         return temp[0];
@@ -101,30 +97,6 @@ public class Texture {
 
         // Recycle the bitmap.
         bmp.recycle();
-
-        // If texture mapping buffer has not been initialized yet, do it now.
-        if(tempTextureBuffer == null)
-            buildTextureMapping();
-    }
-
-    /**
-     * Builds the texture mapping buffer.
-     */
-    private void buildTextureMapping() {
-        // The array of texture mapping coordinates.
-        final float texture[] = {
-                0, 0, // The first vertex
-                1, 0, // The second vertex
-                0, 1, // The third vertex
-                1, 1, // The fourth vertex
-        };
-
-        // Create a native buffer out of the above array.
-        final ByteBuffer ibb = ByteBuffer.allocateDirect(texture.length * 4);
-        ibb.order(ByteOrder.nativeOrder());
-        tempTextureBuffer = ibb.asFloatBuffer();
-        tempTextureBuffer.put(texture);
-        tempTextureBuffer.position(0);
     }
 
     /**
@@ -141,7 +113,7 @@ public class Texture {
         return textureId >= 0;
     }
 
-    public final void prepare(GL10 gl, int wrap) {
+    public final void prepare(GL10 gl, FloatBuffer textureBuffer, int wrap) {
         // Enable 2D texture
         gl.glEnable(GL10.GL_TEXTURE_2D);
 
@@ -154,7 +126,7 @@ public class Texture {
 
         // Enable texture coordinate arrays and load (activate) ours
         gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-        gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, tempTextureBuffer);
+        gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, textureBuffer);
     }
 
     public final void draw(GL10 gl, float x, float y, float w, float h, float rot) {

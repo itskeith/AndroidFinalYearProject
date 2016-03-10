@@ -59,12 +59,14 @@ public class CalculatorProblemGeneratorActivity extends AppCompatActivity implem
             case "D":
             case "E":
             case "F":
-                txtUserInput.append(input);
+                txtAnswerCheck.setText("Press check to check your answer.");
+                txtUserInput.append(input.toUpperCase());
                 break;
             case "Delete":
                 int start = txtUserInput.getText().toString().length();
                 if (start > 0) {
                     txtUserInput.setText(txtUserInput.getEditableText().delete(start - 1, start));
+                    txtAnswerCheck.setText("Press check to check your answer.");
                     if(txtUserInput.getText().toString().isEmpty()){
                         txtAnswerCheck.setText("Press check to check your answer.");
                     }
@@ -160,23 +162,23 @@ public class CalculatorProblemGeneratorActivity extends AppCompatActivity implem
                     break;
             }
         } else if (mode == "Hexadecimal") {
-            txtNumber.setText(Integer.toHexString(firstNumber));
+            txtNumber.setText(Integer.toHexString(firstNumber).toUpperCase());
             switch (operator) {
                 case 0:
                     txtOperator.setText("+");
-                    txtAnswer.setText(Integer.toHexString(firstNumber + secondNumber));
+                    txtAnswer.setText(Integer.toHexString(firstNumber + secondNumber).toUpperCase());
                     break;
                 case 1:
                     txtOperator.setText("-");
-                    txtAnswer.setText(Integer.toHexString(firstNumber - secondNumber));
+                    txtAnswer.setText(Integer.toHexString(firstNumber - secondNumber).toUpperCase());
                     break;
                 case 2:
                     txtOperator.setText("*");
-                    txtAnswer.setText(Integer.toHexString(firstNumber * secondNumber));
+                    txtAnswer.setText(Integer.toHexString(firstNumber * secondNumber).toUpperCase());
                     break;
                 case 3:
                     txtOperator.setText("/");
-                    txtAnswer.setText(Integer.toHexString(firstNumber / secondNumber));
+                    txtAnswer.setText(Integer.toHexString(firstNumber / secondNumber).toUpperCase());
                     break;
             }
         }

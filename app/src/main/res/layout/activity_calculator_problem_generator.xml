@@ -31,13 +31,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:elevation="4dp"
                 android:text="A random problem is generated here, hit the check button to find out if you&apos;re correct or hit the generate button the make a new random problem."
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:elevation="5dp">
 
                 <Button
                     android:id="@+id/binaryProblemGenerator"
@@ -96,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@color/light_grey"
-                    android:elevation="4dp"
+                    android:elevation="10dp"
                     android:gravity="center">
 
                     <TextView
@@ -149,7 +151,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:elevation="4dp"
+                    android:elevation="10dp"
                     android:gravity="center"
                     android:text=""
                     android:textAppearance="?android:attr/textAppearanceLarge" />
