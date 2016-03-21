@@ -39,12 +39,12 @@
                 android:elevation="4dp"
                 android:spinnerMode="dropdown" />
             <Button
-                android:id="@+id/buttonFixedPoint"
+                android:id="@+id/buttonProblemGenerator"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="@drawable/buttons_calc"
                 android:layout_weight=".075"
-                android:text="Enable Fixed-Point" />
+                android:text="Genereate a problem" />
 
             <TextView
                 android:id="@+id/textViewInput"

@@ -22,9 +22,13 @@ public class ReferenceDetailsActivity extends Activity {
 
         //Checks phone orientation
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            ReferenceDetailsFragment details = new ReferenceDetailsFragment();
 
-            finish();
-            return;
+            details.setArguments(getIntent().getExtras());
+
+            getFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
+//            finish();
+//            return;
         }
 
         //Checks for previous saved state

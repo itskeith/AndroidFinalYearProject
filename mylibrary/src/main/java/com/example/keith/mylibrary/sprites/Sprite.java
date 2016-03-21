@@ -14,6 +14,7 @@ public abstract class Sprite {
     protected final Point2D scale;
     protected float rotation;
     protected float alpha;
+
     protected AnimationHandler anim = null;
 
     protected Sprite() {
@@ -23,6 +24,11 @@ public abstract class Sprite {
         alpha = 1.0f;
     }
 
+    /**
+     * Sets the animation handler for this {@code Sprite}. Once set, the animation
+     * will be played on this {@code Sprite} automatically, until set to {@code null}.
+     * @param animation	The animation handler, or {@code null} to remove animation.
+     */
     public final void setAnimation(AnimationHandler animation) {
         anim = animation;
     }
@@ -31,6 +37,10 @@ public abstract class Sprite {
         return anim;
     }
 
+    /**
+     * Advances the animation for this sprite.
+     * @param elapsedTime	The elapsed time since the previous frame.
+     */
     final void advanceAnimation(float elapsedTime) {
         if(anim == null)
             return;
@@ -38,13 +48,8 @@ public abstract class Sprite {
         anim.advance(this, elapsedTime);
     }
 
-    public final Point2D getPosition() {
-        return pos;
-    }
-
-    public final Point2D getScale() {
-        return scale;
-    }
+    public final Point2D getPosition() { return pos; }
+    public final Point2D getScale() { return scale; }
 
     public final void setScale(float scaleValue) {
         scale.x = scale.y = scaleValue;
@@ -56,12 +61,12 @@ public abstract class Sprite {
     }
 
     public final void setScale(Point2D sc) {
-        if (sc != null)
+        if(sc != null)
             setScale(sc.x, sc.y);
     }
 
     public final void setPosition(Point2D position) {
-        if (position != null)
+        if(position != null)
             setPosition(position.x, position.y);
     }
 

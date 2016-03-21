@@ -43,7 +43,8 @@ public class ReferenceListFragment extends ListFragment {
         setListAdapter(gateStringArrayToList);
 
         View referenceDetailsFrame = getActivity().findViewById(R.id.referencedetails);
-
+        getListView().setBackgroundColor(getResources().getColor(R.color.light_orange));
+        getListView().setSelector(R.drawable.selector);
         // Sets mDuelPane to true or false depending on what the layout currently is
         // Check if referenceDetailsFrame exists and if it is visible
         mDuelPane = referenceDetailsFrame != null
@@ -72,14 +73,20 @@ public class ReferenceListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         showDetails(position);
+        getListView().setSelector(R.drawable.selector);
     }
+
 
     void showDetails(int index) {
         mCurCheckPosition = index;
 
         if (mDuelPane) {
 
+            getListView().setSelector(R.drawable.selector);
             getListView().setItemChecked(index, true);
+            getListView().setSelection(index);
+            getListView().setSelected(true);
+            getListView().setBackgroundColor(getResources().getColor(R.color.light_orange));
 
             ReferenceDetailsFragment details = (ReferenceDetailsFragment)
                     getFragmentManager().findFragmentById(R.id.referencedetails);
@@ -89,7 +96,7 @@ public class ReferenceListFragment extends ListFragment {
 
                 FragmentTransaction ft =
                         getFragmentManager().beginTransaction();
-
+                getListView().setSelector(R.drawable.selector);
                 ft.replace(R.id.referencedetails, details);
 
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -97,10 +104,9 @@ public class ReferenceListFragment extends ListFragment {
 
             }
         } else {
-
+            getListView().setSelector(R.drawable.selector);
             Intent intent = new Intent();
             intent.setClass(getActivity(), ReferenceDetailsActivity.class);
-
             intent.putExtra("index", index);
 
             startActivity(intent);

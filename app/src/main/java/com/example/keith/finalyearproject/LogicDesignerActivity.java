@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.keith.mylibrary.Stage;
+import com.example.keith.mylibrary.TextureManager;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,8 @@ public class LogicDesignerActivity extends AppCompatActivity {
                 stringArray);
         listView.setAdapter(stringArrayToList);
         stage = (Stage)findViewById(R.id.my_stage);
+        TextureManager.add(new int[]{R.drawable.nottexturetest});
+        stage.setScene(new MyScene(stage));
     }
 
     @Override

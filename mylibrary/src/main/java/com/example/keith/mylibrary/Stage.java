@@ -18,19 +18,67 @@ import java.nio.FloatBuffer;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-public class Stage extends GLSurfaceView {
+public class Stage extends GLSurfaceView  {
+    private final class StageAdvanceTask extends Thread {
+        private static final int FRAME_DURATION_MS = 20;
 
+        private long mLastTime;
 
-    private final class MyRenderer implements Renderer {
+        private StageAdvanceTask() {
+            mLastTime = System.nanoTime();
+        }
+
+        @Override
+        public void run() {
+            while(advanceThread != null) {
+                final long time = System.nanoTime();
+                final long diff = time - mLastTime;
+
+                if(currentScene != null)
+                    if(currentScene.isLoaded())
+                        currentScene.advance(diff / 1000000000.0f);
+
+                mLastTime = time;
+
+                // Did advancing take less than 17 milliseconds?
+                if(diff < (FRAME_DURATION_MS - 2) * 1000000) {
+                    try {
+                        Thread.sleep(FRAME_DURATION_MS - diff / 1000000);
+                    } catch (InterruptedException e) {
+                        // Do nothing
+                    }
+                }
+            }
+        }
+    }
+
+    private class MyRenderer implements GLSurfaceView.Renderer {
         public final void onDrawFrame(GL10 gl) {
+            final int ts = TextureManager.getState();
+
+            if(ts != TextureManager.STATE_LOADED) {
+                if(ts == TextureManager.STATE_FRESH)
+                    TextureManager.loadTextures(getContext());
+
+                return;
+            }
+
+            final RGB clearColor = currentScene == null ? defClearColor : currentScene.getBackColor();
+
+            gl.glClearColor(clearColor.r, clearColor.g, clearColor.b, 1.0f);
             gl.glClear(GLES10.GL_COLOR_BUFFER_BIT);
             gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertexBuffer);
-            tex.prepare(gl,vertexBuffer, GL10.GL_CLAMP_TO_EDGE);
-            tex.draw(gl, w / 2, h / 2, tex.getWidth(), tex.getHeight(), 0);
+
+            if(currentScene != null) {
+                if(!currentScene.isLoaded())
+                    currentScene.onLoaded();
+
+                currentScene.render(gl);
+            }
         }
 
         public final void onSurfaceChanged(GL10 gl, int width, int height) {
-            gl.glClearColor(0, 0, 1, 1.0f);
+            gl.glClearColor(0, 0, 0, 1);
 
             if(width > height) {
                 h = 600;
@@ -40,13 +88,15 @@ public class Stage extends GLSurfaceView {
                 h = height * w / width;
             }
 
+            gl.glLoadIdentity();
+
             screenWidth = width;
             screenHeight = height;
 
             gl.glViewport(0, 0, screenWidth, screenHeight);
             gl.glMatrixMode(GL10.GL_PROJECTION);
             gl.glLoadIdentity();
-            gl.glOrthof(0, w, h, 0, -1, 1);
+            gl.glOrthof(0, w, h, 0, -1f, 1f);
             gl.glMatrixMode(GL10.GL_MODELVIEW);
             gl.glLoadIdentity();
         }
@@ -55,33 +105,27 @@ public class Stage extends GLSurfaceView {
             // Set up alpha blending
             gl.glEnable(GL10.GL_ALPHA_TEST);
             gl.glEnable(GL10.GL_BLEND);
+
+            // We will discuss this line later along with textures
             gl.glBlendFunc(GL10.GL_ONE, GL10.GL_ONE_MINUS_SRC_ALPHA);
 
-            // We are in 2D. Who needs depth?
+            // We are in 2D. Who needs depth!
             gl.glDisable(GL10.GL_DEPTH_TEST);
 
             // Enable vertex arrays (we'll use them to draw primitives).
             gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 
-            tex.load(getContext());
+            // Enable texture coordinate arrays.
+            gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+
+            TextureManager.unload();
         }
     }
-
-    /* Stage width and height */
-    private float w, h;
-
-    /* Screen width and height */
-    private int screenWidth, screenHeight;
-
-    /* Our native vertex buffer */
-    private FloatBuffer vertexBuffer;
-
-    /* Temporary: texture to be drawn. */
-    private Texture tex;
 
     public Stage(Context context, AttributeSet attrs) {
         super(context, attrs);
         setEGLConfigChooser(8, 8, 8, 8, 0, 0);
+
         setRenderer(new MyRenderer());
 
         float vertices[] = {
@@ -97,6 +141,55 @@ public class Stage extends GLSurfaceView {
         vertexBuffer.put(vertices);
         vertexBuffer.position(0);
 
-        tex = new Texture(R.drawable.nottexture);
+        scheduleTimer();
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        // Once the thread sees this, it will stop running.
+        advanceThread = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        scheduleTimer();
+    }
+
+    public final void setScene(Scene scene) {
+        currentScene = scene;
+    }
+
+    public final Scene getScene() {
+        return currentScene;
+    }
+
+    /**
+     * Schedules the advance (frame) timer.
+     */
+    private void scheduleTimer() {
+        if(advanceThread == null) {
+            advanceThread = new StageAdvanceTask();
+            advanceThread.start();
+        }
+    }
+
+    private RGB defClearColor = new RGB(0, 0, 0);
+
+    /* Stage width and height */
+    private float w, h;
+
+    /* Screen width and height */
+    private int screenWidth, screenHeight;
+
+    /* Our native vertex buffer */
+    private FloatBuffer vertexBuffer;
+
+    /* The scene to be rendered and animated. */
+    private Scene currentScene;
+
+    /* The thread that handles animation. */
+    private Thread advanceThread;
 }

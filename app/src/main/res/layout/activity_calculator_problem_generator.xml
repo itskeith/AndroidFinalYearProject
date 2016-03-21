@@ -35,11 +35,16 @@
                 android:text="A random problem is generated here, hit the check button to find out if you&apos;re correct or hit the generate button the make a new random problem."
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
+            <Space
+                android:layout_width="20px"
+                android:layout_height="10px"
+                android:background="@color/orange" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:elevation="5dp">
+                android:elevation="5dp"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/binaryProblemGenerator"
@@ -65,8 +70,18 @@
 
             <Space
                 android:layout_width="20px"
-                android:layout_height="20px"
+                android:layout_height="10px"
                 android:background="@color/orange" />
+
+            <Button
+                android:id="@+id/buttonSolution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/buttons_calc"
+                android:elevation="4dp"
+                android:onClick="showSolution"
+                android:text="Show the solution" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,15 +109,16 @@
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <LinearLayout
+                    android:id="@+id/linearLayoutSecondNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="@color/light_grey"
-                    android:elevation="10dp"
+                    android:elevation="5dp"
                     android:gravity="center">
 
                     <TextView
-                        android:id="@+id/textViewUserInput"
+                        android:id="@+id/textViewSecondNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -120,16 +136,31 @@
                     android:text="="
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                <TextView
-                    android:id="@+id/textViewAnswer"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/linearLayoutAnswer"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:gravity="center"
-                    android:text=""
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:background="@color/light_grey"
+                    android:elevation="10dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textViewAnswer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:text=""
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                </LinearLayout>
 
             </LinearLayout>
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="10px"
+                android:background="@color/orange" />
 
             <FrameLayout
                 android:id="@+id/calculator_problem_frame"
@@ -155,6 +186,7 @@
                     android:gravity="center"
                     android:text=""
                     android:textAppearance="?android:attr/textAppearanceLarge" />
+
             </LinearLayout>
 
             <LinearLayout
