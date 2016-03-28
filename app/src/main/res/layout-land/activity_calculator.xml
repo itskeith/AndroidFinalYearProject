@@ -49,9 +49,8 @@
             <TextView
                 android:id="@+id/textViewInput"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="100dp"
                 android:layout_below="@+id/textViewMode"
-                android:layout_weight="0.275"
                 android:background="@color/grey"
                 android:gravity="right|bottom"
                 android:scrollbars="vertical"
