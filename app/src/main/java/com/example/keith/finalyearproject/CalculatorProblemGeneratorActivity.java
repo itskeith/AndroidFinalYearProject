@@ -203,7 +203,7 @@ public class CalculatorProblemGeneratorActivity extends AppCompatActivity implem
 
         setProblemFormat = rand.nextInt(2);
         firstNumber = rand.nextInt(127);
-        operator = rand.nextInt(4);
+        operator = rand.nextInt(3);
         secondNumber = rand.nextInt(127);
         if (setProblemFormat == 0) {
             secondNumberLayout.setBackgroundResource(R.color.light_grey);
@@ -249,16 +249,6 @@ public class CalculatorProblemGeneratorActivity extends AppCompatActivity implem
                         txtAnswer.setText("");
                     }
                     break;
-                case 3:
-                    txtOperator.setText("/");
-                    answer = firstNumber / secondNumber;
-                    if (setProblemFormat == 0) {
-                        txtAnswer.setText(Integer.toBinaryString(answer));
-                    } else {
-                        txtSecondNumber.setText(Integer.toBinaryString(secondNumber));
-                        txtAnswer.setText("");
-                    }
-                    break;
             }
         } else if (mode == "Hexadecimal") {
             txtNumber.setText(Integer.toHexString(firstNumber).toUpperCase());
@@ -286,16 +276,6 @@ public class CalculatorProblemGeneratorActivity extends AppCompatActivity implem
                 case 2:
                     txtOperator.setText("*");
                     answer = firstNumber * secondNumber;
-                    if (setProblemFormat == 0) {
-                        txtAnswer.setText(Integer.toHexString(answer).toUpperCase());
-                    } else {
-                        txtSecondNumber.setText(Integer.toHexString(secondNumber).toUpperCase());
-                        txtAnswer.setText("");
-                    }
-                    break;
-                case 3:
-                    txtOperator.setText("/");
-                    answer = firstNumber / secondNumber;
                     if (setProblemFormat == 0) {
                         txtAnswer.setText(Integer.toHexString(answer).toUpperCase());
                     } else {
